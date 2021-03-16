@@ -51,7 +51,24 @@ public:
         }
     }
 
-    template< class InputIt > deque( InputIt first, InputIt last) {}
+    template< class InputIt > deque( InputIt first, InputIt last) {
+
+        tabLength = 2;
+
+        tab=new T*[tabLength];
+
+        for(int i=0;i<tabLength;i++){
+            tab[i]=new T[tailleChunk];
+        }
+
+        if (first == NULL || last == NULL){
+            std::cout << "Impossible de contruire le deque car une ou plusieurs valeurs sont nulles !" << endl;
+        }else{
+            tab[0][0]=first;
+            tab[0][1]=last;
+        }
+
+    }
     deque( const deque& other ) {}
     deque( deque&& other ) {}
 
