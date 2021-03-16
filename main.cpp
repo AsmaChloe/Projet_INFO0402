@@ -31,6 +31,16 @@ int main() {
     std::cout<<"Taille deque normal : " << dequebb.size() << " - Taille mon deque : "<< deque22.size() << std::endl;
     std::cout<<"Taille deque normal : " << dequef.size() << " - Taille mon deque : "<< deque6.size() << std::endl;
 
+    //TEST AVEC OPERATOR
+    std::cout<<"Avec mm element partout : "<<std::endl;
+    for(int i=0;i<deque22.size();i++){
+        std::cout<<"Element "<<i<<" : "<<deque22[i]<<std::endl;
+    }
+
+    std::cout<<"Avec liste d'initialisation : "<<std::endl;
+    for(int i=0;i<deque6.size();i++){
+        std::cout<<"Element "<<i<<" : "<<deque6[i]<<std::endl;
+    }
     // assignation
     /*deque1 = deque6;
     deque2 = std::move(deque1);

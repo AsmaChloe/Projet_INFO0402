@@ -101,6 +101,14 @@ public:
         return tab[x][y];
     }
     const T& operator[]( size_type pos ) const {
+        /*A=indice du premier chunk ===> toujours à 0 ???
+        U=premier élément stocké dans le premier chunk ====> toujours à 0 ???*/
+        int A=0;
+        int U=0;
+        int x=(A+(pos+U)/tailleChunk)%tabLength;
+        int y=(pos+U)%tailleChunk;
+
+        return tab[x][y];
     }
 
     T& front() { return dummy; }
