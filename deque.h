@@ -102,7 +102,12 @@ public:
             j++;
         }
     }
-    ~deque() {}
+    ~deque() {
+        for(int i=0;i<tabLength;i++){
+            delete[] tab[i];
+        }
+        delete[] tab;
+    }
 
     deque& operator=( const deque& other ) { return *this; }
     deque& operator=( deque&& other ) { return *this; }
