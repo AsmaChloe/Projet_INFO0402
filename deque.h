@@ -52,8 +52,9 @@ public:
     }
 
     template< class InputIt > deque( InputIt first, InputIt last) {
+        //FAUX ! deque avec tous les éléments de first à last
 
-        tabLength = 2;
+        /*tabLength = 2;
 
         tab=new T*[tabLength];
 
@@ -62,14 +63,21 @@ public:
         }
 
         if (first == NULL || last == NULL){
-            std::cout << "Impossible de contruire le deque car une ou plusieurs valeurs sont nulles !" << endl;
+            std::cout << "Impossible de contruire le deque car une ou plusieurs valeurs sont nulles !" << std::endl;
         }else{
             tab[0][0]=first;
             tab[0][1]=last;
-        }
+        }*/
 
     }
-    deque( const deque& other ) {}
+    deque( const deque& other ) : tabLength(other.tabLength), nbElements(other.nbElements) {
+        tab=new T*[tabLength];
+        for(int i=0;i<tabLength;i++){
+            tab[i]=new T[tailleChunk];
+        }
+
+        //COPIE VALEURS PAR VALEURS
+    }
     deque( deque&& other ) {}
 
     deque( std::initializer_list<T> init ) : nbElements(init.size()) {
