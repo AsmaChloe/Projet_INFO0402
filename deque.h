@@ -7,14 +7,17 @@
 #include <cstdio>
 #include <functional>
 #include <initializer_list>
-#define tailleChunk 10
+#define chunkLength 3
 
 template <class T> class deque {
 private :
     size_t tabLength; //Longueur du tableau de pointeurs de tableaux
     T** tab;
     size_t nbElements;
-
+    size_t firstPtr; //indice du premier chunk dans le tableau de pointeurs
+    size_t lastPtr; // indice du dernier chunk dans le tableau de pointeurs
+    size_t firstVal; //indice du premier élément du premier chunk
+    size_t lastVal; //indice du dernier élément du premier chunk
 public:
     // ne pas toucher
     using value_type = T;
@@ -22,33 +25,47 @@ public:
     static T dummy;  // pour renvoyer une lvalue lorsque demandé
 
     // à implémenter
-    deque() :tabLength(0), nbElements(0) {
+    deque() :tabLength(0), nbElements(0),firstPtr(0),lastPtr(0),firstVal(0),lastVal(0) {
         tab=new T*[tabLength];
     }
 
     explicit deque(size_type count) : nbElements(count) {
-        tabLength= count / tailleChunk + count % tailleChunk;
+        tabLength= count / chunkLength + count % chunkLength;
 
+        //Initialisation du tableau
         tab=new T*[tabLength];
         for(int i=0;i<tabLength;i++){
-            tab[i]=new T[tailleChunk];
+            tab[i]=new T[chunkLength];
         }
+
+        //Initialisation des indices
+        firstPtr=0;
+        lastPtr=(tabLength>0 ? tabLength-1 : 0);
+        firstVal=0;
+        lastVal=0;
     }
 
     deque( size_type count, const T&value ) : nbElements(count) {
-        tabLength= count / tailleChunk + count % tailleChunk;
+        tabLength= count / chunkLength + count % chunkLength;
 
+        //Initialisation du tableau
         tab=new T*[tabLength];
         for(int i=0;i<tabLength;i++){
-            tab[i]=new T[tailleChunk];
+            tab[i]=new T[chunkLength];
         }
 
-        //Ajout des valeurs -> a tester qd operator[] fait
+        //Ajout des valeurs dans le tableau
         for(int i=0;i<tabLength;i++){
-            for(int j=0; j < tailleChunk; j++){
+            for(int j=0; j < chunkLength; j++){
                 tab[i][j]=value;
             }
         }
+
+        //Initialisation des indices
+        firstPtr=0;
+        lastPtr=(tabLength>0 ? tabLength-1 : 0);
+        firstVal=0;
+        lastVal=(count%chunkLength==0? 0 : count%chunkLength-1);
     }
 
     template< class InputIt > deque( InputIt first, InputIt last) {
@@ -59,7 +76,7 @@ public:
         tab=new T*[tabLength];
 
         for(int i=0;i<tabLength;i++){
-            tab[i]=new T[tailleChunk];
+            tab[i]=new T[chunkLength];
         }
 
         if (first == NULL || last == NULL){
@@ -70,12 +87,15 @@ public:
         }*/
 
     }
-    deque( const deque& other ) : tabLength(other.tabLength), nbElements(other.nbElements) {
+    deque( const deque& other ) : tabLength(other.tabLength), nbElements(other.nbElements), firstPtr(other.firstPtr), lastPtr(other.lastPtr), firstVal(other.firstVal), lastVal(other.lastVal) {
+        //Initialisation du tableau
         tab=new T*[tabLength];
         for(int i=0;i<tabLength;i++){
-            tab[i]=new T[tailleChunk];
-            for(int j=0;j<tailleChunk;j++)
-                tab[i][j]=other.tab[i][j];
+            tab[i]=new T[chunkLength];
+            for(int j=0; j < chunkLength; j++) {
+                tab[i][j] = other.tab[i][j];
+                std::cout << "Valeur copié : " << tab[i][j] << std::endl;
+            }
         }
     }
     deque( deque&& other ) {}
@@ -84,16 +104,16 @@ public:
         int i=0,j=0,count=0;
 
         //Initialisation du tableau
-        tabLength= init.size()/tailleChunk + init.size()%tailleChunk;
+        tabLength= init.size() / chunkLength + init.size() % chunkLength;
         tab=new T*[tabLength];
         for(i=0;i<tabLength;i++){
-            tab[i]=new T[tailleChunk];
+            tab[i]=new T[chunkLength];
         }
 
-        //Remplissage -> a tester qd operator[] fait
+        //Remplissage
         i=0;
         for(auto &element : init){
-            if(count%tailleChunk==0 && count!=0) {
+            if(count % chunkLength == 0 && count != 0) {
                 i++;
                 j = 0;
             }
@@ -101,7 +121,14 @@ public:
             count++;
             j++;
         }
+
+        //Initialisation des indices
+        firstPtr=0;
+        lastPtr=tabLength-1;
+        firstVal=0;
+        lastVal=chunkLength-(init.size()%chunkLength)-1;
     }
+
     ~deque() {
         for(int i=0;i<tabLength;i++){
             delete[] tab[i];
@@ -120,23 +147,18 @@ public:
     T& at( size_type pos ) { return dummy; }
     const T& at( size_type pos ) const { return dummy; }
 
+
+    /* PROBLEME LORS DE LAFFICHAGE !!!!
+     * A cause de lastVal car on fait -1 lors de son initialisation ! Si on le retire, l'opérateur [] marche correctement*/
     T& operator[]( size_type pos ) {
-        /*A=indice du premier chunk ===> toujours à 0 ???
-        U=premier élément stocké dans le premier chunk ====> toujours à 0 ???*/
-        int A=0;
-        int U=0;
-        int x=(A+(pos+U)/tailleChunk)%tabLength;
-        int y=(pos+U)%tailleChunk;
+        int x= (firstPtr + (pos+lastVal)/chunkLength) % tabLength;
+        int y= (pos+lastVal) % chunkLength;
 
         return tab[x][y];
     }
     const T& operator[]( size_type pos ) const {
-        /*A=indice du premier chunk ===> toujours à 0 ???
-        U=premier élément stocké dans le premier chunk ====> toujours à 0 ???*/
-        int A=0;
-        int U=0;
-        int x=(A+(pos+U)/tailleChunk)%tabLength;
-        int y=(pos+U)%tailleChunk;
+        int x= (firstPtr+ (pos+lastVal)/chunkLength) % tabLength;
+        int y= (pos+lastVal) % chunkLength;
 
         return tab[x][y];
     }

@@ -9,8 +9,8 @@ int main() {
     deque<A>   deque1;                                      // défaut
     deque<A>   deque2(7);                             // count
     deque<A>   deque3(11, a);                         // count/value
-    deque<A>   deque4(deque3);                              //Copie
-    deque<A>   deque6( {1,2,3,4,5,6} );                 //Liste d'initialisation
+    deque<A>   deque6( {1,2,3,4,5,6,7} );                 //Liste d'initialisation
+    deque<A>   deque4(deque6);                              //Copie
 
     //A tester encore : first/last ; &&other => avec std::move
 
@@ -18,11 +18,12 @@ int main() {
     std::deque<A>   dequea;                                 // défaut
     std::deque<A>   dequeb(7);                           // count
     std::deque<A>   dequec(11,a);                        // count/value
-    std::deque<A>   dequed(dequec);                         //Copie
-    std::deque<A>   dequef( {1,2,3,4,5,6} );             //Liste d'initialisation
+    //std::deque<A>   dequee( std::move(dequed) );
+    std::deque<A>   dequef( {1,2,3,4,5,6,7} );             //Liste d'initialisation
+    std::deque<A>   dequed(dequef);                         //Copie
 
     //td::deque<A>   dequec( dequeb.begin(), dequeb.end() );  // itérateur
-    //std::deque<A>   dequee( std::move(dequed) );
+
 
     //TEST DE TAILLE
     /*std::cout<<"Taille deque vide vrai deque : " << dequea.size() << " - Taille mon deque : "<< deque1.size() << std::endl;
