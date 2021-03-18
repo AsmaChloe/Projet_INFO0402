@@ -74,9 +74,9 @@ public:
         tab=new T*[tabLength];
         for(int i=0;i<tabLength;i++){
             tab[i]=new T[tailleChunk];
+            for(int j=0;j<tailleChunk;j++)
+                tab[i][j]=other.tab[i][j];
         }
-
-        //COPIE VALEURS PAR VALEURS
     }
     deque( deque&& other ) {}
 
