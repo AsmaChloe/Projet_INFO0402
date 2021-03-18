@@ -126,7 +126,7 @@ public:
         firstPtr=0;
         lastPtr=tabLength-1;
         firstVal=0;
-        lastVal=chunkLength-(init.size()%chunkLength)-1;
+        lastVal=(init.size()==0 ? 0 : (init.size()%chunkLength)-1);
     }
 
     ~deque() {
@@ -147,9 +147,6 @@ public:
     T& at( size_type pos ) { return dummy; }
     const T& at( size_type pos ) const { return dummy; }
 
-
-    /* PROBLEME LORS DE LAFFICHAGE !!!!
-     * A cause de lastVal car on fait -1 lors de son initialisation ! Si on le retire, l'opérateur [] marche correctement*/
     T& operator[]( size_type pos ) {
         int x= (firstPtr + (pos+lastVal)/chunkLength) % tabLength;
         int y= (pos+lastVal) % chunkLength;
