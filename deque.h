@@ -138,10 +138,22 @@ public:
         }
 
         //Initialisation des indices
-        firstPtr=0;
-        lastPtr=tabLength-1;
-        firstVal=0;
-        lastVal=(init.size()==0 ? 0 : (init.size()%chunkLength)-1);
+
+        if(init.size()==0){ //Liste vide
+            firstPtr=-1;
+            lastPtr=-1;
+            firstVal=-1;
+            lastVal=-1;
+        }
+        else{
+            firstPtr=0;
+            lastPtr=tabLength-1;
+            firstVal=0;
+            if(init.size()%chunkLength==0)
+                lastVal=chunkLength-1;
+            else
+                lastVal=(init.size()%chunkLength)-1;
+        }
     }
 
     ~deque() {
@@ -151,12 +163,12 @@ public:
         delete[] tab;
     }
 
-    /**************CASSE********************/
+
     deque& operator=( const deque& other ) {
         int i, j;
 
         //On vide les valeurs
-        for (i = firstPtr; i < lastPtr; i++)
+        for (i = firstPtr; i<=lastPtr; i++)
             delete[] tab[i];
 
         nbElements = other.nbElements;
@@ -166,7 +178,7 @@ public:
         lastVal = other.lastVal;
 
         //On copie les valeurs de other
-        for (i = firstPtr; i < lastPtr; i++) {
+        for (i = firstPtr; i <=lastPtr; i++) {
             tab[i]=new T[chunkLength];
             for (j = 0; j < chunkLength; j++) {
                 tab[i][j] = other.tab[i][j];

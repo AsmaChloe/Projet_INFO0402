@@ -34,11 +34,11 @@ int main() {
 
     std::cout<<"\n";
 
-    for(int i=0;i<dequec.size();i++)
-        std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
+    for(int i=0;i<dequef.size();i++)
+        std::cout<<"dequef["<<i<<"] ="<<dequef[i]<<std::endl;
 
-    std::cout<<"\n ...dequeb=dequec...\n";
-    dequeb = dequec;
+    std::cout<<"\n ...dequeb=dequef...\n";
+    dequeb = dequef;
 
     for(int i=0;i<dequeb.size();i++)
         std::cout<<"dequeb["<<i<<"] ="<<dequeb[i]<<std::endl;
@@ -49,14 +49,14 @@ int main() {
 
     std::cout<<"\n";
 
-    for(int i=0;i<deque3.size();i++)
-        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;
+    for(int i=0;i<deque6.size();i++)
+        std::cout<<"deque6["<<i<<"] ="<<deque6[i]<<std::endl;
 
-    std::cout<<"\n ...deque2=deque3...\n";
-    deque2 = deque3;
+    std::cout<<"\n ...deque2=deque6...\n";
+    deque2 = deque6;
 
     for(int i=0;i<deque2.size();i++)
-        std::cout<<"deque3["<<i<<"] ="<<deque2[i]<<std::endl;
+        std::cout<<"deque2["<<i<<"] ="<<deque2[i]<<std::endl;
     /*deque2 = std::move(deque1);
     deque3 = { 4, 5, 6, 7};
 
