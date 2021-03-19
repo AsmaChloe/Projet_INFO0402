@@ -94,11 +94,22 @@ public:
             tab[i]=new T[chunkLength];
             for(int j=0; j < chunkLength; j++) {
                 tab[i][j] = other.tab[i][j];
-                std::cout << "Valeur copié : " << tab[i][j] << std::endl;
             }
         }
     }
-    deque( deque&& other ) {}
+
+    //Constructeur par déplacement
+    deque( deque&& other ) : tabLength(other.tabLength), nbElements(other.nbElements), firstPtr(other.firstPtr), lastPtr(other.lastPtr), firstVal(other.firstVal), lastVal(other.lastVal) {
+
+        //Initialisation du tableau
+        tab=new T*[tabLength];
+        for(int i=0;i<tabLength;i++){
+            tab[i]=new T[chunkLength];
+            for(int j=0; j < chunkLength; j++) {
+                tab[i][j] = other.tab[i][j];
+            }
+        }
+    }
 
     deque( std::initializer_list<T> init ) : nbElements(init.size()) {
         int i=0,j=0,count=0;

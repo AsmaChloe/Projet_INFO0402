@@ -9,43 +9,26 @@ int main() {
     deque<A>   deque1;                                      // défaut
     deque<A>   deque2(7);                             // count
     deque<A>   deque3(11, a);                         // count/value
-    deque<A>   deque6( {1,2,3,4,5,6,7} );                 //Liste d'initialisation
+    deque<A>   deque6( {1,2,3,4,5,6,7} );               //Liste d'initialisation
     deque<A>   deque4(deque6);                              //Copie
-
+    deque<A>    deque5(std::move(deque4));                  //Par déplacement
     //A tester encore : first/last ; &&other => avec std::move
 
     //Vrai deque
     std::deque<A>   dequea;                                 // défaut
     std::deque<A>   dequeb(7);                           // count
     std::deque<A>   dequec(11,a);                        // count/value
-    //std::deque<A>   dequee( std::move(dequed) );
-    std::deque<A>   dequef( {1,2,3,4,5,6,7} );             //Liste d'initialisation
+
+    std::deque<A>   dequef( {1,2,3,4,5,6,7} );            //Liste d'initialisation
     std::deque<A>   dequed(dequef);                         //Copie
+    std::deque<A>   dequee( std::move(dequed) );            // Par déplacement
 
     //td::deque<A>   dequec( dequeb.begin(), dequeb.end() );  // itérateur
 
-
-    //TEST DE TAILLE
-    /*std::cout<<"Taille deque vide vrai deque : " << dequea.size() << " - Taille mon deque : "<< deque1.size() << std::endl;
-    std::cout<<"Taille deque count vrai deque : " << dequeb.size() << " - Taille mon deque : "<< deque2.size() << std::endl;
-    std::cout<<"Taille deque count + t vrai deque : " << dequec.size() << " - Taille mon deque : "<< deque3.size() << std::endl;
-    std::cout<<"Taille deque liste vrai deque : " << dequef.size() << " - Taille mon deque : "<< deque6.size() << std::endl;*/
-    std::cout<<"Taille deque Copie vrai deque : " << dequed.size() << " - Taille mon deque : "<< deque4.size() << std::endl;
-
     //TEST AVEC OPERATOR[]
-    /*std::cout<<"Avec mm element partout : "<<std::endl;
-    for(int i=0;i<deque3.size();i++){
-        std::cout<<"Element "<<i<<" : "<<deque3[i]<<std::endl;
-    }
-
-    std::cout<<"Avec liste d'initialisation : "<<std::endl;
-    for(int i=0;i<deque6.size();i++){
-        std::cout<<"Element "<<i<<" : "<<deque6[i]<<std::endl;
-    }*/
-
-    std::cout<<"Par copie : "<<std::endl;
-    for(int i=0;i<deque4.size();i++){
-        std::cout<<"Notre deque "<<deque4[i]<<" - Le vrai deque "<<dequed[i]<<std::endl;
+    std::cout<<"Par déplacement : "<<std::endl;
+    for(int i=0;i<deque5.size();i++){
+        std::cout<<"Notre deque "<<deque5[i]<<" - Le vrai deque "<<dequee[i]<<std::endl;
     }
     // assignation
     /*deque1 = deque6;
