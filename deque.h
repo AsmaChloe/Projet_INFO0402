@@ -25,7 +25,7 @@ public:
     static T dummy;  // pour renvoyer une lvalue lorsque demandé
 
     // à implémenter
-    deque() :tabLength(0), nbElements(0),firstPtr(0),lastPtr(0),firstVal(0),lastVal(0) {
+    deque() :tabLength(0), nbElements(0),firstPtr(-1),lastPtr(-1),firstVal(-1),lastVal(-1) {
         tab=new T*[tabLength];
     }
 
@@ -104,11 +104,13 @@ public:
         //Initialisation du tableau
         tab=new T*[tabLength];
         for(int i=0;i<tabLength;i++){
-            tab[i]=new T[chunkLength];
-            for(int j=0; j < chunkLength; j++) {
-                tab[i][j] = other.tab[i][j];
-            }
+            tab[i]=other.tab[i];
+            other.tab[i]=nullptr;
         }
+        other.firstVal=-1;
+        other.lastVal=-1;
+        other.firstPtr=-1;
+        other.lastPtr=-1;
     }
 
     deque( std::initializer_list<T> init ) : nbElements(init.size()) {
@@ -158,6 +160,8 @@ public:
     T& at( size_type pos ) { return dummy; }
     const T& at( size_type pos ) const { return dummy; }
 
+
+    /*Pb lors de la lecture d'un tableau qui a été vidé de ses élément (constructeur par déplacement)*/
     T& operator[]( size_type pos ) {
         int x= (firstPtr + (pos+lastVal)/chunkLength) % tabLength;
         int y= (pos+lastVal) % chunkLength;
