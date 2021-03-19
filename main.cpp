@@ -7,7 +7,7 @@ int main() {
     const A a=2;
     // constructions
     deque<A>   deque1;                                      // défaut
-    deque<A>   deque2(6);                             // count
+    deque<A>   deque2(13);                             // count
     deque<A>   deque3(11, a);                         // count/value
     deque<A>   deque6( {1,2,3,4,5,6,7} );               //Liste d'initialisation
     deque<A>   deque4(deque6);                              //Copie
@@ -16,7 +16,7 @@ int main() {
 
     //Vrai deque
     std::deque<A>   dequea;                                 // défaut
-    std::deque<A>   dequeb(6);                           // count
+    std::deque<A>   dequeb(13);                           // count
     std::deque<A>   dequec(11,a);                        // count/value
     std::deque<A>   dequef( {1,2,3,4,5,6,7} );            //Liste d'initialisation
     std::deque<A>   dequed(dequef);                         //Copie
@@ -34,12 +34,11 @@ int main() {
 
     std::cout<<"\n";
 
-    for(int i=0;i<dequef.size();i++)
-        std::cout<<"dequef["<<i<<"] ="<<dequef[i]<<std::endl;
+    for(int i=0;i<dequec.size();i++)
+        std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
 
-    std::cout<<"\n ...dequeb=deque6...\n";
-    dequeb = dequef;
-    dequef[5]=55;
+    std::cout<<"\n ...dequeb=dequec...\n";
+    dequeb = dequec;
 
     for(int i=0;i<dequeb.size();i++)
         std::cout<<"dequeb["<<i<<"] ="<<dequeb[i]<<std::endl;
@@ -50,15 +49,14 @@ int main() {
 
     std::cout<<"\n";
 
-    for(int i=0;i<deque6.size();i++)
-        std::cout<<"deque6["<<i<<"] ="<<deque6[i]<<std::endl;
+    for(int i=0;i<deque3.size();i++)
+        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;
 
-    std::cout<<"\n ...deque2=deque6...\n";
-    deque2 = deque6;
-
+    std::cout<<"\n ...deque2=deque3...\n";
+    deque2 = deque3;
 
     for(int i=0;i<deque2.size();i++)
-        std::cout<<"deque2["<<i<<"] ="<<deque2[i]<<std::endl;
+        std::cout<<"deque3["<<i<<"] ="<<deque2[i]<<std::endl;
     /*deque2 = std::move(deque1);
     deque3 = { 4, 5, 6, 7};
 

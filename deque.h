@@ -88,6 +88,7 @@ public:
 
     }
     deque( const deque& other ) : tabLength(other.tabLength), nbElements(other.nbElements), firstPtr(other.firstPtr), lastPtr(other.lastPtr), firstVal(other.firstVal), lastVal(other.lastVal) {
+        std::cout<<"CONSTRUCTEUR PAR COPIE !!"<<std::endl;
         //Initialisation du tableau
         tab=new T*[tabLength];
         for(int i=0;i<tabLength;i++){
@@ -150,31 +151,29 @@ public:
         delete[] tab;
     }
 
+    /**************CASSE********************/
     deque& operator=( const deque& other ) {
-        /*int i, j;
-        printf("Here1\n");
+        int i, j;
 
         //On vide les valeurs
-        for (i = 0; i < nbElements; i++) {
-            tab[i] = nullptr;
-        }
-        printf("Here2\n");
+        for (i = firstPtr; i < lastPtr; i++)
+            delete[] tab[i];
+
         nbElements = other.nbElements;
         firstPtr = other.firstPtr;
         lastPtr = other.lastPtr;
         firstVal = other.firstVal;
         lastVal = other.lastVal;
 
-        for (i = firstPtr; i < lastPtr; i++){
+        //On copie les valeurs de other
+        for (i = firstPtr; i < lastPtr; i++) {
+            tab[i]=new T[chunkLength];
             for (j = 0; j < chunkLength; j++) {
                 tab[i][j] = other.tab[i][j];
             }
         }
-        std::cout<<nbElements<<std::endl;
-        return *this;*/
-        deque<T> nvDeque(other);
-        std::cout<<other.size()<<std::endl;
-        return nvDeque;
+
+        return *this;
     }
     deque& operator=( deque&& other ) { return *this; }
     deque& operator=( std::initializer_list<T> ilist ) { return *this; }
