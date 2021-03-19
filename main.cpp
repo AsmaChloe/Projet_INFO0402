@@ -7,32 +7,59 @@ int main() {
     const A a=2;
     // constructions
     deque<A>   deque1;                                      // défaut
-    deque<A>   deque2(7);                             // count
+    deque<A>   deque2(6);                             // count
     deque<A>   deque3(11, a);                         // count/value
     deque<A>   deque6( {1,2,3,4,5,6,7} );               //Liste d'initialisation
     deque<A>   deque4(deque6);                              //Copie
     deque<A>    deque5(std::move(deque4));                  //Par déplacement
-    //A tester encore : first/last ; &&other => avec std::move
+    //A tester encore : first/last
 
     //Vrai deque
     std::deque<A>   dequea;                                 // défaut
-    std::deque<A>   dequeb(7);                           // count
+    std::deque<A>   dequeb(6);                           // count
     std::deque<A>   dequec(11,a);                        // count/value
-
     std::deque<A>   dequef( {1,2,3,4,5,6,7} );            //Liste d'initialisation
     std::deque<A>   dequed(dequef);                         //Copie
     std::deque<A>   dequee( std::move(dequed) );            // Par déplacement
-
     //td::deque<A>   dequec( dequeb.begin(), dequeb.end() );  // itérateur
 
-    //TEST AVEC OPERATOR[]
-    std::cout<<"Par déplacement : "<<std::endl;
-    for(int i=0;i<deque5.size();i++){
-        std::cout<<"Notre deque "<<deque5[i]<<" - Le vrai deque "<<dequee[i]<<std::endl;
-    }
-    // assignation
-    /*deque1 = deque6;
-    deque2 = std::move(deque1);
+    //Test apres constructeur par déplacement
+    for(int i=0;i<deque4.size();i++)
+        std::cout<<"Mon deque : "<<dequed[i]<< "- Vrai deque :"<<deque4[i]<<std::endl;
+
+    //assign
+    std::cout<<"VRAI DEQUE !!!!!!"<<std::endl;
+    for(int i=0;i<dequeb.size();i++)
+        std::cout<<"dequeb["<<i<<"] ="<<dequeb[i]<<std::endl;
+
+    std::cout<<"\n";
+
+    for(int i=0;i<dequef.size();i++)
+        std::cout<<"dequef["<<i<<"] ="<<dequef[i]<<std::endl;
+
+    std::cout<<"\n ...dequeb=deque6...\n";
+    dequeb = dequef;
+    dequef[5]=55;
+
+    for(int i=0;i<dequeb.size();i++)
+        std::cout<<"dequeb["<<i<<"] ="<<dequeb[i]<<std::endl;
+
+    std::cout<<"MON DEQUE !!!!!!"<<std::endl;
+    for(int i=0;i<deque2.size();i++)
+        std::cout<<"deque2["<<i<<"] ="<<deque2[i]<<std::endl;
+
+    std::cout<<"\n";
+
+    for(int i=0;i<deque6.size();i++)
+        std::cout<<"deque6["<<i<<"] ="<<deque6[i]<<std::endl;
+
+    std::cout<<"\n ...deque2=deque6...\n";
+    deque2 = deque6;
+
+
+    for(int i=0;i<deque2.size();i++)
+        std::cout<<"deque2["<<i<<"] ="<<deque2[i]<<std::endl;
+    /*deque2 = std::move(deque1);
     deque3 = { 4, 5, 6, 7};
 
     // assign

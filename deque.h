@@ -105,12 +105,13 @@ public:
         tab=new T*[tabLength];
         for(int i=0;i<tabLength;i++){
             tab[i]=other.tab[i];
-            other.tab[i]=nullptr;
+            other.tab[i]=new T[chunkLength];
         }
         other.firstVal=-1;
         other.lastVal=-1;
         other.firstPtr=-1;
         other.lastPtr=-1;
+        other.nbElements=0;
     }
 
     deque( std::initializer_list<T> init ) : nbElements(init.size()) {
@@ -149,7 +150,32 @@ public:
         delete[] tab;
     }
 
-    deque& operator=( const deque& other ) { return *this; }
+    deque& operator=( const deque& other ) {
+        /*int i, j;
+        printf("Here1\n");
+
+        //On vide les valeurs
+        for (i = 0; i < nbElements; i++) {
+            tab[i] = nullptr;
+        }
+        printf("Here2\n");
+        nbElements = other.nbElements;
+        firstPtr = other.firstPtr;
+        lastPtr = other.lastPtr;
+        firstVal = other.firstVal;
+        lastVal = other.lastVal;
+
+        for (i = firstPtr; i < lastPtr; i++){
+            for (j = 0; j < chunkLength; j++) {
+                tab[i][j] = other.tab[i][j];
+            }
+        }
+        std::cout<<nbElements<<std::endl;
+        return *this;*/
+        deque<T> nvDeque(other);
+        std::cout<<other.size()<<std::endl;
+        return nvDeque;
+    }
     deque& operator=( deque&& other ) { return *this; }
     deque& operator=( std::initializer_list<T> ilist ) { return *this; }
 
@@ -163,12 +189,14 @@ public:
 
     /*Pb lors de la lecture d'un tableau qui a été vidé de ses élément (constructeur par déplacement)*/
     T& operator[]( size_type pos ) {
+        if(nbElements<1) return dummy;
         int x= (firstPtr + (pos+lastVal)/chunkLength) % tabLength;
         int y= (pos+lastVal) % chunkLength;
 
         return tab[x][y];
     }
     const T& operator[]( size_type pos ) const {
+        if(nbElements<1) return dummy;
         int x= (firstPtr+ (pos+lastVal)/chunkLength) % tabLength;
         int y= (pos+lastVal) % chunkLength;
 
