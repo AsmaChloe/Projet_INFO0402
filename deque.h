@@ -105,7 +105,7 @@ public:
         tab=new T*[tabLength];
         for(int i=0;i<tabLength;i++){
             tab[i]=other.tab[i];
-            other.tab[i]=new T[chunkLength];
+            other.tab[i]=new T[chunkLength]; //***************** on mettrait pas plutot delete[] other.tab[i] pour libérer la mémoire ???
         }
         other.firstVal=-1;
         other.lastVal=-1;
@@ -166,7 +166,7 @@ public:
     deque& operator=( const deque& other ) {
         int i, j;
 
-        //On vide les valeurs
+        //On vide les valeurs de base
         for (i = firstPtr; i<=lastPtr; i++)
             delete[] tab[i];
 
@@ -186,7 +186,26 @@ public:
 
         return *this;
     }
-    deque& operator=( deque&& other ) { return *this; }
+    deque& operator=( deque&& other ) {
+        int i, j;
+
+        //On reprend les valeurs des attributs
+        nbElements = other.nbElements;
+        firstPtr = other.firstPtr;
+        lastPtr = other.lastPtr;
+        firstVal = other.firstVal;
+        lastVal = other.lastVal;
+
+        //On fait pointer nos pointeurs sur les chunk de other
+        for (i = firstPtr; i <=lastPtr; i++) {
+            tab[i]=other.tab[i];
+            //On coupe le lien entre les pointeurs de other et les chunk
+            other.tab[i]= nullptr;
+            delete[] other.tab[i];
+        }
+
+        return *this;
+    }
     deque& operator=( std::initializer_list<T> ilist ) { return *this; }
 
     void assign( size_type count, const T& value ) {}
