@@ -24,7 +24,7 @@ public:
     using size_type = size_t;
     static T dummy;  // pour renvoyer une lvalue lorsque demandé
 
-    // à implémenter
+
     deque() :tabLength(0), nbElements(0),firstPtr(-1),lastPtr(-1),firstVal(-1),lastVal(-1) {
         tab=new T*[tabLength];
     }
@@ -41,8 +41,8 @@ public:
         //Initialisation des indices
         firstPtr=0;
         lastPtr=(tabLength>0 ? tabLength-1 : 0);
-        firstVal=0;
-        lastVal=0;
+        firstVal=-1;
+        lastVal=-1;
     }
 
     deque( size_type count, const T&value ) : nbElements(count) {
@@ -65,7 +65,7 @@ public:
         firstPtr=0;
         lastPtr=(tabLength>0 ? tabLength-1 : 0);
         firstVal=0;
-        lastVal=(count%chunkLength==0? 0 : count%chunkLength-1);
+        lastVal=(count%chunkLength==0? chunkLength-1 : count%chunkLength-1);
     }
 
     template< class InputIt > deque( InputIt first, InputIt last) {
@@ -88,7 +88,6 @@ public:
 
     }
     deque( const deque& other ) : tabLength(other.tabLength), nbElements(other.nbElements), firstPtr(other.firstPtr), lastPtr(other.lastPtr), firstVal(other.firstVal), lastVal(other.lastVal) {
-        std::cout<<"CONSTRUCTEUR PAR COPIE !!"<<std::endl;
         //Initialisation du tableau
         tab=new T*[tabLength];
         for(int i=0;i<tabLength;i++){
