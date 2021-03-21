@@ -27,7 +27,7 @@ int main() {
     //deque1 = deque6;
     //deque2 = std::move(deque1);
 
-    //operator= : liste d'initialisation
+    //*****************************************operator= : liste d'initialisation*****************************************
     /*std::cout<<"\n ...dequea = { 4, 5, 6, 7}...\n";
     dequeb = { 4, 5, 6, 7};
 
@@ -44,8 +44,8 @@ int main() {
         std::cout<<"deque2["<<i<<"] ="<<deque2[i]<<std::endl;*/
 
 
-    // assign
-    std::cout<<"\n ...dequea.assign( 5, a);...\n";
+    //*****************************************assign : count, value*****************************************
+    /*std::cout<<"\n ...dequea.assign( 5, a);...\n";
     dequea.assign( 6, a);
 
     for(int i=0;i<dequea.size();i++)
@@ -58,13 +58,30 @@ int main() {
     deque1.assign( 6, a);
 
     for(int i=0;i<deque1.size();i++)
-        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
+        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;*/
 
-    /*deque2.assign( deque1.begin(), deque1.end() );
+    //*****************************************assign : liste d'initialisation*****************************************
+
+    std::cout<<"\n ...dequec.assign( 5, a);...\n";
+    dequec.assign( {8,9,10,11} );
+
+    for(int i=0;i<dequec.size();i++)
+        std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
+
+
+    std::cout<<"\n\nMON DEQUE !!!!!!"<<std::endl;
+
+    std::cout<<"\n ...deque3.assign( {8,9,10,11} );...\n";
     deque3.assign( {8,9,10,11} );
 
+    for(int i=0;i<deque3.size();i++)
+        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;
+
+    /* A FAIRE QUAND ITERATOR !!!!!!!!!!!!! deque2.assign( deque1.begin(), deque1.end() );*/
+
+
     // front/back
-    const deque<A>&deque6const = deque6;
+    /*const deque<A>&deque6const = deque6;
     std::cout
             << deque6.at(0) << ","
             << deque6const.at(0) << ","
