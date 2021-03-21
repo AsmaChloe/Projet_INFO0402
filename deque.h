@@ -105,8 +105,9 @@ public:
         tab=new T*[tabLength];
         for(int i=0;i<tabLength;i++){
             tab[i]=other.tab[i];
-            other.tab[i]=new T[chunkLength]; //***************** on mettrait pas plutot delete[] other.tab[i] pour libérer la mémoire ???
         }
+        delete[] other.tab;
+        
         other.firstVal=-1;
         other.lastVal=-1;
         other.firstPtr=-1;
@@ -201,15 +202,15 @@ public:
             tab[i]=other.tab[i];
             //On coupe le lien entre les pointeurs de other et les chunk
             other.tab[i]= nullptr;
-            delete[] other.tab[i];
         }
+        delete[] other.tab;
 
         other.firstVal=-1;
         other.lastVal=-1;
         other.firstPtr=-1;
         other.lastPtr=-1;
         other.nbElements=0;
-        
+
         return *this;
     }
     deque& operator=( std::initializer_list<T> ilist ) { return *this; }
