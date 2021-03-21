@@ -107,12 +107,13 @@ public:
             tab[i]=other.tab[i];
         }
         delete[] other.tab;
-        
+        other.tab= nullptr;
         other.firstVal=-1;
         other.lastVal=-1;
         other.firstPtr=-1;
         other.lastPtr=-1;
         other.nbElements=0;
+        other.tabLength=0;
     }
 
     deque( std::initializer_list<T> init ) : nbElements(init.size()) {
@@ -176,6 +177,7 @@ public:
         lastPtr = other.lastPtr;
         firstVal = other.firstVal;
         lastVal = other.lastVal;
+        tabLength = other.tabLength;
 
         //On copie les valeurs de other
         for (i = firstPtr; i <=lastPtr; i++) {
@@ -196,20 +198,23 @@ public:
         lastPtr = other.lastPtr;
         firstVal = other.firstVal;
         lastVal = other.lastVal;
+        tabLength = other.tabLength;
 
         //On fait pointer nos pointeurs sur les chunk de other
         for (i = firstPtr; i <=lastPtr; i++) {
             tab[i]=other.tab[i];
             //On coupe le lien entre les pointeurs de other et les chunk
-            other.tab[i]= nullptr;
+            //other.tab[i]= nullptr;
         }
-        delete[] other.tab;
+        /*delete[] other.tab;
+        other.tab= nullptr;*/
 
         other.firstVal=-1;
         other.lastVal=-1;
         other.firstPtr=-1;
         other.lastPtr=-1;
         other.nbElements=0;
+        other.tabLength=0;
 
         return *this;
     }
