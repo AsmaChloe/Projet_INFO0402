@@ -58,6 +58,8 @@ int main() {
     for(int i=0;i<deque2.size();i++)
         std::cout<<"deque2["<<i<<"] ="<<deque2[i]<<std::endl;
 
+    for(int i=0;i<deque6.size();i++)
+        std::cout<<"deque6["<<i<<"] ="<<deque6[i]<<std::endl;
 
     /*deque3 = { 4, 5, 6, 7};
 

@@ -204,6 +204,12 @@ public:
             delete[] other.tab[i];
         }
 
+        other.firstVal=-1;
+        other.lastVal=-1;
+        other.firstPtr=-1;
+        other.lastPtr=-1;
+        other.nbElements=0;
+        
         return *this;
     }
     deque& operator=( std::initializer_list<T> ilist ) { return *this; }
