@@ -105,8 +105,9 @@ public:
         tab=new T*[tabLength];
         for(int i=0;i<tabLength;i++){
             tab[i]=other.tab[i];
+            other.tab[i]=nullptr;
         }
-        delete[] other.tab;
+
         other.tab= nullptr;
         other.firstVal=-1;
         other.lastVal=-1;
@@ -159,9 +160,9 @@ public:
 
     ~deque() {
         for(int i=0;i<tabLength;i++){
-            delete[] tab[i];
+            if(tab[i]!= nullptr) delete[] tab[i];
         }
-        delete[] tab;
+        if(tab!=nullptr) delete[] tab;
     }
 
 
@@ -171,7 +172,7 @@ public:
         //On vide les valeurs de base
         for (i = firstPtr; i<=lastPtr; i++)
             delete[] tab[i];
-
+        delete[]tab;
         nbElements = other.nbElements;
         firstPtr = other.firstPtr;
         lastPtr = other.lastPtr;
@@ -179,6 +180,7 @@ public:
         lastVal = other.lastVal;
         tabLength = other.tabLength;
 
+        tab=new T*[tabLength];
         //On copie les valeurs de other
         for (i = firstPtr; i <=lastPtr; i++) {
             tab[i]=new T[chunkLength];
@@ -204,10 +206,8 @@ public:
         for (i = firstPtr; i <=lastPtr; i++) {
             tab[i]=other.tab[i];
             //On coupe le lien entre les pointeurs de other et les chunk
-            //other.tab[i]= nullptr;
+            other.tab[i]= nullptr;
         }
-        /*delete[] other.tab;
-        other.tab= nullptr;*/
 
         other.firstVal=-1;
         other.lastVal=-1;
