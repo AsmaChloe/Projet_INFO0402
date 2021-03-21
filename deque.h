@@ -173,6 +173,7 @@ public:
         for (i = firstPtr; i<=lastPtr; i++)
             delete[] tab[i];
         delete[]tab;
+
         nbElements = other.nbElements;
         firstPtr = other.firstPtr;
         lastPtr = other.lastPtr;
@@ -180,8 +181,8 @@ public:
         lastVal = other.lastVal;
         tabLength = other.tabLength;
 
-        tab=new T*[tabLength];
         //On copie les valeurs de other
+        tab=new T*[tabLength];
         for (i = firstPtr; i <=lastPtr; i++) {
             tab[i]=new T[chunkLength];
             for (j = 0; j < chunkLength; j++) {
@@ -191,8 +192,14 @@ public:
 
         return *this;
     }
+
     deque& operator=( deque&& other ) {
         int i, j;
+
+        //On vide l'objet de base
+        for(i=firstPtr;i<=lastPtr;i++)
+            delete[] tab[i];
+        delete[] tab;
 
         //On reprend les valeurs des attributs
         nbElements = other.nbElements;
@@ -203,6 +210,7 @@ public:
         tabLength = other.tabLength;
 
         //On fait pointer nos pointeurs sur les chunk de other
+        tab= new T*[tabLength];
         for (i = firstPtr; i <=lastPtr; i++) {
             tab[i]=other.tab[i];
             //On coupe le lien entre les pointeurs de other et les chunk
@@ -230,14 +238,14 @@ public:
 
     /*Pb lors de la lecture d'un tableau qui a été vidé de ses élément (constructeur par déplacement)*/
     T& operator[]( size_type pos ) {
-        if(nbElements<1) return dummy;
+        if(nbElements<1 || pos>=nbElements || pos<0) return dummy;
         int x= (firstPtr + (pos+lastVal)/chunkLength) % tabLength;
         int y= (pos+lastVal) % chunkLength;
 
         return tab[x][y];
     }
     const T& operator[]( size_type pos ) const {
-        if(nbElements<1) return dummy;
+        if(nbElements<1 || pos>=nbElements || pos<0) return dummy;
         int x= (firstPtr+ (pos+lastVal)/chunkLength) % tabLength;
         int y= (pos+lastVal) % chunkLength;
 
