@@ -279,24 +279,26 @@ public:
         size_t nvTabLength;
         int i,j;
 
-        if(count>nbElements){
+        if(count!=nbElements){
             //calcul de la nouvelle longeur
             nvTabLength=count/chunkLength + count%chunkLength;
 
-            //On ajoute les pointeurs manquants
-            for(i=tabLength;i<nvTabLength;i++)
-                tab[i]=new T[chunkLength];
-            tabLength=nvTabLength;
-        }
-        else{
-            if(count<nbElements){
-                //calcul de la nouvelle longeur
-                nvTabLength=count/chunkLength + count%chunkLength;
-
-                //On supprime les pointeurs en trop
-                for(i=nvTabLength;i<tabLength;i++)
-                    delete[] tab[i];
+            if(count>nbElements){
+                //On ajoute les pointeurs manquants
+                for(i=tabLength;i<nvTabLength;i++)
+                    tab[i]=new T[chunkLength];
                 tabLength=nvTabLength;
+            }
+            else{
+                if(count<nbElements){
+                    //calcul de la nouvelle longeur
+                    nvTabLength=count/chunkLength + count%chunkLength;
+
+                    //On supprime les pointeurs en trop
+                    for(i=nvTabLength;i<tabLength;i++)
+                        delete[] tab[i];
+                    tabLength=nvTabLength;
+                }
             }
         }
 
