@@ -25,46 +25,28 @@ int main() {
 
     //assign
     //deque1 = deque6;
+    //deque2 = std::move(deque1);
 
-    //assign : par déplacement
-    std::cout<<"VRAI DEQUE !!!!!!"<<std::endl;
-    for(int i=0;i<dequeb.size();i++)
-        std::cout<<"dequeb["<<i<<"] ="<<dequeb[i]<<std::endl;
-
-    std::cout<<"\n";
-
-    for(int i=0;i<dequef.size();i++)
-        std::cout<<"dequef["<<i<<"] ="<<dequef[i]<<std::endl;
-
-    std::cout<<"\n ...dequeb = std::move(dequea)...\n";
-    dequeb = std::move(dequef);
+    //operator= : liste d'initialisation
+    std::cout<<"\n ...dequea = { 4, 5, 6, 7}...\n";
+    dequeb = { 4, 5, 6, 7};
 
     for(int i=0;i<dequeb.size();i++)
         std::cout<<"dequeb["<<i<<"] ="<<dequeb[i]<<std::endl;
 
 
     std::cout<<"\n\nMON DEQUE !!!!!!"<<std::endl;
-    for(int i=0;i<deque2.size();i++)
-        std::cout<<"deque2["<<i<<"] ="<<deque2[i]<<std::endl;
 
-    std::cout<<"\n";
-
-    for(int i=0;i<deque6.size();i++)
-        std::cout<<"deque6["<<i<<"] ="<<deque6[i]<<std::endl;
-
-    std::cout<<"\n ...deque2 = std::move(deque6);...\n";
-    deque2 = std::move(deque6);
+    std::cout<<"\n ...deque2 = { 4, 5, 6, 7};;...\n";
+    deque2 = { 4, 5, 6, 7};
 
     for(int i=0;i<deque2.size();i++)
         std::cout<<"deque2["<<i<<"] ="<<deque2[i]<<std::endl;
 
-    for(int i=0;i<deque6.size();i++)
-        std::cout<<"deque6["<<i<<"] ="<<deque6[i]<<std::endl;
 
-    /*deque3 = { 4, 5, 6, 7};
 
     // assign
-    deque1.assign( 5, 2);
+    /*deque1.assign( 5, 2);
     deque2.assign( deque1.begin(), deque1.end() );
     deque3.assign( {8,9,10,11} );
 

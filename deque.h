@@ -226,7 +226,54 @@ public:
 
         return *this;
     }
-    deque& operator=( std::initializer_list<T> ilist ) { return *this; }
+    deque& operator=( std::initializer_list<T> ilist ) {
+        int i, j, count=0;
+
+        //On vide l'objet de base
+        for(i=firstPtr;i<=lastPtr;i++)
+            delete[] tab[i];
+        delete[] tab;
+
+        //On récupère les indices
+        tabLength= ilist.size() / chunkLength + ilist.size() % chunkLength;
+        nbElements=ilist.size();
+        if(ilist.size()==0){ //Dans le cas d'une liste vide
+            firstPtr=-1;
+            lastPtr=-1;
+            firstVal=-1;
+            lastVal=-1;
+        }
+        else{
+            firstPtr=0;
+            lastPtr=tabLength-1;
+            firstVal=0;
+            if(ilist.size()%chunkLength==0)
+                lastVal=chunkLength-1;
+            else
+                lastVal=(ilist.size()%chunkLength)-1;
+        }
+
+        //Reallocation du tableau
+        tab=new T*[tabLength];
+        for(i=0;i<tabLength;i++){
+            tab[i]=new T[chunkLength];
+        }
+
+        //Remplissage
+        i=0;
+        j=0;
+        for(auto &element : ilist){
+            if(count % chunkLength == 0 && count != 0) {
+                i++;
+                j = 0;
+            }
+            tab[i][j]=element;
+            count++;
+            j++;
+        }
+
+        return *this;
+    }
 
     void assign( size_type count, const T& value ) {}
     template< class InputIt > void assign( InputIt first, InputIt last ) {}
