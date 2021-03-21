@@ -28,7 +28,7 @@ int main() {
     //deque2 = std::move(deque1);
 
     //operator= : liste d'initialisation
-    std::cout<<"\n ...dequea = { 4, 5, 6, 7}...\n";
+    /*std::cout<<"\n ...dequea = { 4, 5, 6, 7}...\n";
     dequeb = { 4, 5, 6, 7};
 
     for(int i=0;i<dequeb.size();i++)
@@ -41,13 +41,26 @@ int main() {
     deque2 = { 4, 5, 6, 7};
 
     for(int i=0;i<deque2.size();i++)
-        std::cout<<"deque2["<<i<<"] ="<<deque2[i]<<std::endl;
-
+        std::cout<<"deque2["<<i<<"] ="<<deque2[i]<<std::endl;*/
 
 
     // assign
-    /*deque1.assign( 5, 2);
-    deque2.assign( deque1.begin(), deque1.end() );
+    std::cout<<"\n ...dequea.assign( 5, a);...\n";
+    dequea.assign( 6, a);
+
+    for(int i=0;i<dequea.size();i++)
+        std::cout<<"dequea["<<i<<"] ="<<dequea[i]<<std::endl;
+
+
+    std::cout<<"\n\nMON DEQUE !!!!!!"<<std::endl;
+
+    std::cout<<"\n ...deque1.assign( 5, a);...\n";
+    deque1.assign( 6, a);
+
+    for(int i=0;i<deque1.size();i++)
+        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
+
+    /*deque2.assign( deque1.begin(), deque1.end() );
     deque3.assign( {8,9,10,11} );
 
     // front/back

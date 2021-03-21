@@ -275,7 +275,52 @@ public:
         return *this;
     }
 
-    void assign( size_type count, const T& value ) {}
+    void assign( size_type count, const T& value ) {
+        size_t nvTabLength;
+        int i,j;
+
+        if(count>nbElements){
+            //calcul de la nouvelle longeur
+            nvTabLength=count/chunkLength + count%chunkLength;
+
+            //On ajoute les pointeurs manquants
+            for(i=tabLength;i<nvTabLength;i++)
+                tab[i]=new T[chunkLength];
+            tabLength=nvTabLength;
+        }
+        else{
+            if(count<nbElements){
+                //calcul de la nouvelle longeur
+                nvTabLength=count/chunkLength + count%chunkLength;
+
+                //On supprime les pointeurs en trop
+                for(i=nvTabLength;i<tabLength;i++)
+                    delete[] tab[i];
+                tabLength=nvTabLength;
+            }
+        }
+
+        //Nouveaux indices
+        nbElements=count;
+        if(tabLength==0){
+            firstPtr=-1;
+            lastPtr=-1;
+            firstVal=-1;
+            lastVal=-1;
+        }
+        else{
+            firstPtr=0;
+            lastPtr=tabLength-1;
+            firstVal=0;
+            lastVal=(count%chunkLength==0 ? chunkLength-1 : (count%chunkLength)-1);
+        }
+
+        //Nouveaux éléments
+        for(i=firstPtr;i<=lastPtr;i++)
+            for(j=0;j<chunkLength;j++)
+                tab[i][j]=value;
+    }
+
     template< class InputIt > void assign( InputIt first, InputIt last ) {}
     void assign( std::initializer_list<T> ilist ) {}
 
