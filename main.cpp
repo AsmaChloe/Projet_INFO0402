@@ -78,7 +78,7 @@ int main() {
             << dequefconst.front() << ", "
             << dequef.back()  << ", "
             << dequefconst.back()  << ", "
-            //<< dequef.empty() << ", "
+            << dequef.empty() << ", "
             << dequef.size()  << std::endl;
 
     //MON DEQUE
@@ -91,7 +91,7 @@ int main() {
             << deque6const.front() << ", "
             << deque6.back()  << ", "
             << deque6const.back()  << ", "
-            //<< deque6.empty() << ", "
+            << "Empty ? " << deque6.empty() << ", "
             << "Size() : " << deque6.size()  << std::endl;
 
     // clear

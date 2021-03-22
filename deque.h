@@ -435,25 +435,7 @@ public:
      */
     bool empty() const {
 
-        int taille = size();
-        int compteur = 0;
-        bool res;
-
-        for (int i = 0; i < taille; i++) {
-            for (int j = 0; j < taille; j++) {
-                if (tab[i][j] == NULL){
-                    compteur++;
-                }
-            }
-        }
-
-        if (compteur == taille){
-            res = true;
-        }else{
-            res = false;
-        }
-
-        return res;
+        return (lastVal==-1 && lastPtr==-1 && firstPtr==-1 && firstVal==-1 && tabLength==0 && nbElements==0);
     }
 
     /**
