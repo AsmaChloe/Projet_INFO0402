@@ -485,7 +485,22 @@ public:
 
     void swap( deque& other ) {}
 
-    friend bool operator==( const deque& lhs, const deque& rhs ) { return true; }
+    /** OPERATEURS **/
+    friend bool operator==( const deque& lhs, const deque& rhs ) {
+        int i, compt = 0, res = false;
+        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
+                if (lhs.tab[i] == rhs.tab[i]){
+                    compt++;
+                }
+            }
+            if (compt == lhs.size()){
+                res = true;
+            }
+        }
+        return res;
+    }
+
     friend bool operator!=( const deque& lhs, const deque& rhs ) { return true; }
     friend bool operator<(  const deque& lhs, const deque& rhs ) { return true; }
     friend bool operator<=( const deque& lhs, const deque& rhs ) { return true; }
@@ -495,7 +510,9 @@ public:
     // iterateur classique
     class iterator {
     public:
-        explicit iterator() {}
+        explicit iterator() {
+
+        }
         iterator(const iterator&) {}
         iterator& operator++() { return *this; }
         iterator operator++(int) { return *this; }
@@ -515,8 +532,8 @@ public:
         // int& operator[](int n);
         // const int& operator[](int n) const;
     };
-    iterator begin() { return iterator(); }
-    iterator end() { return iterator(); }
+    iterator begin() { return tab[firstPtr][firstVal]; }
+    iterator end() { return tab[lastPtr][lastVal]; }
 
     // iterateur constant
     class const_iterator {
