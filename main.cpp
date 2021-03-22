@@ -45,7 +45,7 @@ int main() {
 
 
     //*****************************************assign : count, value*****************************************
-    /*std::cout<<"\n ...dequea.assign( 5, a);...\n";
+    std::cout<<"\n ...dequea.assign( 5, a);...\n";
     dequea.assign( 6, a);
 
     for(int i=0;i<dequea.size();i++)
@@ -58,7 +58,7 @@ int main() {
     deque1.assign( 6, a);
 
     for(int i=0;i<deque1.size();i++)
-        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;*/
+        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
 
     //*****************************************assign : liste d'initialisation*****************************************
 
@@ -81,7 +81,7 @@ int main() {
     /* A FAIRE QUAND ITERATOR !!!!!!!!!!!!! deque2.assign( deque1.begin(), deque1.end() );*/
 
     //*****************************************FRONT BACK*****************************************
-    const deque<A>&deque6const = deque6;
+    /*const deque<A>&deque6const = deque6;
     const std::deque<A>&dequefconst = dequef;
     //VRAI DEQUE
     std::cout
@@ -107,7 +107,7 @@ int main() {
             << deque6.back()  << ", "
             << deque6const.back()  << ", "
             //<< deque6.empty() << ", "
-            << deque6.size()  << std::endl;
+            << deque6.size()  << std::endl;*/
     /*
 
     // clear
