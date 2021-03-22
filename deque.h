@@ -414,7 +414,7 @@ public:
         // Ajout du dernier élément
         nbElements++;
         lastVal = remainingSpace;
-        operator[](nbElements - 1) = value;
+        tab[lastPtr][lastVal] = value;
     }
 
     void push_back(T&& value) {
@@ -451,7 +451,7 @@ public:
         // Ajout du dernier élément
         nbElements++;
         lastVal = remainingSpace;
-        operator[](nbElements - 1) = value;
+        tab[lastPtr][lastVal] = value;
     }
 
     template< class... Args > void emplace_back( Args&&... args ) {}
