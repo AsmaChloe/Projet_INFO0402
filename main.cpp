@@ -10,7 +10,8 @@ int main() {
     deque<A>   deque2(13);                             // count
     deque<A>   deque3(11, a);                         // count/value
     deque<A>   deque6( {1,2,3,4,5,6,7} );               //Liste d'initialisation
-    deque<A>   deque7({0,1,2,3,4,5,6});
+    deque<int>   deque7({1,2,3,4,5,6,7});
+    deque<int>   deque8({0,1,2,3,4,5,6});
     deque<A>   deque4(deque6);                              //Copie
     deque<A>    deque5(std::move(deque4));                  //Par déplacement
     //A tester encore : first/last
@@ -19,9 +20,10 @@ int main() {
     std::deque<A>   dequea;                                 // défaut
     std::deque<A>   dequeb(13);                           // count
     std::deque<A>   dequec(11,a);                        // count/value
-    const std::deque<A>   dequef( {1,2,3,4,5,6,7} );            //Liste d'initialisation
+    std::deque<A>   dequef( {1,2,3,4,5,6,7} );            //Liste d'initialisation
     std::deque<A>   dequed(dequef);                         //Copie
-    const std::deque<A>   dequeg({0,1,2,3,4,5,6});
+    std::deque<int>   dequeg({1,2,3,4,5,6,7});
+    std::deque<int>   dequez({0,1,2,3,4,5,6});
     std::deque<A>   dequee( std::move(dequed) );            // Par déplacement
     //td::deque<A>   dequec( dequeb.begin(), dequeb.end() );  // itérateur
 
@@ -111,21 +113,21 @@ int main() {
     deque4.pop_front();
     */// tests
     std::cout
-            << "Deque 6 == Deque 7 : " << ((deque6 == deque7)?"OUI" : "NON") << std::endl
-            << "Deque 6 != Deque 7 : " << ((deque6 != deque7)?"OUI" : "NON") << std::endl
-            << "Deque 6 < Deque 7 : " << ((deque6 < deque7)?"OUI" : "NON") << std::endl
-            << "Deque 6 <= Deque 7 : " << ((deque6 <= deque7)?"OUI" : "NON") << std::endl
-            << "Deque 6 > Deque 7 : " << ((deque6 > deque7)?"OUI" : "NON") << std::endl
-            << "Deque 6 >= Deque 7 : " << ((deque6 >= deque7)?"OUI" : "NON") << std::endl;
+            << "Deque 6 == Deque 7 : " << ((deque7 == deque8)?"OUI" : "NON") << std::endl
+            << "Deque 6 != Deque 7 : " << ((deque7 != deque8)?"OUI" : "NON") << std::endl
+            << "Deque 6 < Deque 7 : " << ((deque7 < deque8)?"OUI" : "NON") << std::endl
+            << "Deque 6 <= Deque 7 : " << ((deque7 <= deque8)?"OUI" : "NON") << std::endl
+            << "Deque 6 > Deque 7 : " << ((deque7 > deque8)?"OUI" : "NON") << std::endl
+            << "Deque 6 >= Deque 7 : " << ((deque7 >= deque8)?"OUI" : "NON") << std::endl;
 
     std::cout << "VERIFICATIONS :" << std::endl;
     std::cout
-            << "Deque 6 == Deque 7 : " << ((dequef == dequeg)?"OUI" : "NON") << std::endl
-            << "Deque 6 != Deque 7 : " << ((dequef != dequeg)?"OUI" : "NON") << std::endl
-            << "Deque 6 < Deque 7 : " << ((dequef < dequeg)?"OUI" : "NON") << std::endl
-            << "Deque 6 <= Deque 7 : " << ((dequef <= dequeg)?"OUI" : "NON") << std::endl
-            << "Deque 6 > Deque 7 : " << ((dequef > dequeg)?"OUI" : "NON") << std::endl
-            << "Deque 6 >= Deque 7 : " << ((dequef >= dequeg)?"OUI" : "NON") << std::endl;
+            << "Deque 6 == Deque 7 : " << ((dequeg == dequez)?"OUI" : "NON") << std::endl
+            << "Deque 6 != Deque 7 : " << ((dequeg != dequez)?"OUI" : "NON") << std::endl
+            << "Deque 6 < Deque 7 : " << ((dequeg < dequez)?"OUI" : "NON") << std::endl
+            << "Deque 6 <= Deque 7 : " << ((dequeg <= dequez)?"OUI" : "NON") << std::endl
+            << "Deque 6 > Deque 7 : " << ((dequeg > dequez)?"OUI" : "NON") << std::endl
+            << "Deque 6 >= Deque 7 : " << ((dequeg >= dequez)?"OUI" : "NON") << std::endl;
 
 
     // iterateur
