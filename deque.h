@@ -361,7 +361,9 @@ public:
             return tab[lastPtr][lastVal];
     }
 
-    bool empty() const { return false; }
+    bool empty() const {
+        return (tabLength==0 && nbElements==0 && firstPtr==-1 && lastPtr==-1 && firstPtr==-1 && lastVal==-1);
+    }
 
     size_t size() const { return nbElements; }
 

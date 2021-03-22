@@ -45,6 +45,7 @@ int main() {
 
 
     //*****************************************assign : count, value*****************************************
+    /*
     std::cout<<"\n ...dequea.assign( 5, a);...\n";
     dequea.assign( 6, a);
 
@@ -59,6 +60,7 @@ int main() {
 
     for(int i=0;i<deque1.size();i++)
         std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
+        */
 
     //*****************************************assign : liste d'initialisation*****************************************
 
@@ -81,7 +83,7 @@ int main() {
     /* A FAIRE QUAND ITERATOR !!!!!!!!!!!!! deque2.assign( deque1.begin(), deque1.end() );*/
 
     //*****************************************FRONT BACK*****************************************
-    /*const deque<A>&deque6const = deque6;
+    const deque<A>&deque6const = deque6;
     const std::deque<A>&dequefconst = dequef;
     //VRAI DEQUE
     std::cout
@@ -93,8 +95,9 @@ int main() {
             << dequefconst.front() << ", "
             << dequef.back()  << ", "
             << dequefconst.back()  << ", "
-            //<< dequef.empty() << ", "
-            << dequef.size()  << std::endl;
+            << dequef.empty() << ", "
+            << dequef.size()  << ", "
+            << dequea.empty()<<std::endl;
 
     //MON DEQUE
     std::cout
@@ -106,8 +109,9 @@ int main() {
             << deque6const.front() << ", "
             << deque6.back()  << ", "
             << deque6const.back()  << ", "
-            //<< deque6.empty() << ", "
-            << deque6.size()  << std::endl;*/
+            << deque6.empty() << ", "
+            << deque6.size()  <<", "
+            << deque1.empty()<<std::endl;
     /*
 
     // clear
