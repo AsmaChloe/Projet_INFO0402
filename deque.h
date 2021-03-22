@@ -296,57 +296,19 @@ public:
     template< class InputIt > void assign( InputIt first, InputIt last ) {}
 
     void assign( std::initializer_list<T> ilist ) {
-        size_t nvTabLength;
-        int i,j,nbTours=0;
+        //On vide l'objet courant
+        clear();
 
-        if(ilist.size()>nbElements){
-            //calcul de la nouvelle longeur
-            nvTabLength=ilist.size()/chunkLength + ilist.size()%chunkLength;
-
-            //On ajoute les pointeurs manquants
-            for(i=tabLength;i<nvTabLength;i++)
-                tab[i]=new T[chunkLength];
-            tabLength=nvTabLength;
-        }
-        else{
-            if(ilist.size()<nbElements){
-                //calcul de la nouvelle longeur
-                nvTabLength=ilist.size()/chunkLength + ilist.size()%chunkLength;
-
-                //On supprime les pointeurs en trop
-                for(i=nvTabLength;i<tabLength;i++)
-                    delete[] tab[i];
-                tabLength=nvTabLength;
-            }
-        }
+        //Creation d'un nouvel objet selon les paramètres
+        deque<T> nvDeque(ilist);
 
         //Nouveaux indices
-        nbElements=ilist.size();
-        if(tabLength==0){
-            firstPtr=-1;
-            lastPtr=-1;
-            firstVal=-1;
-            lastVal=-1;
-        }
-        else{
-            firstPtr=0;
-            lastPtr=tabLength-1;
-            firstVal=0;
-            lastVal=(ilist.size()%chunkLength==0 ? chunkLength-1 : (ilist.size()%chunkLength)-1);
-        }
-
-        //Nouveaux éléments
-        i=0;
-        j=0;
-        for(auto &element : ilist){
-            if(nbTours % chunkLength == 0 && nbTours!= 0) {
-                i++;
-                j = 0;
-            }
-            tab[i][j]=element;
-            nbTours++;
-            j++;
-        }
+        tabLength=nvDeque.tabLength;
+        nbElements=nvDeque.nbElements;
+        firstPtr=nvDeque.firstPtr;
+        lastPtr=nvDeque.lastPtr;
+        firstVal=nvDeque.firstVal;
+        lastVal=nvDeque.lastVal;
     }
 
     //Contrairement à operator[], at check si pos se trouve dans les bornes du deque et retour une exception si ce n'est pas le cas
