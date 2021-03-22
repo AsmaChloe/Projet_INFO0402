@@ -361,15 +361,26 @@ public:
             return tab[lastPtr][lastVal];
     }
 
+    /**
+     * Fonction empty pour vérifier si un conteneur est vide ou non
+     * @return true ou false
+     */
     bool empty() const {
         return (tabLength==0 && nbElements==0 && firstPtr==-1 && lastPtr==-1 && firstPtr==-1 && lastVal==-1);
     }
 
+    /**
+     * Fonction size qui permet de savoir la taille d'un deque
+     * @return le nombre d'éléments du deque
+     */
     size_t size() const { return nbElements; }
 
+    /**
+     * Fonction qui supprime le deque (ce qu'il y a à l'intérieur)
+     */
     void clear() {
         //On vide
-        for (int i = firstPtr; i < lastPtr; i++)
+        for (int i = firstPtr; i <= lastPtr; i++)
             if (tab[i] != nullptr) delete[] tab[i];
         if (tab != nullptr)
             delete[] tab;
@@ -379,9 +390,20 @@ public:
         tabLength = nbElements = 0;
         firstVal = lastVal = firstPtr = lastPtr = -1;
     }
+  
+  /**
+     * Permet d'ajouter un élément à la fin du conteneur
+     * @param value
+     */
+    void push_back( const T& value ) {
 
 
-    void push_back( const T& value ) {}
+    }
+
+    /**
+     * Permet d'ajouter un élément à la fin du conteneur
+     * @param value
+     */
     void push_back( T&& value ) {}
 
     template< class... Args > void emplace_back( Args&&... args ) {}
@@ -400,17 +422,135 @@ public:
 
     void swap( deque& other ) {}
 
-    friend bool operator==( const deque& lhs, const deque& rhs ) { return true; }
-    friend bool operator!=( const deque& lhs, const deque& rhs ) { return true; }
-    friend bool operator<(  const deque& lhs, const deque& rhs ) { return true; }
-    friend bool operator<=( const deque& lhs, const deque& rhs ) { return true; }
-    friend bool operator>(  const deque& lhs, const deque& rhs ) { return true; }
-    friend bool operator>=( const deque& lhs, const deque& rhs ) { return true; }
+    /** OPERATEURS **/
+    friend bool operator==( const deque& lhs, const deque& rhs ) {
+        int i, j, compt = 0, nbElement = 1, res = false;
+        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
+                for(j=0; j<chunkLength; j++) {
+
+                    if (nbElement <= lhs.size()){
+                        if (lhs.tab[i][j] == rhs.tab[i][j]) {
+                            compt++;
+                        }
+                    }
+                    nbElement++;
+                }
+            }
+            if (compt == lhs.size()){
+                res = true;
+            }
+        }
+        return res;
+    }
+
+    friend bool operator!=( const deque& lhs, const deque& rhs ) {
+        int i, j, compt = 0, nbElement = 1, res = false;
+        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
+                for(j=0; j<chunkLength; j++) {
+
+                    if (nbElement <= lhs.size()){
+                        if (lhs.tab[i][j] != rhs.tab[i][j]) {
+                            compt++;
+                        }
+                    }
+                    nbElement++;
+                }
+            }
+            if (compt == lhs.size()){
+                res = true;
+            }
+        }
+        return res;
+    }
+    friend bool operator<(  const deque& lhs, const deque& rhs ) {
+        int i, j, compt = 0, nbElement = 1, res = false;
+        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
+                for(j=0; j<chunkLength; j++) {
+
+                    if (nbElement <= lhs.size()){
+                        if (lhs.tab[i][j] < rhs.tab[i][j]) {
+                            compt++;
+                        }
+                    }
+                    nbElement++;
+                }
+            }
+            if (compt == lhs.size()){
+                res = true;
+            }
+        }
+        return res;
+    }
+    friend bool operator<=( const deque& lhs, const deque& rhs ) {
+        int i, j, compt = 0, nbElement = 1, res = false;
+        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
+                for(j=0; j<chunkLength; j++) {
+
+                    if (nbElement <= lhs.size()){
+                        if (lhs.tab[i][j] <= rhs.tab[i][j]) {
+                            compt++;
+                        }
+                    }
+                    nbElement++;
+                }
+            }
+            if (compt == lhs.size()){
+                res = true;
+            }
+        }
+        return res;
+    }
+    friend bool operator>(  const deque& lhs, const deque& rhs ) {
+        int i, j, compt = 0, nbElement = 1, res = false;
+        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
+                for(j=0; j<chunkLength; j++) {
+
+                    if (nbElement <= lhs.size()){
+                        if (lhs.tab[i][j] > rhs.tab[i][j]) {
+                            compt++;
+                        }
+                    }
+                    nbElement++;
+                }
+            }
+            if (compt == lhs.size()){
+                res = true;
+            }
+        }
+        return res;
+    }
+    friend bool operator>=( const deque& lhs, const deque& rhs ) {
+        int i, j, compt = 0, nbElement = 1, res = false;
+        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
+                for(j=0; j<chunkLength; j++) {
+
+                    if (nbElement <= lhs.size()){
+                        if (lhs.tab[i][j] >= rhs.tab[i][j]) {
+                            compt++;
+                        }
+                    }
+                    nbElement++;
+                }
+            }
+            if (compt == lhs.size()){
+                res = true;
+            }
+        }
+        return res;
+    }
 
     // iterateur classique
     class iterator {
     public:
-        explicit iterator() {}
+        explicit iterator() {
+
+        }
         iterator(const iterator&) {}
         iterator& operator++() { return *this; }
         iterator operator++(int) { return *this; }
@@ -430,8 +570,8 @@ public:
         // int& operator[](int n);
         // const int& operator[](int n) const;
     };
-    iterator begin() { return iterator(); }
-    iterator end() { return iterator(); }
+    iterator begin() { return tab[firstPtr][firstVal]; }
+    iterator end() { return tab[lastPtr][lastVal]; }
 
     // iterateur constant
     class const_iterator {
