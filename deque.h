@@ -380,9 +380,20 @@ public:
     }
 
     //Contrairement à operator[], at check si pos se trouve dans les bornes du deque et retour une exception si ce n'est pas le cas
-    T& at( size_type pos ) { return dummy; }
-    const T& at( size_type pos ) const { return dummy; }
-
+    //Se renseigner sur les exceptions ?? Ou  on verra plus tard ?? =>Je crois qu'on en parle des les derniers CM
+    T& at( size_type pos ) {
+        if(pos>=0 && pos<nbElements){
+            return operator[](pos);
+        }
+        else
+            return dummy; //????????????????????????
+    }
+    const T& at( size_type pos ) const {
+        if(pos>=0 && pos <nbElements)
+            return operator[](pos);
+        else
+            return dummy; //???????????????????????
+    }
 
     T& operator[]( size_type pos ) {
         if(nbElements<1 || pos>=nbElements || pos<0) return dummy;
@@ -399,6 +410,7 @@ public:
         return tab[x][y];
     }
 
+    /******* A RESOUDRE : Presence de warning lié au retour manquant dans le cas où les if ne sont pas à true**********/
     T& front() {
         if(firstVal!=-1 && firstPtr!=-1)
             return tab[firstPtr][firstVal];

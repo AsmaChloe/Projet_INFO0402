@@ -62,7 +62,7 @@ int main() {
 
     //*****************************************assign : liste d'initialisation*****************************************
 
-    std::cout<<"\n ...dequec.assign( 5, a);...\n";
+    /*std::cout<<"\n ...dequec.assign( 5, a);...\n";
     dequec.assign( {8,9,10,11} );
 
     for(int i=0;i<dequec.size();i++)
@@ -75,37 +75,28 @@ int main() {
     deque3.assign( {8,9,10,11} );
 
     for(int i=0;i<deque3.size();i++)
-        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;
+        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;*/
 
     //*****************************************assign : liste d'initialisation*****************************************
     /* A FAIRE QUAND ITERATOR !!!!!!!!!!!!! deque2.assign( deque1.begin(), deque1.end() );*/
 
     //*****************************************FRONT BACK*****************************************
-
+    const deque<A>&deque6const = deque6;
+    const std::deque<A>&dequefconst = dequef;
     //VRAI DEQUE
     std::cout
-            /*<< "dequea.front() = "<<dequea.front()<<", "
-            << "dequea.back() = "<<dequea.back()<<", "
-            << "dequeb.front() = "<<dequeb.front()<<", "
-            << "dequeb.back() = "<<dequeb.back()<<", "          Creation d'un segmentation fault-> les deques sont vides*/
-            << "dequec.front() = "<<dequec.front()<<", "
-            << "dequec.back() = "<<dequec.back()<<", "
-            << "dequef.front() = "<<dequef.front()<<", "
-            << "dequef.back() = "<<dequef.back()<<", "
-            <<std::endl;
+            << dequef.at(0) << ","
+            << dequefconst.at(0) << ","
+            << dequef[1] << ","
+            << dequefconst[1] << ","
+            << dequef.front() << ", "
+            << dequefconst.front() << ", "
+            << dequef.back()  << ", "
+            << dequefconst.back()  << ", "
+            //<< dequef.empty() << ", "
+            << dequef.size()  << std::endl;
 
     //MON DEQUE
-    std::cout
-        /*<< "deque1.front() = "<<deque1.front()<<", "
-        << "deque1.back() = "<<deque1.back()<<", "
-        << "deque2.front() = "<<deque2.front()<<", "
-        << "deque2.back() = "<<deque2.back()<<", "          Creation d'un segmentation fault-> Normal ? Le vrai deque fait pareil*/
-        << "deque3.front() = "<<deque3.front()<<", "
-        << "deque3.back() = "<<deque3.back()<<", "
-        << "deque6.front() = "<<deque6.front()<<", "
-        << "deque6.back() = "<<deque6.back()<<", "
-        <<std::endl;
-    /*const deque<A>&deque6const = deque6;
     std::cout
             << deque6.at(0) << ","
             << deque6const.at(0) << ","
@@ -115,8 +106,9 @@ int main() {
             << deque6const.front() << ", "
             << deque6.back()  << ", "
             << deque6const.back()  << ", "
-            << deque6.empty() << ", "
+            //<< deque6.empty() << ", "
             << deque6.size()  << std::endl;
+    /*
 
     // clear
     deque5.clear();
