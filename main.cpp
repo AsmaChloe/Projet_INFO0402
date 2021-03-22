@@ -31,41 +31,6 @@ int main() {
     //deque1 = deque6;
     //deque2 = std::move(deque1);
 
-    //*****************************************operator= : liste d'initialisation*****************************************
-    /*std::cout<<"\n ...dequea = { 4, 5, 6, 7}...\n";
-    dequeb = { 4, 5, 6, 7};
-    for(int i=0;i<dequeb.size();i++)
-        std::cout<<"dequeb["<<i<<"] ="<<dequeb[i]<<std::endl;
-    std::cout<<"\n\nMON DEQUE !!!!!!"<<std::endl;
-    std::cout<<"\n ...deque2 = { 4, 5, 6, 7};;...\n";
-    deque2 = { 4, 5, 6, 7};
-    for(int i=0;i<deque2.size();i++)
-        std::cout<<"deque2["<<i<<"] ="<<deque2[i]<<std::endl;*/
-
-
-    //*****************************************assign : count, value*****************************************
-    /*std::cout<<"\n ...dequea.assign( 5, a);...\n";
-    dequea.assign( 6, a);
-    for(int i=0;i<dequea.size();i++)
-        std::cout<<"dequea["<<i<<"] ="<<dequea[i]<<std::endl;
-    std::cout<<"\n\nMON DEQUE !!!!!!"<<std::endl;
-    std::cout<<"\n ...deque1.assign( 5, a);...\n";
-    deque1.assign( 6, a);
-    for(int i=0;i<deque1.size();i++)
-        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;*/
-
-    //*****************************************assign : liste d'initialisation*****************************************
-
-    /*std::cout<<"\n ...dequec.assign( 5, a);...\n";
-    dequec.assign( {8,9,10,11} );
-    for(int i=0;i<dequec.size();i++)
-        std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
-    std::cout<<"\n\nMON DEQUE !!!!!!"<<std::endl;
-    std::cout<<"\n ...deque3.assign( {8,9,10,11} );...\n";
-    deque3.assign( {8,9,10,11} );
-    for(int i=0;i<deque3.size();i++)
-        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;*/
-
     //*****************************************assign : liste d'initialisation*****************************************
     /* A FAIRE QUAND ITERATOR !!!!!!!!!!!!! deque2.assign( deque1.begin(), deque1.end() );*/
 
@@ -128,7 +93,6 @@ int main() {
             << "Deque 6 <= Deque 7 : " << ((dequeg <= dequez)?"OUI" : "NON") << std::endl
             << "Deque 6 > Deque 7 : " << ((dequeg > dequez)?"OUI" : "NON") << std::endl
             << "Deque 6 >= Deque 7 : " << ((dequeg >= dequez)?"OUI" : "NON") << std::endl;
-
 
     // iterateur
     /*
