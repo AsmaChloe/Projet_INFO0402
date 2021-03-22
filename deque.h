@@ -448,19 +448,20 @@ public:
      * Fonction qui supprime le deque (ce qu'il y a à l'intérieur)
      */
     void clear() {
-
-        for (int i = 0; i < size(); i++) {
-            for (int j = 0; j < size(); ++j) {
-                tab[i][j] = NULL;
-            }
-        }
+        int i;
+        for(i=firstPtr;i<=lastPtr;i++)
+            delete[] tab[i];
+        delete[] tab;
     }
 
     /**
      * Permet d'ajouter un élément à la fin du conteneur
      * @param value
      */
-    void push_back( const T& value ) {}
+    void push_back( const T& value ) {
+
+
+    }
 
     /**
      * Permet d'ajouter un élément à la fin du conteneur
