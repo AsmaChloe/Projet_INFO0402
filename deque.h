@@ -329,15 +329,15 @@ public:
 
     T& operator[]( size_type pos ) {
         if(nbElements<1 || pos>=nbElements || pos<0) return dummy;
-        int x= (firstPtr + (pos+lastVal)/chunkLength) % tabLength;
-        int y= (pos+lastVal) % chunkLength;
+        int x= (firstPtr + (pos+firstVal)/chunkLength) % tabLength;
+        int y= (pos+firstVal) % chunkLength;
 
         return tab[x][y];
     }
     const T& operator[]( size_type pos ) const {
         if(nbElements<1 || pos>=nbElements || pos<0) return dummy;
-        int x= (firstPtr+ (pos+lastVal)/chunkLength) % tabLength;
-        int y= (pos+lastVal) % chunkLength;
+        int x= (firstPtr + (pos+firstVal)/chunkLength) % tabLength;
+        int y= (pos+firstVal) % chunkLength;
 
         return tab[x][y];
     }
