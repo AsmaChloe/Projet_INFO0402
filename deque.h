@@ -507,11 +507,76 @@ public:
         return res;
     }
 
-    friend bool operator!=( const deque& lhs, const deque& rhs ) { return true; }
-    friend bool operator<(  const deque& lhs, const deque& rhs ) { return true; }
-    friend bool operator<=( const deque& lhs, const deque& rhs ) { return true; }
-    friend bool operator>(  const deque& lhs, const deque& rhs ) { return true; }
-    friend bool operator>=( const deque& lhs, const deque& rhs ) { return true; }
+    friend bool operator!=( const deque& lhs, const deque& rhs ) {
+        int i, compt = 0, res = false;
+        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
+                if (lhs.tab[i] != rhs.tab[i]){
+                    compt++;
+                }
+            }
+            if (compt == lhs.size()){
+                res = true;
+            }
+        }
+        return res;
+    }
+    friend bool operator<(  const deque& lhs, const deque& rhs ) {
+        int i, compt = 0, res = false;
+        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
+                if (lhs.tab[i] < rhs.tab[i]){
+                    compt++;
+                }
+            }
+            if (compt == lhs.size()){
+                res = true;
+            }
+        }
+        return res;
+    }
+    friend bool operator<=( const deque& lhs, const deque& rhs ) {
+        int i, compt = 0, res = false;
+        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
+                if (lhs.tab[i] <= rhs.tab[i]){
+                    compt++;
+                }
+            }
+            if (compt == lhs.size()){
+                res = true;
+            }
+        }
+        return res;
+    }
+    friend bool operator>(  const deque& lhs, const deque& rhs ) {
+        int i, compt = 0, res = false;
+        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
+                if (lhs.tab[i] > rhs.tab[i]){
+                    compt++;
+                }
+            }
+            if (compt == lhs.size()){
+                res = true;
+            }
+        }
+        return res;
+    }
+    friend bool operator>=( const deque& lhs, const deque& rhs ) {
+        int i, compt = 0, res = false;
+        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
+                if (lhs.tab[i] >= rhs.tab[i]){
+                    compt++;
+                }
+            }
+            if (compt == lhs.size()){
+                res = true;
+            }
+        }
+        return res;
+    }
 
     // iterateur classique
     class iterator {
