@@ -390,8 +390,8 @@ public:
         tabLength = nbElements = 0;
         firstVal = lastVal = firstPtr = lastPtr = -1;
     }
-
-    /**
+  
+  /**
      * Permet d'ajouter un élément à la fin du conteneur
      * @param value
      */
