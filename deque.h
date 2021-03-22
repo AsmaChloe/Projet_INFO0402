@@ -418,40 +418,8 @@ public:
     }
 
     void push_back(T&& value) {
-        size_t remainingSpace = nbElements % chunkLength;  // Si=0, il n'y a plus de place, sinon ça vaut l'indice où sera placé le nouvel élément
-        T** nvTab;
-        int i;
-
-        if (remainingSpace == 0) {
-            // Si les tableaux pointés sont déjà tous remplis
-            tabLength++;
-
-            //Creation d'un nouveau tableau pour la reaoloccation
-            nvTab = new T*[tabLength];
-            if(firstPtr!=-1) {
-                for (i = firstPtr; i <= lastPtr; i++) {
-                    nvTab[i] = tab[i]; //On reprends les chunk de l'ancien tableau
-                    tab[i] = nullptr;
-                }
-            }
-            else{
-                //Pour un deque vide
-                firstPtr=0;
-                firstVal=0;
-            }
-
-            //Et on libère la mémoire de l'ancien tableau
-            delete[] tab;
-            tab = nvTab;
-
-            // Le nouveau chunk
-            lastPtr++;
-            tab[lastPtr] = new T[chunkLength];
-        }
-        // Ajout du dernier élément
-        nbElements++;
-        lastVal = remainingSpace;
-        tab[lastPtr][lastVal] = value;
+        const T valeur=value;
+        push_back(valeur);
     }
 
     template< class... Args > void emplace_back( Args&&... args ) {}
