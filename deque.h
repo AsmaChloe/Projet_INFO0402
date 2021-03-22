@@ -435,7 +435,7 @@ public:
      */
     bool empty() const {
 
-        return (lastVal==-1 && lastPtr==-1 && firstPtr==-1 && firstVal==-1 && tabLength==0 && nbElements==0);
+        return (tabLength==0 && nbElements==0 && lastVal==-1 && lastPtr==-1 && firstPtr==-1 && firstVal==-1);
     }
 
     /**
@@ -448,10 +448,16 @@ public:
      * Fonction qui supprime le deque (ce qu'il y a à l'intérieur)
      */
     void clear() {
-        int i;
-        for(i=firstPtr;i<=lastPtr;i++)
-            delete[] tab[i];
-        delete[] tab;
+        //On vide
+        for (int i = firstPtr; i < lastPtr; i++)
+            if (tab[i] != nullptr) delete[] tab[i];
+        if (tab != nullptr)
+            delete[] tab;
+        tab = nullptr;
+
+        //Mise à 0 des attributs
+        tabLength = nbElements = 0;
+        firstVal = lastVal = firstPtr = lastPtr = -1;
     }
 
     /**

@@ -107,7 +107,7 @@ int main() {
     // pop
     deque4.pop_back();
     deque4.pop_front();
-    // tests
+    */// tests
     std::cout
             << (deque4 == deque5) << ", "
             << (deque4 != deque5) << ", "
@@ -116,6 +116,7 @@ int main() {
             << (deque4 >  deque5) << ", "
             << (deque4 == deque5) << std::endl;
     // iterateur
+    /*
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
     std::cout << std::endl;
     deque<A>::iterator it1 = deque1.insert( deque1.cbegin(), 7 );
