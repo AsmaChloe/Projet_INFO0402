@@ -369,7 +369,7 @@ public:
         i=0;
         j=0;
         for(auto &element : ilist){
-            if(ilist.size() % chunkLength == 0 && ilist.size() != 0) {
+            if(nbTours % chunkLength == 0 && nbTours!= 0) {
                 i++;
                 j = 0;
             }
@@ -379,11 +379,11 @@ public:
         }
     }
 
+    //Contrairement à operator[], at check si pos se trouve dans les bornes du deque et retour une exception si ce n'est pas le cas
     T& at( size_type pos ) { return dummy; }
     const T& at( size_type pos ) const { return dummy; }
 
 
-    /*Pb lors de la lecture d'un tableau qui a été vidé de ses élément (constructeur par déplacement)*/
     T& operator[]( size_type pos ) {
         if(nbElements<1 || pos>=nbElements || pos<0) return dummy;
         int x= (firstPtr + (pos+lastVal)/chunkLength) % tabLength;
@@ -399,11 +399,23 @@ public:
         return tab[x][y];
     }
 
-    T& front() { return dummy; }
-    const T& front() const { return dummy; }
+    T& front() {
+        if(firstVal!=-1 && firstPtr!=-1)
+            return tab[firstPtr][firstVal];
+    }
+    const T& front() const {
+        if(firstVal!=-1 && firstPtr!=-1)
+            return tab[firstPtr][firstVal];
+    }
 
-    T& back() { return dummy; }
-    const T& back() const { return dummy; }
+    T& back() {
+        if(lastVal!=-1 && lastPtr!=-1)
+            return tab[lastPtr][lastVal];
+    }
+    const T& back() const {
+        if(lastVal!=-1 && lastPtr!=-1)
+            return tab[lastPtr][lastVal];
+    }
 
     bool empty() const { return false; }
 

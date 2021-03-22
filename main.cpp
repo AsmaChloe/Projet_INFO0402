@@ -77,10 +77,34 @@ int main() {
     for(int i=0;i<deque3.size();i++)
         std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;
 
+    //*****************************************assign : liste d'initialisation*****************************************
     /* A FAIRE QUAND ITERATOR !!!!!!!!!!!!! deque2.assign( deque1.begin(), deque1.end() );*/
 
+    //*****************************************FRONT BACK*****************************************
 
-    // front/back
+    //VRAI DEQUE
+    std::cout
+            /*<< "dequea.front() = "<<dequea.front()<<", "
+            << "dequea.back() = "<<dequea.back()<<", "
+            << "dequeb.front() = "<<dequeb.front()<<", "
+            << "dequeb.back() = "<<dequeb.back()<<", "          Creation d'un segmentation fault-> les deques sont vides*/
+            << "dequec.front() = "<<dequec.front()<<", "
+            << "dequec.back() = "<<dequec.back()<<", "
+            << "dequef.front() = "<<dequef.front()<<", "
+            << "dequef.back() = "<<dequef.back()<<", "
+            <<std::endl;
+
+    //MON DEQUE
+    std::cout
+        /*<< "deque1.front() = "<<deque1.front()<<", "
+        << "deque1.back() = "<<deque1.back()<<", "
+        << "deque2.front() = "<<deque2.front()<<", "
+        << "deque2.back() = "<<deque2.back()<<", "          Creation d'un segmentation fault-> Normal ? Le vrai deque fait pareil*/
+        << "deque3.front() = "<<deque3.front()<<", "
+        << "deque3.back() = "<<deque3.back()<<", "
+        << "deque6.front() = "<<deque6.front()<<", "
+        << "deque6.back() = "<<deque6.back()<<", "
+        <<std::endl;
     /*const deque<A>&deque6const = deque6;
     std::cout
             << deque6.at(0) << ","
