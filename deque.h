@@ -394,7 +394,6 @@ public:
             if(firstPtr!=-1) {
                 for (i = firstPtr; i <= lastPtr; i++) {
                     nvTab[i] = tab[i]; //On reprends les chunk de l'ancien tableau
-                    delete[] tab[i];
                     tab[i] = nullptr;
                 }
             }
@@ -432,7 +431,6 @@ public:
             if(firstPtr!=-1) {
                 for (i = firstPtr; i <= lastPtr; i++) {
                     nvTab[i] = tab[i]; //On reprends les chunk de l'ancien tableau
-                    delete[] tab[i];
                     tab[i] = nullptr;
                 }
             }
