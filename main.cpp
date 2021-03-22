@@ -8,7 +8,7 @@ int main() {
     // constructions
     deque<A>   deque1;                                      // défaut
     deque<A>   deque2(13);                             // count
-    deque<A>   deque3(11, a);                         // count/value
+    deque<A>   deque3(4, a);                         // count/value
     deque<A>   deque6( {1,2,3,4,5,6,7} );               //Liste d'initialisation
     deque<A>   deque4(deque6);                              //Copie
     deque<A>    deque5(std::move(deque4));                  //Par déplacement
@@ -17,7 +17,7 @@ int main() {
     //Vrai deque
     std::deque<A>   dequea;                                 // défaut
     std::deque<A>   dequeb(13);                           // count
-    std::deque<A>   dequec(11,a);                        // count/value
+    std::deque<A>   dequec(4,a);                        // count/value
     std::deque<A>   dequef( {1,2,3,4,5,6,7} );            //Liste d'initialisation
     std::deque<A>   dequed(dequef);                         //Copie
     std::deque<A>   dequee( std::move(dequed) );            // Par déplacement
@@ -27,60 +27,6 @@ int main() {
     //deque1 = deque6;
     //deque2 = std::move(deque1);
 
-    //*****************************************operator= : liste d'initialisation*****************************************
-    /*std::cout<<"\n ...dequea = { 4, 5, 6, 7}...\n";
-    dequeb = { 4, 5, 6, 7};
-
-    for(int i=0;i<dequeb.size();i++)
-        std::cout<<"dequeb["<<i<<"] ="<<dequeb[i]<<std::endl;
-
-
-    std::cout<<"\n\nMON DEQUE !!!!!!"<<std::endl;
-
-    std::cout<<"\n ...deque2 = { 4, 5, 6, 7};;...\n";
-    deque2 = { 4, 5, 6, 7};
-
-    for(int i=0;i<deque2.size();i++)
-        std::cout<<"deque2["<<i<<"] ="<<deque2[i]<<std::endl;*/
-
-
-    //*****************************************assign : count, value*****************************************
-    /*
-    std::cout<<"\n ...dequea.assign( 5, a);...\n";
-    dequea.assign( 6, a);
-
-    for(int i=0;i<dequea.size();i++)
-        std::cout<<"dequea["<<i<<"] ="<<dequea[i]<<std::endl;
-
-
-    std::cout<<"\n\nMON DEQUE !!!!!!"<<std::endl;
-
-    std::cout<<"\n ...deque1.assign( 5, a);...\n";
-    deque1.assign( 6, a);
-
-    for(int i=0;i<deque1.size();i++)
-        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
-        */
-
-    //*****************************************assign : liste d'initialisation*****************************************
-
-    /*std::cout<<"\n ...dequec.assign( 5, a);...\n";
-    dequec.assign( {8,9,10,11} );
-
-    for(int i=0;i<dequec.size();i++)
-        std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
-
-
-    std::cout<<"\n\nMON DEQUE !!!!!!"<<std::endl;
-
-    std::cout<<"\n ...deque3.assign( {8,9,10,11} );...\n";
-    deque3.assign( {8,9,10,11} );
-
-    for(int i=0;i<deque3.size();i++)
-        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;*/
-
-    //*****************************************assign : liste d'initialisation*****************************************
-    /* A FAIRE QUAND ITERATOR !!!!!!!!!!!!! deque2.assign( deque1.begin(), deque1.end() );*/
 
     //*****************************************FRONT BACK*****************************************
     /*const deque<A>&deque6const = deque6;
@@ -116,25 +62,26 @@ int main() {
     //*****************************************PUSH BACK*****************************************
     //VRAI DEQUE
     std::cout<<"VRAI DEQUE\n";
-    for(int i=0;i<dequea.size();i++)
-        std::cout<<"dequea["<<i<<"] ="<<dequea[i]<<std::endl;
+    for(int i=0;i<dequec.size();i++)
+        std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
     // push
-    dequea.push_back(2);
+    dequec.push_back(3);
 
     std::cout<<"\n";
-    for(int i=0;i<dequea.size();i++)
-        std::cout<<"dequea["<<i<<"] ="<<dequea[i]<<std::endl;
+    for(int i=0;i<dequec.size();i++)
+        std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
 
     //MON DEQUE
     std::cout<<"\nMON DEQUE\n";
-    for(int i=0;i<deque1.size();i++)
-        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
+    for(int i=0;i<deque3.size();i++)
+        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;
     // push
-    deque1.push_back(2);
+    deque3.push_back(3);
+    //deque1.push_back(a);
 
     std::cout<<"\n";
-    for(int i=0;i<deque1.size();i++)
-        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
+    for(int i=0;i<deque3.size();i++)
+        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;
 
     // avec rvalue: impossible à tester pour T=int
     //deque4.push_front(6);
