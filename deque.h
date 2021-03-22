@@ -14,10 +14,10 @@ private :
     size_t tabLength; //Longueur du tableau de pointeurs de tableaux
     T** tab;
     size_t nbElements;
-    size_t firstPtr; //indice du premier chunk dans le tableau de pointeurs
-    size_t lastPtr; // indice du dernier chunk dans le tableau de pointeurs
-    size_t firstVal; //indice du premier élément du premier chunk
-    size_t lastVal; //indice du dernier élément du premier chunk
+    int firstPtr; //indice du premier chunk dans le tableau de pointeurs
+    int lastPtr; // indice du dernier chunk dans le tableau de pointeurs
+    int firstVal; //indice du premier élément du premier chunk
+    int lastVal; //indice du dernier élément du premier chunk
 public:
     // ne pas toucher
     using value_type = T;
@@ -382,39 +382,42 @@ public:
 
     void push_back( const T& value ) {}
 
-    void push_back( T&& value ) {
-        size_t remainingSpace=nbElements%chunkLength; //Si=0, il n'y a plus de place, sinon ça vaut l'indice où sera placé le nouvel élément
+    void push_back(T&& value) {
+        size_t remainingSpace = nbElements % chunkLength;  // Si=0, il n'y a plus de place, sinon ça vaut l'indice où sera placé le nouvel élément
         T** nvTab;
-        int i,j;
+        int i;
 
-        if(remainingSpace==0) {//Si les tableaux pointés sont déjà tous remplis
-            std::cout<<"==0"<<std::endl;
-            /*Selon le prof:
-             * "Par contre, si lors de  l'ajout d'un nouveau chunk, le tableau de pointeurs est plein,
-             * c'est ce dernier qui est réalloué (et donc recopié) dans un nouveau tableau plus grand. L'avantage est qu'il est beaucoup
-             * plus rapide de copier un tableau de pointeurs qu'un tableau d'éléments (jamais de deep copy) dès que la taille d'un élément
-             * est supérieure ou égale à la taille d'un pointeur."
-             */
-            //Creation d'un tableau de pointeurs plus grand
-            for (i = firstPtr; i <= lastPtr; i++) {
-                nvTab[i] = new T[chunkLength];
-                nvTab[i] = tab[i];
-            }
-            nvTab[lastPtr + 1] = new T[chunkLength];
-
-            for (int i = firstPtr; i <= lastPtr; i++) {
-                if (tab[i] != NULL)
-                    delete[] tab[i];
-            }
-
+        if (remainingSpace == 0) {
+            // Si les tableaux pointés sont déjà tous remplis
             tabLength++;
+
+            //Creation d'un nouveau tableau pour la reaoloccation
+            nvTab = new T*[tabLength];
+            if(firstPtr!=-1) {
+                for (i = firstPtr; i <= lastPtr; i++) {
+                    nvTab[i] = tab[i]; //On reprends les chunk de l'ancien tableau
+                    delete[] tab[i];
+                    tab[i] = nullptr;
+                }
+            }
+            else{
+                //Pour un deque vide
+                firstPtr=0;
+                firstVal=0;
+            }
+
+            //Et on libère la mémoire de l'ancien tableau
+            delete[] tab;
+            tab = nvTab;
+
+            // Le nouveau chunk
             lastPtr++;
+            tab[lastPtr] = new T[chunkLength];
         }
-        //Ajout du dernier élément
-        tab[lastPtr][remainingSpace]=value;
-        std::cout<<"Debut : "<<tab[firstPtr][firstVal]<<" - Fin : "<<tab[lastPtr][remainingSpace]<<std::endl;
+        // Ajout du dernier élément
         nbElements++;
-        lastVal=remainingSpace;
+        lastVal = remainingSpace;
+        operator[](nbElements - 1) = value;
     }
 
     template< class... Args > void emplace_back( Args&&... args ) {}

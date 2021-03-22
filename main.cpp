@@ -113,28 +113,28 @@ int main() {
             << deque6.size()  <<", "
             << deque1.empty()<<std::endl;*/
 
-    //*****************************************FRONT BACK*****************************************
+    //*****************************************PUSH BACK*****************************************
     //VRAI DEQUE
     std::cout<<"VRAI DEQUE\n";
-    for(int i=0;i<dequee.size();i++)
-        std::cout<<"dequee["<<i<<"] ="<<dequee[i]<<std::endl;
+    for(int i=0;i<dequea.size();i++)
+        std::cout<<"dequea["<<i<<"] ="<<dequea[i]<<std::endl;
     // push
-    dequee.push_back(2);
+    dequea.push_back(2);
 
     std::cout<<"\n";
-    for(int i=0;i<dequee.size();i++)
-        std::cout<<"dequee["<<i<<"] ="<<dequee[i]<<std::endl;
+    for(int i=0;i<dequea.size();i++)
+        std::cout<<"dequea["<<i<<"] ="<<dequea[i]<<std::endl;
 
     //MON DEQUE
     std::cout<<"\nMON DEQUE\n";
-    for(int i=0;i<deque5.size();i++)
-        std::cout<<"deque5["<<i<<"] ="<<deque5[i]<<std::endl;
+    for(int i=0;i<deque1.size();i++)
+        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
     // push
-    deque5.push_back(2);
+    deque1.push_back(2);
 
     std::cout<<"\n";
-    for(int i=0;i<deque5.size();i++)
-        std::cout<<"deque5["<<i<<"] ="<<deque5[i]<<std::endl;
+    for(int i=0;i<deque1.size();i++)
+        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
 
     // avec rvalue: impossible à tester pour T=int
     //deque4.push_front(6);
