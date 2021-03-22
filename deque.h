@@ -159,10 +159,12 @@ public:
     }
 
     ~deque() {
-        for(int i=0;i<tabLength;i++){
-            if(tab[i]!= nullptr) delete[] tab[i];
+        if(tab!=nullptr) {
+            for (int i = 0; i < tabLength; i++) {
+                if (tab[i] != nullptr) delete[] tab[i];
+            }
         }
-        if(tab!=nullptr) delete[] tab;
+        delete[] tab;
     }
 
 
@@ -433,7 +435,18 @@ public:
 
     size_t size() const { return nbElements; }
 
-    void clear() {}
+    void clear() {
+        //On vide
+        for (int i = firstPtr; i < lastPtr; i++)
+            if (tab[i] != nullptr) delete[] tab[i];
+        if (tab != nullptr)
+            delete[] tab;
+        tab = nullptr;
+
+        //Mise à 0 des attributs
+        tabLength = nbElements = 0;
+        firstVal = lastVal = firstPtr = lastPtr = -1;
+    }
 
 
     void push_back( const T& value ) {}
