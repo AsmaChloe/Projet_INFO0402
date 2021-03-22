@@ -429,14 +429,54 @@ public:
             return tab[lastPtr][lastVal];
     }
 
-    bool empty() const { return false; }
+    /**
+     * Fonction empty pour vérifier si un conteneur est vide ou non
+     * @return true ou false
+     */
+    bool empty() const {
 
+        int taille = size();
+        int compteur = 0;
+        bool res;
+
+        for (int i = 0; i < taille; ++i) {
+            for (int j = 0; j < taille; ++j) {
+                if (tab[i][j] == NULL){
+                    compteur++;
+                }
+            }
+        }
+
+        if (compteur == taille){
+            res = true;
+        }else{
+            res = false;
+        }
+
+        return res;
+    }
+
+    /**
+     * Fonction size qui permet de savoir la taille d'un deque
+     * @return le nombre d'éléments du deque
+     */
     size_t size() const { return nbElements; }
 
+    /**
+     * Fonction qui supprime le deque (ce qu'il y a à l'intérieur)
+     */
     void clear() {}
 
-
+    /**
+     * Permet d'ajouter un élément à la fin du conteneur
+     * @param value
+     */
     void push_back( const T& value ) {}
+
+    /**
+     * Permet d'ajouter un élément à la fin du conteneur
+     * @param value
+     */
     void push_back( T&& value ) {}
 
     template< class... Args > void emplace_back( Args&&... args ) {}
