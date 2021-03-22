@@ -92,11 +92,12 @@ int main() {
             << deque6.back()  << ", "
             << deque6const.back()  << ", "
             //<< deque6.empty() << ", "
-            << deque6.size()  << std::endl;
-    /*
+            << "Size() : " << deque6.size()  << std::endl;
+
     // clear
-    deque5.clear();
-    deque5.resize(10);
+    //deque5.clear();
+    //std::cout << " Clear deque 5 : " << deque5.size() << std::endl;
+    /*deque5.resize(10);
     deque4.resize(6,4);
     // push
     deque4.push_back(2);

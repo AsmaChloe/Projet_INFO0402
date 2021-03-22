@@ -439,8 +439,8 @@ public:
         int compteur = 0;
         bool res;
 
-        for (int i = 0; i < taille; ++i) {
-            for (int j = 0; j < taille; ++j) {
+        for (int i = 0; i < taille; i++) {
+            for (int j = 0; j < taille; j++) {
                 if (tab[i][j] == NULL){
                     compteur++;
                 }
@@ -465,7 +465,14 @@ public:
     /**
      * Fonction qui supprime le deque (ce qu'il y a à l'intérieur)
      */
-    void clear() {}
+    void clear() {
+
+        for (int i = 0; i < size(); i++) {
+            for (int j = 0; j < size(); ++j) {
+                tab[i][j] = NULL;
+            }
+        }
+    }
 
     /**
      * Permet d'ajouter un élément à la fin du conteneur
