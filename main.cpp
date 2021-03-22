@@ -19,8 +19,9 @@ int main() {
     std::deque<A>   dequea;                                 // défaut
     std::deque<A>   dequeb(13);                           // count
     std::deque<A>   dequec(11,a);                        // count/value
-    std::deque<A>   dequef( {1,2,3,4,5,6,7} );            //Liste d'initialisation
+    const std::deque<A>   dequef( {1,2,3,4,5,6,7} );            //Liste d'initialisation
     std::deque<A>   dequed(dequef);                         //Copie
+    const std::deque<A>   dequeg({0,1,2,3,4,5,6});
     std::deque<A>   dequee( std::move(dequed) );            // Par déplacement
     //td::deque<A>   dequec( dequeb.begin(), dequeb.end() );  // itérateur
 
@@ -116,6 +117,17 @@ int main() {
             << "Deque 6 <= Deque 7 : " << ((deque6 <= deque7)?"OUI" : "NON") << std::endl
             << "Deque 6 > Deque 7 : " << ((deque6 > deque7)?"OUI" : "NON") << std::endl
             << "Deque 6 >= Deque 7 : " << ((deque6 >= deque7)?"OUI" : "NON") << std::endl;
+
+    std::cout << "VERIFICATIONS :" << std::endl;
+    std::cout
+            << "Deque 6 == Deque 7 : " << ((dequef == dequeg)?"OUI" : "NON") << std::endl
+            << "Deque 6 != Deque 7 : " << ((dequef != dequeg)?"OUI" : "NON") << std::endl
+            << "Deque 6 < Deque 7 : " << ((dequef < dequeg)?"OUI" : "NON") << std::endl
+            << "Deque 6 <= Deque 7 : " << ((dequef <= dequeg)?"OUI" : "NON") << std::endl
+            << "Deque 6 > Deque 7 : " << ((dequef > dequeg)?"OUI" : "NON") << std::endl
+            << "Deque 6 >= Deque 7 : " << ((dequef >= dequeg)?"OUI" : "NON") << std::endl;
+
+
     // iterateur
     /*
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
