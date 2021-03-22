@@ -8,7 +8,7 @@ int main() {
     // constructions
     deque<A>   deque1;                                      // défaut
     deque<A>   deque2(13);                             // count
-    deque<A>   deque3(4, a);                         // count/value
+    deque<A>   deque3(3, a);                         // count/value
     deque<A>   deque6( {1,2,3,4,5,6,7} );               //Liste d'initialisation
     deque<A>   deque4(deque6);                              //Copie
     deque<A>    deque5(std::move(deque4));                  //Par déplacement
@@ -17,7 +17,7 @@ int main() {
     //Vrai deque
     std::deque<A>   dequea;                                 // défaut
     std::deque<A>   dequeb(13);                           // count
-    std::deque<A>   dequec(4,a);                        // count/value
+    std::deque<A>   dequec(3,a);                        // count/value
     std::deque<A>   dequef( {1,2,3,4,5,6,7} );            //Liste d'initialisation
     std::deque<A>   dequed(dequef);                         //Copie
     std::deque<A>   dequee( std::move(dequed) );            // Par déplacement
@@ -66,6 +66,7 @@ int main() {
         std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
     // push
     dequec.push_back(3);
+    dequec.push_back(a);
 
     std::cout<<"\n";
     for(int i=0;i<dequec.size();i++)
@@ -77,7 +78,7 @@ int main() {
         std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;
     // push
     deque3.push_back(3);
-    //deque1.push_back(a);
+    deque3.push_back(a);
 
     std::cout<<"\n";
     for(int i=0;i<deque3.size();i++)
