@@ -172,6 +172,7 @@ public:
         int i, j;
 
         //On vide les valeurs de base
+        if(firstPtr!=-1)
         for (i = firstPtr; i<=lastPtr; i++)
             delete[] tab[i];
         delete[]tab;
@@ -185,10 +186,12 @@ public:
 
         //On copie les valeurs de other
         tab=new T*[tabLength];
-        for (i = firstPtr; i <=lastPtr; i++) {
-            tab[i]=new T[chunkLength];
-            for (j = 0; j < chunkLength; j++) {
-                tab[i][j] = other.tab[i][j];
+        if(firstPtr!=-1) {
+            for (i = firstPtr; i <= lastPtr; i++) {
+                tab[i] = new T[chunkLength];
+                for (j = 0; j < chunkLength; j++) {
+                    tab[i][j] = other.tab[i][j];
+                }
             }
         }
 
@@ -213,10 +216,12 @@ public:
 
         //On fait pointer nos pointeurs sur les chunk de other
         tab= new T*[tabLength];
-        for (i = firstPtr; i <=lastPtr; i++) {
-            tab[i]=other.tab[i];
-            //On coupe le lien entre les pointeurs de other et les chunk
-            other.tab[i]= nullptr;
+        if(firstPtr!=-1) {
+            for (i = firstPtr; i <= lastPtr; i++) {
+                tab[i] = other.tab[i];
+                //On coupe le lien entre les pointeurs de other et les chunk
+                other.tab[i] = nullptr;
+            }
         }
 
         other.firstVal=-1;
@@ -228,6 +233,7 @@ public:
 
         return *this;
     }
+
     deque& operator=( std::initializer_list<T> ilist ) {
         int i, j, count=0;
 
