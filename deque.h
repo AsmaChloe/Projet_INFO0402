@@ -369,7 +369,7 @@ public:
 
     void clear() {
         //On vide
-        for (int i = firstPtr; i < lastPtr; i++)
+        for (int i = firstPtr; i <= lastPtr; i++)
             if (tab[i] != nullptr) delete[] tab[i];
         if (tab != nullptr)
             delete[] tab;
@@ -380,9 +380,42 @@ public:
         firstVal = lastVal = firstPtr = lastPtr = -1;
     }
 
-
     void push_back( const T& value ) {}
-    void push_back( T&& value ) {}
+
+    void push_back( T&& value ) {
+        size_t remainingSpace=nbElements%chunkLength; //Si=0, il n'y a plus de place, sinon ça vaut l'indice où sera placé le nouvel élément
+        T** nvTab;
+        int i,j;
+
+        if(remainingSpace==0) {//Si les tableaux pointés sont déjà tous remplis
+            std::cout<<"==0"<<std::endl;
+            /*Selon le prof:
+             * "Par contre, si lors de  l'ajout d'un nouveau chunk, le tableau de pointeurs est plein,
+             * c'est ce dernier qui est réalloué (et donc recopié) dans un nouveau tableau plus grand. L'avantage est qu'il est beaucoup
+             * plus rapide de copier un tableau de pointeurs qu'un tableau d'éléments (jamais de deep copy) dès que la taille d'un élément
+             * est supérieure ou égale à la taille d'un pointeur."
+             */
+            //Creation d'un tableau de pointeurs plus grand
+            for (i = firstPtr; i <= lastPtr; i++) {
+                nvTab[i] = new T[chunkLength];
+                nvTab[i] = tab[i];
+            }
+            nvTab[lastPtr + 1] = new T[chunkLength];
+
+            for (int i = firstPtr; i <= lastPtr; i++) {
+                if (tab[i] != NULL)
+                    delete[] tab[i];
+            }
+
+            tabLength++;
+            lastPtr++;
+        }
+        //Ajout du dernier élément
+        tab[lastPtr][remainingSpace]=value;
+        std::cout<<"Debut : "<<tab[firstPtr][firstVal]<<" - Fin : "<<tab[lastPtr][remainingSpace]<<std::endl;
+        nbElements++;
+        lastVal=remainingSpace;
+    }
 
     template< class... Args > void emplace_back( Args&&... args ) {}
 
