@@ -25,6 +25,30 @@ public:
         ++count.iAM;
         return *this;
     }
+
+    friend bool operator==( const A& lhs, const A& rhs ) {
+        return lhs.a==rhs.a;
+    }
+
+    friend bool operator!=( const A& lhs, const A& rhs ) {
+        return lhs.a!=rhs.a;
+    }
+
+    friend bool operator>( const A& lhs, const A& rhs ) {
+        return lhs.a>rhs.a;
+    }
+
+    friend bool operator<( const A& lhs, const A& rhs ) {
+        return lhs.a<rhs.a;
+    }
+
+    friend bool operator<=( const A& lhs, const A& rhs ) {
+        return lhs.a<=rhs.a;
+    }
+
+    friend bool operator>=( const A& lhs, const A& rhs ) {
+        return lhs.a>=rhs.a;
+    }
     ~A() { ++count.iDD; }
     friend std::ostream& operator<<(std::ostream& os, const A& obj) { return os << obj.a; }
 };
