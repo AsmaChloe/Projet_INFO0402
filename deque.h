@@ -465,49 +465,29 @@ public:
 
     /** OPERATEURS **/
     friend bool operator==( const deque& lhs, const deque& rhs ) {
-        int i, j, compt = 0, nbElement = 1, res = false;
-        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
-            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
-                for(j=0; j<chunkLength; j++) {
+        int i, j, egal = 1, res = true;
 
-                    if (nbElement <= lhs.size()){
-                        if (lhs.tab[i][j] == rhs.tab[i][j]) {
-                            compt++;
-                        }
+        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+            i=lhs.firstPtr;
+            while(i<=lhs.lastPtr && res==true){
+                j=0;
+                while(j<chunkLength && res==true){
+                    if (lhs.tab[i][j] != rhs.tab[i][j]) {
+                        res=false;
                     }
-                    nbElement++;
                 }
-            }
-            if (compt == lhs.size()){
-                res = true;
             }
         }
         return res;
     }
 
     friend bool operator!=( const deque& lhs, const deque& rhs ) {
-        int i, j, compt = 0, nbElement = 1, res = false;
-        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
-            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
-                for(j=0; j<chunkLength; j++) {
-
-                    if (nbElement <= lhs.size()){
-                        if (lhs.tab[i][j] != rhs.tab[i][j]) {
-                            compt++;
-                        }
-                    }
-                    nbElement++;
-                }
-            }
-            if (compt == lhs.size()){
-                res = true;
-            }
-        }
-        return res;
+        return !operator==(lhs,rhs);
     }
+
     friend bool operator<(  const deque& lhs, const deque& rhs ) {
         int i, j, compt = 0, nbElement = 1, res = false;
-        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
+        /*if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
             for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
                 for(j=0; j<chunkLength; j++) {
 
@@ -522,68 +502,17 @@ public:
             if (compt == lhs.size()){
                 res = true;
             }
-        }
+        }*/
         return res;
     }
     friend bool operator<=( const deque& lhs, const deque& rhs ) {
-        int i, j, compt = 0, nbElement = 1, res = false;
-        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
-            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
-                for(j=0; j<chunkLength; j++) {
-
-                    if (nbElement <= lhs.size()){
-                        if (lhs.tab[i][j] <= rhs.tab[i][j]) {
-                            compt++;
-                        }
-                    }
-                    nbElement++;
-                }
-            }
-            if (compt == lhs.size()){
-                res = true;
-            }
-        }
-        return res;
+        return operator==(lhs,rhs) || operator<(lhs,rhs);
     }
     friend bool operator>(  const deque& lhs, const deque& rhs ) {
-        int i, j, compt = 0, nbElement = 1, res = false;
-        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
-            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
-                for(j=0; j<chunkLength; j++) {
-
-                    if (nbElement <= lhs.size()){
-                        if (lhs.tab[i][j] > rhs.tab[i][j]) {
-                            compt++;
-                        }
-                    }
-                    nbElement++;
-                }
-            }
-            if (compt == lhs.size()){
-                res = true;
-            }
-        }
-        return res;
+        return !operator<=(lhs,rhs);
     }
     friend bool operator>=( const deque& lhs, const deque& rhs ) {
-        int i, j, compt = 0, nbElement = 1, res = false;
-        if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
-            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
-                for(j=0; j<chunkLength; j++) {
-
-                    if (nbElement <= lhs.size()){
-                        if (lhs.tab[i][j] >= rhs.tab[i][j]) {
-                            compt++;
-                        }
-                    }
-                    nbElement++;
-                }
-            }
-            if (compt == lhs.size()){
-                res = true;
-            }
-        }
-        return res;
+        return !operator<(lhs,rhs);
     }
 
     // iterateur classique
