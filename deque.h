@@ -87,6 +87,7 @@ public:
         }*/
 
     }
+
     deque( const deque& other ) : tabLength(other.tabLength), nbElements(other.nbElements), firstPtr(other.firstPtr), lastPtr(other.lastPtr), firstVal(other.firstVal), lastVal(other.lastVal) {
         //Initialisation du tableau
         tab=new T*[tabLength];
@@ -317,20 +318,19 @@ public:
         lastVal=nvDeque.lastVal;
     }
 
-    //Contrairement à operator[], at check si pos se trouve dans les bornes du deque et retour une exception si ce n'est pas le cas
-    //Se renseigner sur les exceptions ?? Ou  on verra plus tard ?? =>Je crois qu'on en parle des les derniers CM
+
     T& at( size_type pos ) {
         if(pos>=0 && pos<nbElements){
             return operator[](pos);
         }
         else
-            return dummy; //????????????????????????
+            return dummy; /************Ajouter exception : out_of_range**************/
     }
     const T& at( size_type pos ) const {
         if(pos>=0 && pos <nbElements)
             return operator[](pos);
         else
-            return dummy; //???????????????????????
+            return dummy; /************Ajouter exception : out_of_range**************/
     }
 
     T& operator[]( size_type pos ) {
