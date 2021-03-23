@@ -14,10 +14,10 @@ private :
     size_t tabLength; //Longueur du tableau de pointeurs de tableaux
     T** tab;
     size_t nbElements;
-    size_t firstPtr; //indice du premier chunk dans le tableau de pointeurs
-    size_t lastPtr; // indice du dernier chunk dans le tableau de pointeurs
-    size_t firstVal; //indice du premier élément du premier chunk
-    size_t lastVal; //indice du dernier élément du premier chunk
+    int firstPtr; //indice du premier chunk dans le tableau de pointeurs
+    int lastPtr; // indice du dernier chunk dans le tableau de pointeurs
+    int firstVal; //indice du premier élément du premier chunk
+    int lastVal; //indice du dernier élément du premier chunk
 public:
     // ne pas toucher
     using value_type = T;
@@ -172,6 +172,7 @@ public:
         int i, j;
 
         //On vide les valeurs de base
+        if(firstPtr!=-1)
         for (i = firstPtr; i<=lastPtr; i++)
             delete[] tab[i];
         delete[]tab;
@@ -185,10 +186,12 @@ public:
 
         //On copie les valeurs de other
         tab=new T*[tabLength];
-        for (i = firstPtr; i <=lastPtr; i++) {
-            tab[i]=new T[chunkLength];
-            for (j = 0; j < chunkLength; j++) {
-                tab[i][j] = other.tab[i][j];
+        if(firstPtr!=-1) {
+            for (i = firstPtr; i <= lastPtr; i++) {
+                tab[i] = new T[chunkLength];
+                for (j = 0; j < chunkLength; j++) {
+                    tab[i][j] = other.tab[i][j];
+                }
             }
         }
 
@@ -213,10 +216,12 @@ public:
 
         //On fait pointer nos pointeurs sur les chunk de other
         tab= new T*[tabLength];
-        for (i = firstPtr; i <=lastPtr; i++) {
-            tab[i]=other.tab[i];
-            //On coupe le lien entre les pointeurs de other et les chunk
-            other.tab[i]= nullptr;
+        if(firstPtr!=-1) {
+            for (i = firstPtr; i <= lastPtr; i++) {
+                tab[i] = other.tab[i];
+                //On coupe le lien entre les pointeurs de other et les chunk
+                other.tab[i] = nullptr;
+            }
         }
 
         other.firstVal=-1;
@@ -228,6 +233,7 @@ public:
 
         return *this;
     }
+
     deque& operator=( std::initializer_list<T> ilist ) {
         int i, j, count=0;
 
@@ -329,15 +335,15 @@ public:
 
     T& operator[]( size_type pos ) {
         if(nbElements<1 || pos>=nbElements || pos<0) return dummy;
-        int x= (firstPtr + (pos+lastVal)/chunkLength) % tabLength;
-        int y= (pos+lastVal) % chunkLength;
+        int x= (firstPtr + (pos+firstVal)/chunkLength) % tabLength;
+        int y= (pos+firstVal) % chunkLength;
 
         return tab[x][y];
     }
     const T& operator[]( size_type pos ) const {
         if(nbElements<1 || pos>=nbElements || pos<0) return dummy;
-        int x= (firstPtr+ (pos+lastVal)/chunkLength) % tabLength;
-        int y= (pos+lastVal) % chunkLength;
+        int x= (firstPtr + (pos+firstVal)/chunkLength) % tabLength;
+        int y= (pos+firstVal) % chunkLength;
 
         return tab[x][y];
     }
@@ -396,15 +402,50 @@ public:
      * @param value
      */
     void push_back( const T& value ) {
+        size_t remainingSpace = nbElements % chunkLength;  // Si=0, il n'y a plus de place, sinon ça vaut l'indice où sera placé le nouvel élément
+        T** nvTab;
+        int i;
 
+        if (remainingSpace == 0) {
+            // Si les tableaux pointés sont déjà tous remplis
+            tabLength++;
 
+            //Creation d'un nouveau tableau pour la reaoloccation
+            nvTab = new T*[tabLength];
+            if(firstPtr!=-1) {
+                for (i = firstPtr; i <= lastPtr; i++) {
+                    nvTab[i] = tab[i]; //On reprends les chunk de l'ancien tableau
+                    tab[i] = nullptr;
+                }
+            }
+            else{
+                //Pour un deque vide
+                firstPtr=0;
+                firstVal=0;
+            }
+
+            //Et on libère la mémoire de l'ancien tableau
+            delete[] tab;
+            tab = nvTab;
+
+            // Le nouveau chunk
+            lastPtr++;
+            tab[lastPtr] = new T[chunkLength];
+        }
+        // Ajout du dernier élément
+        nbElements++;
+        lastVal = remainingSpace;
+        tab[lastPtr][lastVal] = value;
     }
 
-    /**
+     /**
      * Permet d'ajouter un élément à la fin du conteneur
      * @param value
      */
-    void push_back( T&& value ) {}
+    void push_back(T&& value) {
+        const T valeur=value;
+        push_back(valeur);
+    }
 
     template< class... Args > void emplace_back( Args&&... args ) {}
 
