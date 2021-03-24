@@ -451,8 +451,64 @@ public:
 
     void pop_back() {}
 
-    void push_front( const T& value ) {}
-    void push_front( T&& value ) {}
+    /**
+     * Ajoute un élément au début du conteneur
+     * @param value
+     */
+    void push_front( const T& value ) {
+        T** nvTab;
+        int i;
+
+        if(firstVal==-1 || (firstPtr==0 && firstVal==0)){ //Si le deque est vide ou complet sur le premier chunk
+            //Creation d'un nouveau chunk
+            // Si les tableaux pointés sont déjà tous remplis
+            tabLength++;
+
+            //Creation d'un nouveau tableau pour la reaoloccation
+            nvTab = new T*[tabLength];
+            if(firstPtr!=-1) {
+                for (i = firstPtr; i <= lastPtr; i++) {
+                    nvTab[i+1] = tab[i]; //On reprends les chunk de l'ancien tableau
+                    tab[i] = nullptr;
+                }
+            }
+            else{
+                //Pour un deque vide
+                firstPtr=0;
+                firstVal=0;
+            }
+
+            //Et on libère la mémoire de l'ancien tableau
+            delete[] tab;
+            tab = nvTab;
+
+            // Le nouveau chunk
+            tab[firstPtr] = new T[chunkLength];
+            firstVal=chunkLength-1;
+        }
+        else{
+            if(firstVal==0){ //Si le premier chunk est complet et qu'il n'est pas pointé par tab[0]
+                //Remplir le chunk pointé par firstPtr-1
+                firstPtr--;
+                firstVal=chunkLength-1;
+            }
+            else{
+                //Il y a un trou dans le premier chunk, on le remplit
+                firstVal--;
+            }
+        }
+        nbElements++;
+        tab[firstPtr][firstVal]=value;
+    }
+
+    /**
+     * Ajoute un élément au début du conteneur
+     * @param value
+     */
+    void push_front( T&& value ) {
+        const T valeur=value;
+        push_front(valeur);
+    }
 
     template< class... Args > void emplace_front( Args&&... args ) {}
 
