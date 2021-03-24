@@ -30,7 +30,7 @@ public:
     }
 
     explicit deque(size_type count) : nbElements(count) {
-        tabLength= count / chunkLength + count % chunkLength;
+        tabLength= count / chunkLength + count % chunkLength; //A corriger
 
         //Initialisation du tableau
         tab=new T*[tabLength];
@@ -46,7 +46,7 @@ public:
     }
 
     deque( size_type count, const T&value ) : nbElements(count) {
-        tabLength= count / chunkLength + count % chunkLength;
+        tabLength= count / chunkLength + count % chunkLength; //A corriger
 
         //Initialisation du tableau
         tab=new T*[tabLength];
@@ -122,7 +122,7 @@ public:
         int i=0,j=0,count=0;
 
         //Initialisation du tableau
-        tabLength= init.size() / chunkLength + init.size() % chunkLength;
+        tabLength= init.size() / chunkLength + init.size() % chunkLength; //A corriger
         tab=new T*[tabLength];
         for(i=0;i<tabLength;i++){
             tab[i]=new T[chunkLength];
@@ -244,7 +244,7 @@ public:
         delete[] tab;
 
         //On récupère les indices
-        tabLength= ilist.size() / chunkLength + ilist.size() % chunkLength;
+        tabLength= ilist.size() / chunkLength + ilist.size() % chunkLength; //A corriger
         nbElements=ilist.size();
         if(ilist.size()==0){ //Dans le cas d'une liste vide
             firstPtr=-1;
@@ -514,7 +514,68 @@ public:
 
     void pop_front() {}
 
-    void resize( size_type count ) {}
+    /**
+     * Redimensionne le conteneur
+     * @param count
+     */
+    void resize( size_type count ) {
+        T** nvTab;
+        int i;
+
+        if(count!=nbElements){
+            tabLength=count/chunkLength;
+            lastVal = count - (tabLength * chunkLength);
+            if(tabLength*chunkLength<count)//*******VOICI LA VRAI METHODE PR CALCULER LE TAB LENGTH
+                tabLength++;
+
+            //Creation d'un nouveau tableau pour la reaoloccation
+            nvTab = new T*[tabLength];
+
+            if(count<nbElements){//Si on réduit le deque
+                nbElements=0;
+
+                //Si il y en a, on reprend les chunk qui ne changent pas, non coupés
+                for(i=firstPtr ; i<firstPtr+count/chunkLength ; i++){
+                    nvTab[i] = tab[i];
+                    nbElements+=chunkLength;
+                }
+                nvTab[tabLength-1]=new T[chunkLength];
+
+                //Si il y en a, on ajoute les éléments du chunk coupé : le chunk firstPtr+count/chunkLength
+                if(count%chunkLength!=0){
+                    i=0;
+                    while((nbElements<count)==1){
+                        nvTab[tabLength-1][i]=tab[firstPtr+count/chunkLength][i];
+                        i++;
+                        nbElements++;
+                    }
+                }
+            }
+            else{
+                //A faire pour une taille supérieure
+            }
+            nbElements=count;
+
+            //On libère la mémoire de l'ancien tableau
+            if(firstPtr!=-1) {
+                for (i = firstPtr; i <= lastPtr; i++) {
+                    tab[i] = nullptr;
+                }
+            }
+            delete[] tab;
+            tab = nvTab;
+
+            firstPtr=0;
+            lastPtr=tabLength-1;
+            firstVal=0;
+        }
+    }
+
+    /**
+     * Redimensionne le conteneur
+     * @param count
+     * @param value
+     */
     void resize( size_type count, const value_type& value ) {}
 
     void swap( deque& other ) {}

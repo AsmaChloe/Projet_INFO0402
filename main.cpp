@@ -57,7 +57,7 @@ int main() {
 
     //*****************************************PUSH FRONT*****************************************
     //VRAI DEQUE
-    std::cout<<"VRAI DEQUE\n";
+    /*std::cout<<"VRAI DEQUE\n";
     for(int i=0;i<dequec.size();i++)
         std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
     // push
@@ -80,12 +80,28 @@ int main() {
                "    deque3.push_front(aBis);\n"<<std::endl;
 
     for(int i=0;i<deque3.size();i++)
-        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;
+        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;*/
     // avec rvalue: impossible à tester pour T=int
     //deque4.push_front(6);
     // avec rvalue: impossible à tester pour T=int
 
+    //*****************************************RESIZE*****************************************
+    //VRAI DEQUE
+    for(int i=0;i<dequef.size();i++)
+        std::cout<<"dequef["<<i<<"] ="<<dequef[i]<<std::endl;
+    dequef.resize(5);
+    std::cout<<"\n";
+    for(int i=0;i<dequef.size();i++)
+        std::cout<<"dequef["<<i<<"] ="<<dequef[i]<<std::endl;
 
+    std::cout<<"\n"<<std::endl;
+    //MON DEQUE
+    for(int i=0;i<deque6.size();i++)
+        std::cout<<"deque6["<<i<<"] ="<<deque6[i]<<std::endl;
+    deque6.resize(5);
+    std::cout<<"\n";
+    for(int i=0;i<deque6.size();i++)
+        std::cout<<"deque6["<<i<<"] ="<<deque6[i]<<std::endl;
     // clear & resize
     //deque5.clear();
     //std::cout << " Clear deque 5 : " << deque5.size() << std::endl;
