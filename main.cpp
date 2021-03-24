@@ -31,7 +31,7 @@ int main() {
 
     //*****************************************PUSH BACK*****************************************
     //VRAI DEQUE
-    std::cout<<"VRAI DEQUE\n";
+    /*std::cout<<"VRAI DEQUE\n";
     for(int i=0;i<dequec.size();i++)
         std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
     // push
@@ -52,7 +52,7 @@ int main() {
 
     std::cout<<"\n";
     for(int i=0;i<deque3.size();i++)
-        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;
+        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;*/
 
     // avec rvalue: impossible à tester pour T=int
     //deque4.push_front(6);
@@ -73,23 +73,24 @@ int main() {
     //ERREUR POUR UN DEQUE COMPOSE DE A mais ok pour deque de int /!\ A RESOUDRE !!!
 
     //MON DEQUE
-    /*std::cout
-            << "Deque 6 == Deque 7 : " << ((deque6 == deque66)?"OUI" : "NON") << std::endl
-            /*<< "Deque 6 != Deque 7 : " << ((deque6 != deque66)?"OUI" : "NON") << std::endl
-            << "Deque 6 < Deque 7 : " << ((deque6 < deque66)?"OUI" : "NON") << std::endl
-            << "Deque 6 <= Deque 7 : " << ((deque6 <= deque66)?"OUI" : "NON") << std::endl
-            << "Deque 6 > Deque 7 : " << ((deque6 > deque66)?"OUI" : "NON") << std::endl
-            << "Deque 6 >= Deque 7 : " << ((deque6 >= deque66)?"OUI" : "NON") << std::endl;*/
+    std::cout
+            << "Deque 6 == Deque 3 : " << ((deque6 == deque66)?"OUI" : "NON") << std::endl
+            << "Deque 6 != Deque 3 : " << ((deque6 != deque66)?"OUI" : "NON") << std::endl
+            << "Deque 6 < Deque 3 : " << ((deque6 < deque66)?"OUI" : "NON") << std::endl
+            << "Deque 6 <= Deque 3 : " << ((deque6 <= deque66)?"OUI" : "NON") << std::endl
+            << "Deque 6 > Deque 3 : " << ((deque6 > deque66)?"OUI" : "NON") << std::endl
+            << "Deque 6 >= Deque 3 : " << ((deque6 >= deque66)?"OUI" : "NON") << std::endl;
 
     //VRAI DEQUE
-    /*std::cout << "VERIFICATIONS :" << std::endl;
-    std::cout
-            << "Deque 6 == Deque 7 : " << ((dequef == dequeff)?"OUI" : "NON") << std::endl;
-            /*<< "Deque 6 != Deque 7 : " << ((dequef != dequeff)?"OUI" : "NON") << std::endl
-            << "Deque 6 < Deque 7 : " << ((dequef < dequeff)?"OUI" : "NON") << std::endl
-            << "Deque 6 <= Deque 7 : " << ((dequef <= dequeff)?"OUI" : "NON") << std::endl
-            << "Deque 6 > Deque 7 : " << ((dequef > dequeff)?"OUI" : "NON") << std::endl
-            << "Deque 6 >= Deque 7 : " << ((dequef >= dequeff)?"OUI" : "NON") << std::endl;*/
+    std::cout << "VERIFICATIONS :" << std::endl
+    //dequef( {1,2,3,4,5,6,7} );
+    //dequeff( {0,1,2,3,4,5,6} );
+            << "ddequef == dequec : " << ((dequef == dequec)?"OUI" : "NON") << std::endl
+            << "dequef != dequec : " << ((dequef != dequec)?"OUI" : "NON") << std::endl
+            << "dequef < dequec : " << ((dequef < dequec)?"OUI" : "NON") << std::endl
+            << "dequef <= dequec : " << ((dequef <= dequec)?"OUI" : "NON") << std::endl
+            << "dequef > dequec : " << ((dequef > dequec)?"OUI" : "NON") << std::endl
+            << "dequef >= dequec : " << ((dequef >= dequec)?"OUI" : "NON") << std::endl;
 
     // iterateur
     /*
