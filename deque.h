@@ -521,12 +521,14 @@ public:
     void resize( size_type count ) {
         T** nvTab;
         int i;
+        int remainingSpace;
 
         if(count!=nbElements){
-            tabLength=count/chunkLength;
-            lastVal = count - (tabLength * chunkLength);
-            if(tabLength*chunkLength<count)//*******VOICI LA VRAI METHODE PR CALCULER LE TAB LENGTH
+            tabLength=count/chunkLength; //*******VOICI LA VRAI METHODE PR CALCULER LE TAB LENGTH commence ici
+            if(tabLength*chunkLength<count)
                 tabLength++;
+            remainingSpace=tabLength*chunkLength-count; //Dans le chunk, il reste remainingSpace cases vides
+            lastVal=chunkLength-remainingSpace; // Il y a alors chunkLenght-remainingSpace cases prises => soit l'indice de la derniere case
 
             //Creation d'un nouveau tableau pour la reaoloccation
             nvTab = new T*[tabLength];
