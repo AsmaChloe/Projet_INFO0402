@@ -87,21 +87,39 @@ int main() {
 
     //*****************************************RESIZE*****************************************
     //VRAI DEQUE
+    std::cout<<"***************VRAI DEQUE***************\n";
     for(int i=0;i<dequef.size();i++)
-        std::cout<<"dequef["<<i<<"] ="<<dequef[i]<<std::endl;
-    dequef.resize(5);
-    std::cout<<"\n";
-    for(int i=0;i<dequef.size();i++)
-        std::cout<<"dequef["<<i<<"] ="<<dequef[i]<<std::endl;
+        std::cout<<" dequef["<<i<<"]="<<dequef[i];
 
-    std::cout<<"\n"<<std::endl;
+    dequef.resize(5);
+    std::cout<<"\n\n...dequef.resize(5)..."<<std::endl;
+
+    for(int i=0;i<dequef.size();i++)
+        std::cout<<" dequef["<<i<<"]="<<dequef[i];
+
+    dequef.resize(10);
+    std::cout<<"\n\n...dequef.resize(10)..."<<std::endl;
+
+    for(int i=0;i<dequef.size();i++)
+        std::cout<<" dequef["<<i<<"]="<<dequef[i];
+
+
     //MON DEQUE
+    std::cout<<"\n\n***************MON DEQUE***************\n\n";
     for(int i=0;i<deque6.size();i++)
-        std::cout<<"deque6["<<i<<"] ="<<deque6[i]<<std::endl;
+        std::cout<<" deque6["<<i<<"]="<<deque6[i];
+
     deque6.resize(5);
-    std::cout<<"\n";
+    std::cout<<"\n\n...deque6.resize(5)..."<<std::endl;
+
     for(int i=0;i<deque6.size();i++)
-        std::cout<<"deque6["<<i<<"] ="<<deque6[i]<<std::endl;
+        std::cout<<" deque6["<<i<<"]="<<deque6[i];
+
+    deque6.resize(10);
+    std::cout<<"\n\n...deque6.resize(10)..."<<std::endl;
+
+    for(int i=0;i<deque6.size();i++)
+        std::cout<<" deque6["<<i<<"]="<<deque6[i];
     // clear & resize
     //deque5.clear();
     //std::cout << " Clear deque 5 : " << deque5.size() << std::endl;

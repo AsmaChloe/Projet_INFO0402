@@ -534,13 +534,13 @@ public:
         T** nvTab;
         int i;
         int remainingSpace;
-
+        int prevLastPtr=lastPtr;
+        int prevFirstPtr=firstPtr;
         if(count!=nbElements){
             tabLength=count/chunkLength; //*******VOICI LA VRAI METHODE PR CALCULER LE TAB LENGTH commence ici
             if(tabLength*chunkLength<count)
                 tabLength++;
             remainingSpace=tabLength*chunkLength-count; //Dans le chunk, il reste remainingSpace cases vides
-            lastVal=chunkLength-remainingSpace; // Il y a alors chunkLenght-remainingSpace cases prises => soit l'indice de la derniere case
 
             //Creation d'un nouveau tableau pour la reaoloccation
             nvTab = new T*[tabLength];
@@ -564,24 +564,49 @@ public:
                         nbElements++;
                     }
                 }
+
+                lastVal=chunkLength-remainingSpace-1; // Il y a alors chunkLenght-remainingSpace cases prises => soit l'indice de la derniere case
+                lastPtr=tabLength-1;
             }
             else{
-                //A faire pour une taille supérieure
+                //On reprend tous les chunks
+                for(i=firstPtr ; i<=lastPtr ; i++){
+                    nvTab[i] = tab[i];
+                }
+
+                //Si besoin, on remplit le dernier chunk
+                if(lastVal<chunkLength-1){
+                    while(lastVal<chunkLength-1 && nbElements<count){
+                        lastVal++;
+                        nvTab[lastPtr][lastVal]=dummy;
+                        nbElements++;
+                    }
+                }
+
+                //Si besoin, on remplit les autres chunks
+                if(nbElements<count){
+                    while(nbElements!=count){
+                        lastPtr++;
+                        lastVal=-1;
+                        nvTab[lastPtr]=new T[chunkLength];
+                        while(lastVal<chunkLength-1 && nbElements<count){
+                            lastVal++;
+                            nvTab[lastPtr][lastVal]=dummy;
+                            nbElements++;
+                        }
+                    }
+                }
             }
-            nbElements=count;
+            //nbElements=count;
 
             //On libère la mémoire de l'ancien tableau
-            if(firstPtr!=-1) {
-                for (i = firstPtr; i <= lastPtr; i++) {
+            if(prevFirstPtr!=-1) {
+                for (i = prevFirstPtr; i <= prevLastPtr; i++) {
                     tab[i] = nullptr;
                 }
             }
             delete[] tab;
             tab = nvTab;
-
-            firstPtr=0;
-            lastPtr=tabLength-1;
-            firstVal=0;
         }
     }
 
