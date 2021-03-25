@@ -27,6 +27,23 @@ int main() {
     //td::deque<A>   dequec( dequeb.begin(), dequeb.end() );  // itérateur
 
     //assign => A FAIRE : assign( deque1.begin(), deque1.end() )
+
+    for(int i=0;i<dequea.size();i++)
+        std::cout<<"dequea["<<i<<"] ="<<dequea[i]<<std::endl;
+    std::cout<<"\n";
+    dequea=dequef;
+    for(int i=0;i<dequea.size();i++)
+        std::cout<<"dequea["<<i<<"] ="<<dequea[i]<<std::endl;
+
+    std::cout<<"\n\n";
+
+    for(int i=0;i<deque1.size();i++)
+        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
+    std::cout<<"\n";
+    deque1=deque6;
+
+    for(int i=0;i<deque1.size();i++)
+        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
     //deque1 = deque6;
     //deque2 = std::move(deque1);
 
@@ -87,7 +104,7 @@ int main() {
 
     //*****************************************RESIZE*****************************************
     //VRAI DEQUE
-    std::cout<<"***************VRAI DEQUE***************\n";
+    /*std::cout<<"***************VRAI DEQUE***************\n";
     for(int i=0;i<dequea.size();i++)
         std::cout<<" dequea["<<i<<"]="<<dequea[i];
 
@@ -119,7 +136,7 @@ int main() {
     std::cout<<"\n\n...deque1.resize(10,2)..."<<std::endl;
 
     for(int i=0;i<deque1.size();i++)
-        std::cout<<" deque1["<<i<<"]="<<deque1[i];
+        std::cout<<" deque1["<<i<<"]="<<deque1[i];*/
     // clear & resize
     //deque5.clear();
     //std::cout << " Clear deque 5 : " << deque5.size() << std::endl;

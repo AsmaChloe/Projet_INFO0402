@@ -179,20 +179,10 @@ public:
 
 
     deque& operator=( const deque& other ) {
-        /*int i, j;
+        int i, j;
 
-        //On vide les valeurs de base
-        if(firstPtr!=-1)
-        for (i = firstPtr; i<=lastPtr; i++)
-            delete[] tab[i];
-        delete[]tab;
-
-        nbElements = other.nbElements;
-        firstPtr = other.firstPtr;
-        lastPtr = other.lastPtr;
-        firstVal = other.firstVal;
-        lastVal = other.lastVal;
-        tabLength = other.tabLength;
+        //On réalloue l'objet
+        this->resize(other.nbElements);
 
         //On copie les valeurs de other
         tab=new T*[tabLength];
@@ -203,66 +193,33 @@ public:
                     tab[i][j] = other.tab[i][j];
                 }
             }
-        }*/
-        int i, j;
-
-        //On vide l'objet de base
-        clear();
-
-        //On reprend les valeurs des attributs
-        deque<T> nvDeque(other);
-
-        return nvDeque;
-        //return *this;
+        }
+        return *this;
     }
 
     deque& operator=( deque&& other ) {
         int i, j;
 
-        //On vide l'objet de base
-        clear();
+        //On réalloue l'objet
+        this->resize(other.nbElements);
 
-        //On reprend les valeurs des attributs
-        deque<T> nvDeque(other);
-
-        return nvDeque;
+        //On copie les valeurs de other
+        tab=new T*[tabLength];
+        if(firstPtr!=-1) {
+            for (i = firstPtr; i <= lastPtr; i++) {
+                tab[i] = new T[chunkLength];
+                for (j = 0; j < chunkLength; j++) {
+                    tab[i][j] = other.tab[i][j];
+                }
+            }
+        }
+        return *this;
     }
 
     deque& operator=( std::initializer_list<T> ilist ) {
         int i, j, count=0;
-
-        //On vide l'objet de base
-        for(i=firstPtr;i<=lastPtr;i++)
-            delete[] tab[i];
-        delete[] tab;
-
-        //On récupère les indices
-        //tabLength= ilist.size() / chunkLength + ilist.size() % chunkLength; //A corriger
-        tabLength=ilist.size()/chunkLength;
-        if(tabLength*chunkLength<ilist.size())
-            tabLength++;
-        nbElements=ilist.size();
-        if(ilist.size()==0){ //Dans le cas d'une liste vide
-            firstPtr=-1;
-            lastPtr=-1;
-            firstVal=-1;
-            lastVal=-1;
-        }
-        else{
-            firstPtr=0;
-            lastPtr=tabLength-1;
-            firstVal=0;
-            if(ilist.size()%chunkLength==0)
-                lastVal=chunkLength-1;
-            else
-                lastVal=(ilist.size()%chunkLength)-1;
-        }
-
-        //Reallocation du tableau
-        tab=new T*[tabLength];
-        for(i=0;i<tabLength;i++){
-            tab[i]=new T[chunkLength];
-        }
+        //On redimensionne le deque selon la liste
+        this->resize(ilist.size());
 
         //Remplissage
         i=0;
