@@ -545,6 +545,7 @@ public:
         int remainingSpace;
         int prevLastPtr=lastPtr;
         int prevFirstPtr=firstPtr;
+
         if(count!=nbElements){
             tabLength=count/chunkLength; //*******VOICI LA VRAI METHODE PR CALCULER LE TAB LENGTH commence ici
             if(tabLength*chunkLength<count)
@@ -583,8 +584,14 @@ public:
                     nvTab[i] = tab[i];
                 }
 
-                //Si besoin, on remplit le dernier chunk
-                if(lastVal<chunkLength-1){
+                //Si le deque est vide, on initialise son tableau et on change des attributs
+                if(lastPtr==-1 && firstPtr==-1){
+                    firstPtr=0;//Le reste des attributs changeront tout seuls par la suite
+                    firstVal=0;
+                }
+
+                //Si besoin, on remplit le dernier chunk =>Non valide sur un deque vide
+                if(lastVal<chunkLength-1 && lastVal!=-1){
                     while(lastVal<chunkLength-1 && nbElements<count){
                         lastVal++;
                         nvTab[lastPtr][lastVal]=value;
@@ -606,15 +613,14 @@ public:
                     }
                 }
             }
-            //nbElements=count;
-
             //On libère la mémoire de l'ancien tableau
-            if(prevFirstPtr!=-1) {
+            if(prevLastPtr!=-1 && prevFirstPtr!=-1){
                 for (i = prevFirstPtr; i <= prevLastPtr; i++) {
                     tab[i] = nullptr;
                 }
+                delete[] tab;
             }
-            delete[] tab;
+
             tab = nvTab;
         }
     }
@@ -623,7 +629,7 @@ public:
 
     /** OPERATEURS **/
     friend bool operator==( const deque& lhs, const deque& rhs ) {
-        int i, j, egal = 1, res = true;
+        int i, j, res = true;
 
         if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
             i=lhs.firstPtr;
