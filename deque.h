@@ -179,7 +179,7 @@ public:
 
 
     deque& operator=( const deque& other ) {
-        int i, j;
+        /*int i, j;
 
         //On vide les valeurs de base
         if(firstPtr!=-1)
@@ -203,45 +203,29 @@ public:
                     tab[i][j] = other.tab[i][j];
                 }
             }
-        }
+        }*/
+        int i, j;
 
-        return *this;
+        //On vide l'objet de base
+        clear();
+
+        //On reprend les valeurs des attributs
+        deque<T> nvDeque(other);
+
+        return nvDeque;
+        //return *this;
     }
 
     deque& operator=( deque&& other ) {
         int i, j;
 
         //On vide l'objet de base
-        for(i=firstPtr;i<=lastPtr;i++)
-            delete[] tab[i];
-        delete[] tab;
+        clear();
 
         //On reprend les valeurs des attributs
-        nbElements = other.nbElements;
-        firstPtr = other.firstPtr;
-        lastPtr = other.lastPtr;
-        firstVal = other.firstVal;
-        lastVal = other.lastVal;
-        tabLength = other.tabLength;
+        deque<T> nvDeque(other);
 
-        //On fait pointer nos pointeurs sur les chunk de other
-        tab= new T*[tabLength];
-        if(firstPtr!=-1) {
-            for (i = firstPtr; i <= lastPtr; i++) {
-                tab[i] = other.tab[i];
-                //On coupe le lien entre les pointeurs de other et les chunk
-                other.tab[i] = nullptr;
-            }
-        }
-
-        other.firstVal=-1;
-        other.lastVal=-1;
-        other.firstPtr=-1;
-        other.lastPtr=-1;
-        other.nbElements=0;
-        other.tabLength=0;
-
-        return *this;
+        return nvDeque;
     }
 
     deque& operator=( std::initializer_list<T> ilist ) {
@@ -398,11 +382,14 @@ public:
      */
     void clear() {
         //On vide
-        for (int i = firstPtr; i <= lastPtr; i++)
-            if (tab[i] != nullptr) delete[] tab[i];
-        if (tab != nullptr)
-            delete[] tab;
-        tab = nullptr;
+        if(firstPtr!=-1 && lastPtr==-1){
+            for (int i = firstPtr; i <= lastPtr; i++)
+                if (tab[i] != nullptr) delete[] tab[i];
+            if (tab != nullptr)
+                delete[] tab;
+            tab = nullptr;
+        }
+
 
         //Mise à 0 des attributs
         tabLength = nbElements = 0;
