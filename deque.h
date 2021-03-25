@@ -30,7 +30,10 @@ public:
     }
 
     explicit deque(size_type count) : nbElements(count) {
-        tabLength= count / chunkLength + count % chunkLength; //A corriger
+        //tabLength= count / chunkLength + count % chunkLength; //A corriger
+        tabLength=count/chunkLength;
+        if(tabLength*chunkLength<count)
+            tabLength++;
 
         //Initialisation du tableau
         tab=new T*[tabLength];
@@ -46,7 +49,10 @@ public:
     }
 
     deque( size_type count, const T&value ) : nbElements(count) {
-        tabLength= count / chunkLength + count % chunkLength; //A corriger
+        //tabLength= count / chunkLength + count % chunkLength; //A corriger
+        tabLength=count/chunkLength;
+        if(tabLength*chunkLength<count)
+            tabLength++;
 
         //Initialisation du tableau
         tab=new T*[tabLength];
@@ -122,7 +128,10 @@ public:
         int i=0,j=0,count=0;
 
         //Initialisation du tableau
-        tabLength= init.size() / chunkLength + init.size() % chunkLength; //A corriger
+        //tabLength= init.size() / chunkLength + init.size() % chunkLength; //A corriger
+        tabLength=init.size()/chunkLength;
+        if(tabLength*chunkLength<init.size())
+            tabLength++;
         tab=new T*[tabLength];
         for(i=0;i<tabLength;i++){
             tab[i]=new T[chunkLength];
@@ -244,7 +253,10 @@ public:
         delete[] tab;
 
         //On récupère les indices
-        tabLength= ilist.size() / chunkLength + ilist.size() % chunkLength; //A corriger
+        //tabLength= ilist.size() / chunkLength + ilist.size() % chunkLength; //A corriger
+        tabLength=ilist.size()/chunkLength;
+        if(tabLength*chunkLength<ilist.size())
+            tabLength++;
         nbElements=ilist.size();
         if(ilist.size()==0){ //Dans le cas d'une liste vide
             firstPtr=-1;
