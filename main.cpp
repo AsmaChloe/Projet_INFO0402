@@ -97,8 +97,8 @@ int main() {
     for(int i=0;i<dequef.size();i++)
         std::cout<<" dequef["<<i<<"]="<<dequef[i];
 
-    dequef.resize(10);
-    std::cout<<"\n\n...dequef.resize(10)..."<<std::endl;
+    dequef.resize(10,2);
+    std::cout<<"\n\n...dequef.resize(10,2)..."<<std::endl;
 
     for(int i=0;i<dequef.size();i++)
         std::cout<<" dequef["<<i<<"]="<<dequef[i];
@@ -115,8 +115,8 @@ int main() {
     for(int i=0;i<deque6.size();i++)
         std::cout<<" deque6["<<i<<"]="<<deque6[i];
 
-    deque6.resize(10);
-    std::cout<<"\n\n...deque6.resize(10)..."<<std::endl;
+    deque6.resize(10,2);
+    std::cout<<"\n\n...deque6.resize(10,2)..."<<std::endl;
 
     for(int i=0;i<deque6.size();i++)
         std::cout<<" deque6["<<i<<"]="<<deque6[i];

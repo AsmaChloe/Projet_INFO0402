@@ -531,6 +531,15 @@ public:
      * @param count
      */
     void resize( size_type count ) {
+        resize(count,dummy);
+    }
+
+    /**
+     * Redimensionne le conteneur
+     * @param count
+     * @param value
+     */
+    void resize( size_type count, const value_type& value ) {
         T** nvTab;
         int i;
         int remainingSpace;
@@ -578,7 +587,7 @@ public:
                 if(lastVal<chunkLength-1){
                     while(lastVal<chunkLength-1 && nbElements<count){
                         lastVal++;
-                        nvTab[lastPtr][lastVal]=dummy;
+                        nvTab[lastPtr][lastVal]=value;
                         nbElements++;
                     }
                 }
@@ -591,7 +600,7 @@ public:
                         nvTab[lastPtr]=new T[chunkLength];
                         while(lastVal<chunkLength-1 && nbElements<count){
                             lastVal++;
-                            nvTab[lastPtr][lastVal]=dummy;
+                            nvTab[lastPtr][lastVal]=value;
                             nbElements++;
                         }
                     }
@@ -609,13 +618,6 @@ public:
             tab = nvTab;
         }
     }
-
-    /**
-     * Redimensionne le conteneur
-     * @param count
-     * @param value
-     */
-    void resize( size_type count, const value_type& value ) {}
 
     void swap( deque& other ) {}
 
