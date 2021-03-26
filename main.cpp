@@ -52,9 +52,9 @@ int main() {
 
 
     // clear
-    deque5.clear();
+    /*deque5.clear();
     deque5.resize(10);
-    deque4.resize(6,4);
+    deque4.resize(6,4);*/
 
     // push
     //deque4.push_back(2);
@@ -62,7 +62,29 @@ int main() {
     //deque4.push_front(6);
     // avec rvalue: impossible à tester pour T=int
 
-    // pop
+    //*****************************************POP BACK*****************************************
+
+    std::cout<<"***************VRAI DEQUE***************\n";
+    for(int i=0;i<dequec.size();i++)
+        std::cout<<" dequec["<<i<<"]="<<dequec[i];
+
+    dequec.pop_back();
+    std::cout<<"\n\n...dequec.pop_back();..."<<std::endl;
+
+    for(int i=0;i<dequec.size();i++)
+        std::cout<<" dequec["<<i<<"]="<<dequec[i];
+
+
+    //MON DEQUE
+    std::cout<<"\n\n***************MON DEQUE***************\n\n";
+    for(int i=0;i<deque3.size();i++)
+        std::cout<<" deque3["<<i<<"]="<<deque3[i];
+
+    deque3.pop_back();
+    std::cout<<"\n\n...deque3.pop_back();..."<<std::endl;
+
+    for(int i=0;i<deque3.size();i++)
+        std::cout<<" deque3["<<i<<"]="<<deque3[i];
 
     //*****************************************SWAP*****************************************
     // swap
@@ -123,7 +145,7 @@ int main() {
 
     //*****************************************OPERATEUR DE TEST*****************************************
     //MON DEQUE
-    std::cout
+    /*std::cout
             << "Deque 6 == Deque 3 : " << ((deque6 == deque3)?"OUI" : "NON") << std::endl
             << "Deque 6 != Deque 3 : " << ((deque6 != deque3)?"OUI" : "NON") << std::endl
             << "Deque 6 < Deque 3 : " << ((deque6 < deque3)?"OUI" : "NON") << std::endl
@@ -138,7 +160,7 @@ int main() {
             << "dequef < dequec : " << ((dequef < dequec)?"OUI" : "NON") << std::endl
             << "dequef <= dequec : " << ((dequef <= dequec)?"OUI" : "NON") << std::endl
             << "dequef > dequec : " << ((dequef > dequec)?"OUI" : "NON") << std::endl
-            << "dequef >= dequec : " << ((dequef >= dequec)?"OUI" : "NON") << std::endl;
+            << "dequef >= dequec : " << ((dequef >= dequec)?"OUI" : "NON") << std::endl;*/
 
     // iterateur
     /*
