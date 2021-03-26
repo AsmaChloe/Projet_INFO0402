@@ -27,23 +27,6 @@ int main() {
     //td::deque<A>   dequec( dequeb.begin(), dequeb.end() );  // itérateur
 
     //assign => A FAIRE : assign( deque1.begin(), deque1.end() )
-
-    for(int i=0;i<dequea.size();i++)
-        std::cout<<"dequea["<<i<<"] ="<<dequea[i]<<std::endl;
-    std::cout<<"\n";
-    dequea=dequef;
-    for(int i=0;i<dequea.size();i++)
-        std::cout<<"dequea["<<i<<"] ="<<dequea[i]<<std::endl;
-
-    std::cout<<"\n\n";
-
-    for(int i=0;i<deque1.size();i++)
-        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
-    std::cout<<"\n";
-    deque1=deque6;
-
-    for(int i=0;i<deque1.size();i++)
-        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
     //deque1 = deque6;
     //deque2 = std::move(deque1);
 
@@ -147,28 +130,81 @@ int main() {
     deque4.pop_back();
     deque4.pop_front();*/
 
-    //*****************************************OPERATEUR DE TEST*****************************************
-    //ERREUR POUR UN DEQUE COMPOSE DE A mais ok pour deque de int /!\ A RESOUDRE !!!
+    //*****************************************SWAP*****************************************
+    // swap
+    //deque4.swap(deque5);
+    //swap(deque1,deque2);
+    /*std::cout<<"***************VRAI DEQUE***************\n";
+    for(int i=0;i<dequec.size();i++)
+        std::cout<<" dequec["<<i<<"]="<<dequec[i];
+    std::cout<<"\n";
+    for(int i=0;i<dequee.size();i++)
+        std::cout<<" dequee["<<i<<"]="<<dequee[i];
+
+    dequec.swap(dequee);
+    std::cout<<"\n\n...dequec.swap(dequee);..."<<std::endl;
+
+    for(int i=0;i<dequec.size();i++)
+        std::cout<<" dequec["<<i<<"]="<<dequec[i];
+    std::cout<<"\n";
+    for(int i=0;i<dequee.size();i++)
+        std::cout<<" dequee["<<i<<"]="<<dequee[i];
+
+    dequee.swap(dequec);
+    std::cout<<"\n\n...dequee.swap(dequec);..."<<std::endl;
+
+    for(int i=0;i<dequec.size();i++)
+        std::cout<<" dequec["<<i<<"]="<<dequec[i];
+    std::cout<<"\n";
+    for(int i=0;i<dequee.size();i++)
+        std::cout<<" dequee["<<i<<"]="<<dequee[i];
+
 
     //MON DEQUE
-    /*std::cout
-            << "Deque 6 == Deque 3 : " << ((deque6 == deque66)?"OUI" : "NON") << std::endl
-            << "Deque 6 != Deque 3 : " << ((deque6 != deque66)?"OUI" : "NON") << std::endl
-            << "Deque 6 < Deque 3 : " << ((deque6 < deque66)?"OUI" : "NON") << std::endl
-            << "Deque 6 <= Deque 3 : " << ((deque6 <= deque66)?"OUI" : "NON") << std::endl
-            << "Deque 6 > Deque 3 : " << ((deque6 > deque66)?"OUI" : "NON") << std::endl
-            << "Deque 6 >= Deque 3 : " << ((deque6 >= deque66)?"OUI" : "NON") << std::endl;
+    std::cout<<"\n\n***************MON DEQUE***************\n\n";
+    for(int i=0;i<deque3.size();i++)
+        std::cout<<" deque3["<<i<<"]="<<deque3[i];
+    std::cout<<"\n";
+    for(int i=0;i<deque5.size();i++)
+        std::cout<<" deque5["<<i<<"]="<<deque5[i];
+
+    deque3.swap(deque5);
+    std::cout<<"\n\n...deque3.swap(deque5);..."<<std::endl;
+
+    for(int i=0;i<deque3.size();i++)
+        std::cout<<" deque3["<<i<<"]="<<deque3[i];
+    std::cout<<"\n";
+    for(int i=0;i<deque5.size();i++)
+        std::cout<<" deque5["<<i<<"]="<<deque5[i];
+
+    deque5.swap(deque3);
+    std::cout<<"\n\n...deque5.swap(deque3);..."<<std::endl;
+
+    for(int i=0;i<deque3.size();i++)
+        std::cout<<" deque3["<<i<<"]="<<deque3[i];
+    std::cout<<"\n";
+    for(int i=0;i<deque5.size();i++)
+        std::cout<<" deque5["<<i<<"]="<<deque5[i];*/
+
+
+    //*****************************************OPERATEUR DE TEST*****************************************
+    //MON DEQUE
+    std::cout
+            << "Deque 6 == Deque 3 : " << ((deque6 == deque3)?"OUI" : "NON") << std::endl
+            << "Deque 6 != Deque 3 : " << ((deque6 != deque3)?"OUI" : "NON") << std::endl
+            << "Deque 6 < Deque 3 : " << ((deque6 < deque3)?"OUI" : "NON") << std::endl
+            << "Deque 6 <= Deque 3 : " << ((deque6 <= deque3)?"OUI" : "NON") << std::endl
+            << "Deque 6 > Deque 3 : " << ((deque6 > deque3)?"OUI" : "NON") << std::endl
+            << "Deque 6 >= Deque 3 : " << ((deque6 >= deque3)?"OUI" : "NON") << std::endl;
 
     //VRAI DEQUE
     std::cout << "VERIFICATIONS :" << std::endl
-    //dequef( {1,2,3,4,5,6,7} );
-    //dequeff( {0,1,2,3,4,5,6} );
             << "ddequef == dequec : " << ((dequef == dequec)?"OUI" : "NON") << std::endl
             << "dequef != dequec : " << ((dequef != dequec)?"OUI" : "NON") << std::endl
             << "dequef < dequec : " << ((dequef < dequec)?"OUI" : "NON") << std::endl
             << "dequef <= dequec : " << ((dequef <= dequec)?"OUI" : "NON") << std::endl
             << "dequef > dequec : " << ((dequef > dequec)?"OUI" : "NON") << std::endl
-            << "dequef >= dequec : " << ((dequef >= dequec)?"OUI" : "NON") << std::endl;*/
+            << "dequef >= dequec : " << ((dequef >= dequec)?"OUI" : "NON") << std::endl;
 
     // iterateur
     /*
@@ -181,9 +217,7 @@ int main() {
     deque<A>::iterator it5 = deque1.insert( it4, {5,4,3,2,1,0} );
     deque<A>::iterator it6 = deque1.erase(it5);
     deque1.erase(it6, deque1.cend() );
-    // swap
-    deque4.swap(deque5);
-    swap(deque1,deque2);*/
+*/
 
 
     return 0;

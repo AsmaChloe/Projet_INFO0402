@@ -536,11 +536,23 @@ public:
         }
     }
 
-    void swap( deque& other ) {}
+    /**
+     * Cette méthode inverse le contenu de l'objet courant avec l'objet passé en paramètre
+     * @param other
+     */
+    void swap( deque& other ){
+        deque<T>tmp=(*this);
+        *this=other;
+        other=tmp;
+    }
 
     /** OPERATEURS **/
     friend bool operator==( const deque& lhs, const deque& rhs ) {
         int i, j, res = true;
+
+        if(lhs.size() != rhs.size()){
+            return false;
+        }
 
         if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
             i=lhs.firstPtr;
@@ -550,7 +562,9 @@ public:
                     if (lhs.tab[i][j] != rhs.tab[i][j]) {
                         res=false;
                     }
+                    j++;
                 }
+                i++;
             }
         }
         return res;
@@ -561,31 +575,35 @@ public:
     }
 
     friend bool operator<(  const deque& lhs, const deque& rhs ) {
-        int i, j, compt = 0, nbElement = 1, res = false;
-        /*if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
-            for(i=lhs.firstPtr;i<=lhs.lastPtr;i++) {
-                for(j=0; j<chunkLength; j++) {
+        int i;
+        i=0;
+        bool retour;
+        while(i<lhs.size() && i<rhs.size()){
+            if(lhs[i]<rhs[i])
+                return true;
+            else if (lhs[i]>rhs[i])
+                return false;
+            else
+                i++;
+        }
 
-                    if (nbElement <= lhs.size()){
-                        if (lhs.tab[i][j] < rhs.tab[i][j]) {
-                            compt++;
-                        }
-                    }
-                    nbElement++;
-                }
-            }
-            if (compt == lhs.size()){
-                res = true;
-            }
-        }*/
-        return res;
+        if(i==lhs.size())
+            if(i==rhs.size()) //C'est les meme deque
+                return false;
+            else
+                return true; //rhs est plus long, donc lhs est plus petit
+        else //lhs est plus long, lhs est pas plus petit
+            return false;
     }
+
     friend bool operator<=( const deque& lhs, const deque& rhs ) {
         return operator==(lhs,rhs) || operator<(lhs,rhs);
     }
+
     friend bool operator>(  const deque& lhs, const deque& rhs ) {
         return !operator<=(lhs,rhs);
     }
+
     friend bool operator>=( const deque& lhs, const deque& rhs ) {
         return !operator<(lhs,rhs);
     }
@@ -673,7 +691,11 @@ public:
     */
 };
 
-template<class T> void swap( deque<T> &lhs, deque<T> &rhs ) {}
+template<class T> void swap( deque<T> &lhs, deque<T> &rhs ) {
+    deque<T>tmp=(lhs);
+    lhs=rhs;
+    rhs=tmp;
+}
 
 template <class T> T deque<T>::dummy = 0;
 #endif //C_DEQUE_H
