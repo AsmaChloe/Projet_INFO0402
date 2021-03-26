@@ -546,7 +546,7 @@ public:
     }
 
     /**
-     * Redimensionne le conteneur
+     * Cette méthode redimensionne le conteneur
      * @param count
      */
     void resize( size_type count ) {
@@ -554,7 +554,7 @@ public:
     }
 
     /**
-     * Redimensionne le conteneur
+     * Cette méthode redimensionne le conteneur
      * @param count
      * @param value
      */
@@ -566,7 +566,7 @@ public:
         int prevFirstPtr=firstPtr;
 
         if(count!=nbElements){
-            tabLength=count/chunkLength; //*******VOICI LA VRAI METHODE PR CALCULER LE TAB LENGTH commence ici
+            tabLength=count/chunkLength;
             if(tabLength*chunkLength<count)
                 tabLength++;
             remainingSpace=tabLength*chunkLength-count; //Dans le chunk, il reste remainingSpace cases vides
@@ -653,7 +653,12 @@ public:
         other=tmp;
     }
 
-    /** OPERATEURS **/
+    /**
+     * Cet méthode retourne si deux conteneurs sont égaux
+     * @param lhs
+     * @param rhs
+     * @return
+     */
     friend bool operator==( const deque& lhs, const deque& rhs ) {
         int i, j, res = true;
 
@@ -677,14 +682,26 @@ public:
         return res;
     }
 
+    /**
+     * Cette méthode retourne si deux conteneurs sont différents
+     * @param lhs
+     * @param rhs
+     * @return
+     */
     friend bool operator!=( const deque& lhs, const deque& rhs ) {
         return !operator==(lhs,rhs);
     }
 
+    /**
+     * Cette méthode retourne si le conteneur à gauche de l'égalité est strictement inférieur au conteneur à droite.
+     * @param lhs
+     * @param rhs
+     * @return
+     */
     friend bool operator<(  const deque& lhs, const deque& rhs ) {
         int i;
         i=0;
-        bool retour;
+
         while(i<lhs.size() && i<rhs.size()){
             if(lhs[i]<rhs[i])
                 return true;
@@ -703,14 +720,32 @@ public:
             return false;
     }
 
+    /**
+     * Cette méthode retourne si le conteneur à gauche de l'égalité est inférieur ou égal au conteneur à droite.
+     * @param lhs
+     * @param rhs
+     * @return
+     */
     friend bool operator<=( const deque& lhs, const deque& rhs ) {
         return operator==(lhs,rhs) || operator<(lhs,rhs);
     }
 
+    /**
+     * Cette méthode retourne si le conteneur à gauche de l'égalité est strictement supérieur au conteneur à droite.
+     * @param lhs
+     * @param rhs
+     * @return
+     */
     friend bool operator>(  const deque& lhs, const deque& rhs ) {
         return !operator<=(lhs,rhs);
     }
 
+    /**
+     * Cette méthode retourne si le conteneur à gauche de l'égalité est supérieur ou égal au conteneur à droite.
+     * @param lhs
+     * @param rhs
+     * @return
+     */
     friend bool operator>=( const deque& lhs, const deque& rhs ) {
         return !operator<(lhs,rhs);
     }
