@@ -188,8 +188,6 @@ int main() {
 
 
     //*****************************************OPERATEUR DE TEST*****************************************
-    //ERREUR POUR UN DEQUE COMPOSE DE A mais ok pour deque de int /!\ A RESOUDRE !!!
-
     //MON DEQUE
     std::cout
             << "Deque 6 == Deque 3 : " << ((deque6 == deque3)?"OUI" : "NON") << std::endl
@@ -201,8 +199,6 @@ int main() {
 
     //VRAI DEQUE
     std::cout << "VERIFICATIONS :" << std::endl
-    //dequef( {1,2,3,4,5,6,7} );
-    //dequec(3,a);
             << "ddequef == dequec : " << ((dequef == dequec)?"OUI" : "NON") << std::endl
             << "dequef != dequec : " << ((dequef != dequec)?"OUI" : "NON") << std::endl
             << "dequef < dequec : " << ((dequef < dequec)?"OUI" : "NON") << std::endl

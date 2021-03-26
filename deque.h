@@ -550,6 +550,10 @@ public:
     friend bool operator==( const deque& lhs, const deque& rhs ) {
         int i, j, res = true;
 
+        if(lhs.size() != rhs.size()){
+            return false;
+        }
+
         if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
             i=lhs.firstPtr;
             while(i<=lhs.lastPtr && res==true){
@@ -558,7 +562,9 @@ public:
                     if (lhs.tab[i][j] != rhs.tab[i][j]) {
                         res=false;
                     }
+                    j++;
                 }
+                i++;
             }
         }
         return res;
@@ -597,7 +603,7 @@ public:
     friend bool operator>(  const deque& lhs, const deque& rhs ) {
         return !operator<=(lhs,rhs);
     }
-    
+
     friend bool operator>=( const deque& lhs, const deque& rhs ) {
         return !operator<(lhs,rhs);
     }
