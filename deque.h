@@ -517,7 +517,7 @@ public:
     }
 
     /**
-     * Cette méthide ajoute un élément au début du conteneur
+     * Cette méthode ajoute un élément au début du conteneur
      * @param value
      */
     void push_front( T&& value ) {
@@ -527,7 +527,23 @@ public:
 
     template< class... Args > void emplace_front( Args&&... args ) {}
 
-    void pop_front() {}
+    /**
+     * Cette méthode retire le premier élément du conteneur
+     */
+    void pop_front() {
+        tab[firstPtr][firstVal]=dummy;
+
+        //Si la premier valeur se trouve au bout d'un chunk
+        if(firstVal==chunkLength-1) {
+            firstVal = 0;
+            firstPtr++;
+            tabLength--;
+        }
+        else
+            firstVal++;
+
+        nbElements--;
+    }
 
     /**
      * Redimensionne le conteneur

@@ -64,7 +64,7 @@ int main() {
 
     //*****************************************POP BACK*****************************************
 
-    std::cout<<"***************VRAI DEQUE***************\n";
+    /*std::cout<<"***************VRAI DEQUE***************\n";
     for(int i=0;i<dequec.size();i++)
         std::cout<<" dequec["<<i<<"]="<<dequec[i];
 
@@ -84,7 +84,35 @@ int main() {
     std::cout<<"\n\n...deque3.pop_back();..."<<std::endl;
 
     for(int i=0;i<deque3.size();i++)
-        std::cout<<" deque3["<<i<<"]="<<deque3[i];
+        std::cout<<" deque3["<<i<<"]="<<deque3[i];*/
+
+    //*****************************************POP FRONT*****************************************
+
+    std::cout<<"***************VRAI DEQUE***************\n";
+    for(int i=0;i<dequef.size();i++)
+        std::cout<<" dequef["<<i<<"]="<<dequef[i];
+
+    dequef.pop_front();
+    dequef.pop_front();
+    dequef.pop_front();
+    std::cout<<"\n\n...dequef.pop_front();..."<<std::endl;
+
+    for(int i=0;i<dequef.size();i++)
+        std::cout<<" dequef["<<i<<"]="<<dequef[i];
+
+
+    //MON DEQUE
+    std::cout<<"\n\n***************MON DEQUE***************\n\n";
+    for(int i=0;i<deque6.size();i++)
+        std::cout<<" deque6["<<i<<"]="<<deque6[i];
+
+    deque6.pop_front();
+    deque6.pop_front();
+    deque6.pop_front();
+    std::cout<<"\n\n...deque6.pop_front();..."<<std::endl;
+
+    for(int i=0;i<deque6.size();i++)
+        std::cout<<" deque6["<<i<<"]="<<deque6[i];
 
     //*****************************************SWAP*****************************************
     // swap
