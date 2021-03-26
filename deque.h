@@ -536,7 +536,15 @@ public:
         }
     }
 
-    void swap( deque& other ) {}
+    /**
+     * Cette méthode inverse le contenu de l'objet courant avec l'objet passé en paramètre
+     * @param other
+     */
+    void swap( deque& other ){
+        deque<T>tmp=(*this);
+        *this=other;
+        other=tmp;
+    }
 
     /** OPERATEURS **/
     friend bool operator==( const deque& lhs, const deque& rhs ) {
@@ -673,7 +681,11 @@ public:
     */
 };
 
-template<class T> void swap( deque<T> &lhs, deque<T> &rhs ) {}
+template<class T> void swap( deque<T> &lhs, deque<T> &rhs ) {
+    deque<T>tmp=(lhs);
+    lhs=rhs;
+    rhs=tmp;
+}
 
 template <class T> T deque<T>::dummy = 0;
 #endif //C_DEQUE_H
