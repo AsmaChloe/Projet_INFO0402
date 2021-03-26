@@ -26,109 +26,93 @@ int main() {
     std::deque<A>   dequee( std::move(dequed) );            // Par déplacement
     //td::deque<A>   dequec( dequeb.begin(), dequeb.end() );  // itérateur
 
-    //assign => A FAIRE : assign( deque1.begin(), deque1.end() )
-    //deque1 = deque6;
-    //deque2 = std::move(deque1);
+    // assignation
+    /*deque1 = deque6;
+    deque2 = std::move(deque1);
+    deque3 = { 4, 5, 6, 7};*/
 
-    //*****************************************PUSH BACK*****************************************
-    //VRAI DEQUE
-    /*std::cout<<"VRAI DEQUE\n";
-    for(int i=0;i<dequec.size();i++)
-        std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
+    // assign
+    /*deque1.assign( 5, 2);
+    deque2.assign( deque1.begin(), deque1.end() ); ========> impossible pour l'instant
+    deque3.assign( {8,9,10,11} );*/
+
+    // front/back
+    /*const deque<A>&deque6const = deque6;
+    std::cout
+            << deque6.at(0) << ","
+            << deque6const.at(0) << ","
+            << deque6[1] << ","
+            << deque6const[1] << ","
+            << deque6.front() << ", "
+            << deque6const.front() << ", "
+            << deque6.back()  << ", "
+            << deque6const.back()  << ", "
+            << deque6.empty() << ", "
+            << deque6.size()  << std::endl;*/
+
+
+    // clear
+    /*deque5.clear();
+    deque5.resize(10);
+    deque4.resize(6,4);*/
+
     // push
-    dequec.push_back(3);
-    dequec.push_back(a);
-
-    std::cout<<"\n";
-    for(int i=0;i<dequec.size();i++)
-        std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
-
-    //MON DEQUE
-    std::cout<<"\nMON DEQUE\n";
-    for(int i=0;i<deque3.size();i++)
-        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;
-    // push
-    deque3.push_back(3);
-    deque3.push_back(a);
-
-    std::cout<<"\n";
-    for(int i=0;i<deque3.size();i++)
-        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;*/
-
-    //*****************************************PUSH FRONT*****************************************
-    //VRAI DEQUE
-    /*std::cout<<"VRAI DEQUE\n";
-    for(int i=0;i<dequec.size();i++)
-        std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
-    // push
-    dequec.push_front(3);
-    dequec.push_front(aBis);
-    std::cout<<"\n    dequec.push_front(3);\n"
-               "    dequec.push_front(aBis);\n"<<std::endl;
-
-    for(int i=0;i<dequec.size();i++)
-        std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
-
-    //MON DEQUE
-    std::cout<<"\nMON DEQUE\n";
-    for(int i=0;i<deque3.size();i++)
-        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;
-    // push
-    deque3.push_front(3);
-    deque3.push_front(aBis);
-    std::cout<<"\n    deque3.push_front(3);\n"
-               "    deque3.push_front(aBis);\n"<<std::endl;
-
-    for(int i=0;i<deque3.size();i++)
-        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;*/
+    //deque4.push_back(2);
     // avec rvalue: impossible à tester pour T=int
     //deque4.push_front(6);
     // avec rvalue: impossible à tester pour T=int
 
-    //*****************************************RESIZE*****************************************
-    //VRAI DEQUE
+    //*****************************************POP BACK*****************************************
+
     /*std::cout<<"***************VRAI DEQUE***************\n";
-    for(int i=0;i<dequea.size();i++)
-        std::cout<<" dequea["<<i<<"]="<<dequea[i];
+    for(int i=0;i<dequec.size();i++)
+        std::cout<<" dequec["<<i<<"]="<<dequec[i];
 
-    dequea.resize(5);
-    std::cout<<"\n\n...dequea.resize(5)..."<<std::endl;
+    dequec.pop_back();
+    std::cout<<"\n\n...dequec.pop_back();..."<<std::endl;
 
-    for(int i=0;i<dequea.size();i++)
-        std::cout<<" dequea["<<i<<"]="<<dequea[i];
-
-    dequea.resize(10,2);
-    std::cout<<"\n\n...dequea.resize(10,2)..."<<std::endl;
-
-    for(int i=0;i<dequea.size();i++)
-        std::cout<<" dequea["<<i<<"]="<<dequea[i];
+    for(int i=0;i<dequec.size();i++)
+        std::cout<<" dequec["<<i<<"]="<<dequec[i];
 
 
     //MON DEQUE
     std::cout<<"\n\n***************MON DEQUE***************\n\n";
-    for(int i=0;i<deque1.size();i++)
-        std::cout<<" deque1["<<i<<"]="<<deque1[i];
+    for(int i=0;i<deque3.size();i++)
+        std::cout<<" deque3["<<i<<"]="<<deque3[i];
 
-    deque1.resize(5);
-    std::cout<<"\n\n...deque1.resize(5)..."<<std::endl;
+    deque3.pop_back();
+    std::cout<<"\n\n...deque3.pop_back();..."<<std::endl;
 
-    for(int i=0;i<deque1.size();i++)
-        std::cout<<" deque1["<<i<<"]="<<deque1[i];
+    for(int i=0;i<deque3.size();i++)
+        std::cout<<" deque3["<<i<<"]="<<deque3[i];*/
 
-    deque1.resize(10,2);
-    std::cout<<"\n\n...deque1.resize(10,2)..."<<std::endl;
+    //*****************************************POP FRONT*****************************************
 
-    for(int i=0;i<deque1.size();i++)
-        std::cout<<" deque1["<<i<<"]="<<deque1[i];*/
-    // clear & resize
-    //deque5.clear();
-    //std::cout << " Clear deque 5 : " << deque5.size() << std::endl;
-    /*deque5.resize(10);
-    deque4.resize(6,4);
+    std::cout<<"***************VRAI DEQUE***************\n";
+    for(int i=0;i<dequef.size();i++)
+        std::cout<<" dequef["<<i<<"]="<<dequef[i];
 
-    // pop
-    deque4.pop_back();
-    deque4.pop_front();*/
+    dequef.pop_front();
+    dequef.pop_front();
+    dequef.pop_front();
+    std::cout<<"\n\n...dequef.pop_front();..."<<std::endl;
+
+    for(int i=0;i<dequef.size();i++)
+        std::cout<<" dequef["<<i<<"]="<<dequef[i];
+
+
+    //MON DEQUE
+    std::cout<<"\n\n***************MON DEQUE***************\n\n";
+    for(int i=0;i<deque6.size();i++)
+        std::cout<<" deque6["<<i<<"]="<<deque6[i];
+
+    deque6.pop_front();
+    deque6.pop_front();
+    deque6.pop_front();
+    std::cout<<"\n\n...deque6.pop_front();..."<<std::endl;
+
+    for(int i=0;i<deque6.size();i++)
+        std::cout<<" deque6["<<i<<"]="<<deque6[i];
 
     //*****************************************SWAP*****************************************
     // swap
@@ -189,7 +173,7 @@ int main() {
 
     //*****************************************OPERATEUR DE TEST*****************************************
     //MON DEQUE
-    std::cout
+    /*std::cout
             << "Deque 6 == Deque 3 : " << ((deque6 == deque3)?"OUI" : "NON") << std::endl
             << "Deque 6 != Deque 3 : " << ((deque6 != deque3)?"OUI" : "NON") << std::endl
             << "Deque 6 < Deque 3 : " << ((deque6 < deque3)?"OUI" : "NON") << std::endl
@@ -204,7 +188,7 @@ int main() {
             << "dequef < dequec : " << ((dequef < dequec)?"OUI" : "NON") << std::endl
             << "dequef <= dequec : " << ((dequef <= dequec)?"OUI" : "NON") << std::endl
             << "dequef > dequec : " << ((dequef > dequec)?"OUI" : "NON") << std::endl
-            << "dequef >= dequec : " << ((dequef >= dequec)?"OUI" : "NON") << std::endl;
+            << "dequef >= dequec : " << ((dequef >= dequec)?"OUI" : "NON") << std::endl;*/
 
     // iterateur
     /*

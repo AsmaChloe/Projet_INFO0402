@@ -24,11 +24,17 @@ public:
     using size_type = size_t;
     static T dummy;  // pour renvoyer une lvalue lorsque demandé
 
-
+    /**
+     * Constructeur par défaut. Construit un conteneur vide.
+     */
     deque() :tabLength(0), nbElements(0),firstPtr(-1),lastPtr(-1),firstVal(-1),lastVal(-1) {
         tab=new T*[tabLength];
     }
 
+    /**
+     * Constructeur qui crée le conteneur avec count instances
+     * @param count
+     */
     explicit deque(size_type count) : nbElements(count) {
         //tabLength= count / chunkLength + count % chunkLength; //A corriger
         tabLength=count/chunkLength;
@@ -48,6 +54,11 @@ public:
         lastVal=-1;
     }
 
+    /**
+     * Constructeur qui crée le conteneur avec count instances mise à la valeur value
+     * @param count
+     * @param value
+     */
     deque( size_type count, const T&value ) : nbElements(count) {
         //tabLength= count / chunkLength + count % chunkLength; //A corriger
         tabLength=count/chunkLength;
@@ -94,6 +105,10 @@ public:
 
     }
 
+    /**
+     * Conctructeur par copie
+     * @param other
+     */
     deque( const deque& other ) : tabLength(other.tabLength), nbElements(other.nbElements), firstPtr(other.firstPtr), lastPtr(other.lastPtr), firstVal(other.firstVal), lastVal(other.lastVal) {
         //Initialisation du tableau
         tab=new T*[tabLength];
@@ -105,7 +120,10 @@ public:
         }
     }
 
-    //Constructeur par déplacement
+    /**
+     * Constructeur par déplacement
+     * @param other
+     */
     deque( deque&& other ) : tabLength(other.tabLength), nbElements(other.nbElements), firstPtr(other.firstPtr), lastPtr(other.lastPtr), firstVal(other.firstVal), lastVal(other.lastVal) {
 
         //Initialisation du tableau
@@ -124,6 +142,9 @@ public:
         other.tabLength=0;
     }
 
+    /**
+     * Constructeur qui crée un conteneur à partir d'une liste d'initialisation
+     */
     deque( std::initializer_list<T> init ) : nbElements(init.size()) {
         int i=0,j=0,count=0;
 
@@ -168,6 +189,9 @@ public:
         }
     }
 
+    /**
+     * Destructeur
+     */
     ~deque() {
         if(tab!=nullptr) {
             for (int i = 0; i < tabLength; i++) {
@@ -177,7 +201,11 @@ public:
         delete[] tab;
     }
 
-
+    /**
+     * Cette méthode copie le contenu de other dans l'objet courant
+     * @param other
+     * @return
+     */
     deque& operator=( const deque& other ) {
         int i, j;
 
@@ -197,6 +225,11 @@ public:
         return *this;
     }
 
+    /**
+     * Cette méthode copie le contenu de other dans l'objet courant
+     * @param other
+     * @return
+     */
     deque& operator=( deque&& other ) {
         int i, j;
 
@@ -216,6 +249,11 @@ public:
         return *this;
     }
 
+    /**
+     * Cette méthode copie le contenu de la liste d'initialisation dans l'objet courant
+     * @param ilist
+     * @return
+     */
     deque& operator=( std::initializer_list<T> ilist ) {
         int i, j, count=0;
         //On redimensionne le deque selon la liste
@@ -237,6 +275,11 @@ public:
         return *this;
     }
 
+    /**
+     * Cette méthode remplit l'objet courant avec count copies de valeur value
+     * @param count
+     * @param value
+     */
     void assign( size_type count, const T& value ) {
         //On vide l'objet courant
         clear();
@@ -255,6 +298,10 @@ public:
 
     template< class InputIt > void assign( InputIt first, InputIt last ) {}
 
+    /**
+     * Cette méthode remplit l'objet courant avec les valeurs de la liste d'initialisation
+     * @param ilist
+     */
     void assign( std::initializer_list<T> ilist ) {
         //On vide l'objet courant
         clear();
@@ -271,7 +318,11 @@ public:
         lastVal=nvDeque.lastVal;
     }
 
-
+    /**
+     * Cette méthode retourne le pos-ème élément du conteneur. La validité de l'indice pos est vérifié.
+     * @param pos
+     * @return
+     */
     T& at( size_type pos ) {
         if(pos>=0 && pos<nbElements){
             return operator[](pos);
@@ -279,6 +330,12 @@ public:
         else
             return dummy; /************Ajouter exception : out_of_range**************/
     }
+
+    /**
+     * Cette méthode retourne le pos-ème élément du conteneur. La validité de l'indice pos est vérifié.
+     * @param pos
+     * @return
+     */
     const T& at( size_type pos ) const {
         if(pos>=0 && pos <nbElements)
             return operator[](pos);
@@ -286,6 +343,11 @@ public:
             return dummy; /************Ajouter exception : out_of_range**************/
     }
 
+    /**
+     * Cette méthode retourne le pos-ème élément du conteneur. La validité de l'indice pos n'est pas vérifié.
+     * @param pos
+     * @return
+     */
     T& operator[]( size_type pos ) {
         if(nbElements<1 || pos>=nbElements || pos<0) return dummy;
         int x= (firstPtr + (pos+firstVal)/chunkLength) % tabLength;
@@ -293,6 +355,12 @@ public:
 
         return tab[x][y];
     }
+
+    /**
+     * Cette méthode retourne le pos-ème élément du conteneur. La validité de l'indice pos n'est pas vérifié.
+     * @param pos
+     * @return
+     */
     const T& operator[]( size_type pos ) const {
         if(nbElements<1 || pos>=nbElements || pos<0) return dummy;
         int x= (firstPtr + (pos+firstVal)/chunkLength) % tabLength;
@@ -302,26 +370,44 @@ public:
     }
 
     /******* A RESOUDRE : Presence de warning lié au retour manquant dans le cas où les if ne sont pas à true**********/
+    /**
+     * Cette méthode retourne le premier élément du conteneur
+     * @return
+     */
     T& front() {
         if(firstVal!=-1 && firstPtr!=-1)
             return tab[firstPtr][firstVal];
     }
+
+    /**
+     * Cette méthode retourne le premier élément du conteneur
+     * @return
+     */
     const T& front() const {
         if(firstVal!=-1 && firstPtr!=-1)
             return tab[firstPtr][firstVal];
     }
 
+    /**
+     * Cette méthode retourne le dernier élément du conteneur
+     * @return
+     */
     T& back() {
         if(lastVal!=-1 && lastPtr!=-1)
             return tab[lastPtr][lastVal];
     }
+
+    /**
+     * Cette méthode retourne le dernier élément du conteneur
+     * @return
+     */
     const T& back() const {
         if(lastVal!=-1 && lastPtr!=-1)
             return tab[lastPtr][lastVal];
     }
 
     /**
-     * Fonction empty pour vérifier si un conteneur est vide ou non
+     * La méthode empty vérifie si un conteneur est vide ou non
      * @return true ou false
      */
     bool empty() const {
@@ -329,13 +415,13 @@ public:
     }
 
     /**
-     * Fonction size qui permet de savoir la taille d'un deque
+     * La méthode size retourne la taille du conteneur
      * @return le nombre d'éléments du deque
      */
     size_t size() const { return nbElements; }
 
     /**
-     * Fonction qui supprime le deque (ce qu'il y a à l'intérieur)
+     * Cette méthode supprime le contenu du deque
      */
     void clear() {
         //On vide
@@ -354,7 +440,7 @@ public:
     }
   
   /**
-     * Permet d'ajouter un élément à la fin du conteneur
+     * Cette méthode permet d'ajouter un élément à la fin du conteneur
      * @param value
      */
     void push_back( const T& value ) {
@@ -362,7 +448,7 @@ public:
     }
 
      /**
-     * Permet d'ajouter un élément à la fin du conteneur
+     * Cette méthode permet d'ajouter un élément à la fin du conteneur
      * @param value
      */
     void push_back(T&& value) {
@@ -372,7 +458,13 @@ public:
 
     template< class... Args > void emplace_back( Args&&... args ) {}
 
-    void pop_back() {}
+    /**
+     * Cette méthode retire un élément à la fin du deque
+     */
+    void pop_back() {
+        //On ne vérifie pas si le deque est vide => selon la documentation on a un undefined behaviour si le conteneur est vide.
+        resize(nbElements-1);
+    }
 
     /**
      * Ajoute un élément au début du conteneur
@@ -425,7 +517,7 @@ public:
     }
 
     /**
-     * Ajoute un élément au début du conteneur
+     * Cette méthode ajoute un élément au début du conteneur
      * @param value
      */
     void push_front( T&& value ) {
@@ -435,10 +527,26 @@ public:
 
     template< class... Args > void emplace_front( Args&&... args ) {}
 
-    void pop_front() {}
+    /**
+     * Cette méthode retire le premier élément du conteneur
+     */
+    void pop_front() {
+        tab[firstPtr][firstVal]=dummy;
+
+        //Si la premier valeur se trouve au bout d'un chunk
+        if(firstVal==chunkLength-1) {
+            firstVal = 0;
+            firstPtr++;
+            tabLength--;
+        }
+        else
+            firstVal++;
+
+        nbElements--;
+    }
 
     /**
-     * Redimensionne le conteneur
+     * Cette méthode redimensionne le conteneur
      * @param count
      */
     void resize( size_type count ) {
@@ -446,7 +554,7 @@ public:
     }
 
     /**
-     * Redimensionne le conteneur
+     * Cette méthode redimensionne le conteneur
      * @param count
      * @param value
      */
@@ -458,26 +566,25 @@ public:
         int prevFirstPtr=firstPtr;
 
         if(count!=nbElements){
-            tabLength=count/chunkLength; //*******VOICI LA VRAI METHODE PR CALCULER LE TAB LENGTH commence ici
+            tabLength=count/chunkLength;
             if(tabLength*chunkLength<count)
                 tabLength++;
             remainingSpace=tabLength*chunkLength-count; //Dans le chunk, il reste remainingSpace cases vides
 
             //Creation d'un nouveau tableau pour la reaoloccation
             nvTab = new T*[tabLength];
-
             if(count<nbElements){//Si on réduit le deque
                 nbElements=0;
-
                 //Si il y en a, on reprend les chunk qui ne changent pas, non coupés
                 for(i=firstPtr ; i<firstPtr+count/chunkLength ; i++){
                     nvTab[i] = tab[i];
                     nbElements+=chunkLength;
                 }
-                nvTab[tabLength-1]=new T[chunkLength];
 
                 //Si il y en a, on ajoute les éléments du chunk coupé : le chunk firstPtr+count/chunkLength
                 if(count%chunkLength!=0){
+                    nvTab[tabLength-1]=new T[chunkLength]; //Creation d'un chunk vierge
+
                     i=0;
                     while((nbElements<count)==1){
                         nvTab[tabLength-1][i]=tab[firstPtr+count/chunkLength][i];
@@ -546,7 +653,12 @@ public:
         other=tmp;
     }
 
-    /** OPERATEURS **/
+    /**
+     * Cet méthode retourne si deux conteneurs sont égaux
+     * @param lhs
+     * @param rhs
+     * @return
+     */
     friend bool operator==( const deque& lhs, const deque& rhs ) {
         int i, j, res = true;
 
@@ -570,14 +682,26 @@ public:
         return res;
     }
 
+    /**
+     * Cette méthode retourne si deux conteneurs sont différents
+     * @param lhs
+     * @param rhs
+     * @return
+     */
     friend bool operator!=( const deque& lhs, const deque& rhs ) {
         return !operator==(lhs,rhs);
     }
 
+    /**
+     * Cette méthode retourne si le conteneur à gauche de l'égalité est strictement inférieur au conteneur à droite.
+     * @param lhs
+     * @param rhs
+     * @return
+     */
     friend bool operator<(  const deque& lhs, const deque& rhs ) {
         int i;
         i=0;
-        bool retour;
+
         while(i<lhs.size() && i<rhs.size()){
             if(lhs[i]<rhs[i])
                 return true;
@@ -596,14 +720,32 @@ public:
             return false;
     }
 
+    /**
+     * Cette méthode retourne si le conteneur à gauche de l'égalité est inférieur ou égal au conteneur à droite.
+     * @param lhs
+     * @param rhs
+     * @return
+     */
     friend bool operator<=( const deque& lhs, const deque& rhs ) {
         return operator==(lhs,rhs) || operator<(lhs,rhs);
     }
 
+    /**
+     * Cette méthode retourne si le conteneur à gauche de l'égalité est strictement supérieur au conteneur à droite.
+     * @param lhs
+     * @param rhs
+     * @return
+     */
     friend bool operator>(  const deque& lhs, const deque& rhs ) {
         return !operator<=(lhs,rhs);
     }
 
+    /**
+     * Cette méthode retourne si le conteneur à gauche de l'égalité est supérieur ou égal au conteneur à droite.
+     * @param lhs
+     * @param rhs
+     * @return
+     */
     friend bool operator>=( const deque& lhs, const deque& rhs ) {
         return !operator<(lhs,rhs);
     }
