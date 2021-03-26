@@ -5,6 +5,7 @@
 
 int main() {
     const A a=2;
+    const A aBis=4;
     // constructions
     deque<A>   deque1;                                      // défaut
     deque<A>   deque2(13);                             // count
@@ -26,6 +27,23 @@ int main() {
     //td::deque<A>   dequec( dequeb.begin(), dequeb.end() );  // itérateur
 
     //assign => A FAIRE : assign( deque1.begin(), deque1.end() )
+
+    for(int i=0;i<dequea.size();i++)
+        std::cout<<"dequea["<<i<<"] ="<<dequea[i]<<std::endl;
+    std::cout<<"\n";
+    dequea=dequef;
+    for(int i=0;i<dequea.size();i++)
+        std::cout<<"dequea["<<i<<"] ="<<dequea[i]<<std::endl;
+
+    std::cout<<"\n\n";
+
+    for(int i=0;i<deque1.size();i++)
+        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
+    std::cout<<"\n";
+    deque1=deque6;
+
+    for(int i=0;i<deque1.size();i++)
+        std::cout<<"deque1["<<i<<"] ="<<deque1[i]<<std::endl;
     //deque1 = deque6;
     //deque2 = std::move(deque1);
 
@@ -54,11 +72,71 @@ int main() {
     for(int i=0;i<deque3.size();i++)
         std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;*/
 
+    //*****************************************PUSH FRONT*****************************************
+    //VRAI DEQUE
+    /*std::cout<<"VRAI DEQUE\n";
+    for(int i=0;i<dequec.size();i++)
+        std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
+    // push
+    dequec.push_front(3);
+    dequec.push_front(aBis);
+    std::cout<<"\n    dequec.push_front(3);\n"
+               "    dequec.push_front(aBis);\n"<<std::endl;
+
+    for(int i=0;i<dequec.size();i++)
+        std::cout<<"dequec["<<i<<"] ="<<dequec[i]<<std::endl;
+
+    //MON DEQUE
+    std::cout<<"\nMON DEQUE\n";
+    for(int i=0;i<deque3.size();i++)
+        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;
+    // push
+    deque3.push_front(3);
+    deque3.push_front(aBis);
+    std::cout<<"\n    deque3.push_front(3);\n"
+               "    deque3.push_front(aBis);\n"<<std::endl;
+
+    for(int i=0;i<deque3.size();i++)
+        std::cout<<"deque3["<<i<<"] ="<<deque3[i]<<std::endl;*/
     // avec rvalue: impossible à tester pour T=int
     //deque4.push_front(6);
     // avec rvalue: impossible à tester pour T=int
 
+    //*****************************************RESIZE*****************************************
+    //VRAI DEQUE
+    /*std::cout<<"***************VRAI DEQUE***************\n";
+    for(int i=0;i<dequea.size();i++)
+        std::cout<<" dequea["<<i<<"]="<<dequea[i];
 
+    dequea.resize(5);
+    std::cout<<"\n\n...dequea.resize(5)..."<<std::endl;
+
+    for(int i=0;i<dequea.size();i++)
+        std::cout<<" dequea["<<i<<"]="<<dequea[i];
+
+    dequea.resize(10,2);
+    std::cout<<"\n\n...dequea.resize(10,2)..."<<std::endl;
+
+    for(int i=0;i<dequea.size();i++)
+        std::cout<<" dequea["<<i<<"]="<<dequea[i];
+
+
+    //MON DEQUE
+    std::cout<<"\n\n***************MON DEQUE***************\n\n";
+    for(int i=0;i<deque1.size();i++)
+        std::cout<<" deque1["<<i<<"]="<<deque1[i];
+
+    deque1.resize(5);
+    std::cout<<"\n\n...deque1.resize(5)..."<<std::endl;
+
+    for(int i=0;i<deque1.size();i++)
+        std::cout<<" deque1["<<i<<"]="<<deque1[i];
+
+    deque1.resize(10,2);
+    std::cout<<"\n\n...deque1.resize(10,2)..."<<std::endl;
+
+    for(int i=0;i<deque1.size();i++)
+        std::cout<<" deque1["<<i<<"]="<<deque1[i];*/
     // clear & resize
     //deque5.clear();
     //std::cout << " Clear deque 5 : " << deque5.size() << std::endl;
@@ -73,7 +151,7 @@ int main() {
     //ERREUR POUR UN DEQUE COMPOSE DE A mais ok pour deque de int /!\ A RESOUDRE !!!
 
     //MON DEQUE
-    std::cout
+    /*std::cout
             << "Deque 6 == Deque 3 : " << ((deque6 == deque66)?"OUI" : "NON") << std::endl
             << "Deque 6 != Deque 3 : " << ((deque6 != deque66)?"OUI" : "NON") << std::endl
             << "Deque 6 < Deque 3 : " << ((deque6 < deque66)?"OUI" : "NON") << std::endl
@@ -90,7 +168,7 @@ int main() {
             << "dequef < dequec : " << ((dequef < dequec)?"OUI" : "NON") << std::endl
             << "dequef <= dequec : " << ((dequef <= dequec)?"OUI" : "NON") << std::endl
             << "dequef > dequec : " << ((dequef > dequec)?"OUI" : "NON") << std::endl
-            << "dequef >= dequec : " << ((dequef >= dequec)?"OUI" : "NON") << std::endl;
+            << "dequef >= dequec : " << ((dequef >= dequec)?"OUI" : "NON") << std::endl;*/
 
     // iterateur
     /*

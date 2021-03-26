@@ -30,7 +30,10 @@ public:
     }
 
     explicit deque(size_type count) : nbElements(count) {
-        tabLength= count / chunkLength + count % chunkLength;
+        //tabLength= count / chunkLength + count % chunkLength; //A corriger
+        tabLength=count/chunkLength;
+        if(tabLength*chunkLength<count)
+            tabLength++;
 
         //Initialisation du tableau
         tab=new T*[tabLength];
@@ -46,7 +49,10 @@ public:
     }
 
     deque( size_type count, const T&value ) : nbElements(count) {
-        tabLength= count / chunkLength + count % chunkLength;
+        //tabLength= count / chunkLength + count % chunkLength; //A corriger
+        tabLength=count/chunkLength;
+        if(tabLength*chunkLength<count)
+            tabLength++;
 
         //Initialisation du tableau
         tab=new T*[tabLength];
@@ -122,7 +128,10 @@ public:
         int i=0,j=0,count=0;
 
         //Initialisation du tableau
-        tabLength= init.size() / chunkLength + init.size() % chunkLength;
+        //tabLength= init.size() / chunkLength + init.size() % chunkLength; //A corriger
+        tabLength=init.size()/chunkLength;
+        if(tabLength*chunkLength<init.size())
+            tabLength++;
         tab=new T*[tabLength];
         for(i=0;i<tabLength;i++){
             tab[i]=new T[chunkLength];
@@ -172,18 +181,8 @@ public:
     deque& operator=( const deque& other ) {
         int i, j;
 
-        //On vide les valeurs de base
-        if(firstPtr!=-1)
-        for (i = firstPtr; i<=lastPtr; i++)
-            delete[] tab[i];
-        delete[]tab;
-
-        nbElements = other.nbElements;
-        firstPtr = other.firstPtr;
-        lastPtr = other.lastPtr;
-        firstVal = other.firstVal;
-        lastVal = other.lastVal;
-        tabLength = other.tabLength;
+        //On réalloue l'objet
+        this->resize(other.nbElements);
 
         //On copie les valeurs de other
         tab=new T*[tabLength];
@@ -195,78 +194,32 @@ public:
                 }
             }
         }
-
         return *this;
     }
 
     deque& operator=( deque&& other ) {
         int i, j;
 
-        //On vide l'objet de base
-        for(i=firstPtr;i<=lastPtr;i++)
-            delete[] tab[i];
-        delete[] tab;
+        //On réalloue l'objet
+        this->resize(other.nbElements);
 
-        //On reprend les valeurs des attributs
-        nbElements = other.nbElements;
-        firstPtr = other.firstPtr;
-        lastPtr = other.lastPtr;
-        firstVal = other.firstVal;
-        lastVal = other.lastVal;
-        tabLength = other.tabLength;
-
-        //On fait pointer nos pointeurs sur les chunk de other
-        tab= new T*[tabLength];
+        //On copie les valeurs de other
+        tab=new T*[tabLength];
         if(firstPtr!=-1) {
             for (i = firstPtr; i <= lastPtr; i++) {
-                tab[i] = other.tab[i];
-                //On coupe le lien entre les pointeurs de other et les chunk
-                other.tab[i] = nullptr;
+                tab[i] = new T[chunkLength];
+                for (j = 0; j < chunkLength; j++) {
+                    tab[i][j] = other.tab[i][j];
+                }
             }
         }
-
-        other.firstVal=-1;
-        other.lastVal=-1;
-        other.firstPtr=-1;
-        other.lastPtr=-1;
-        other.nbElements=0;
-        other.tabLength=0;
-
         return *this;
     }
 
     deque& operator=( std::initializer_list<T> ilist ) {
         int i, j, count=0;
-
-        //On vide l'objet de base
-        for(i=firstPtr;i<=lastPtr;i++)
-            delete[] tab[i];
-        delete[] tab;
-
-        //On récupère les indices
-        tabLength= ilist.size() / chunkLength + ilist.size() % chunkLength;
-        nbElements=ilist.size();
-        if(ilist.size()==0){ //Dans le cas d'une liste vide
-            firstPtr=-1;
-            lastPtr=-1;
-            firstVal=-1;
-            lastVal=-1;
-        }
-        else{
-            firstPtr=0;
-            lastPtr=tabLength-1;
-            firstVal=0;
-            if(ilist.size()%chunkLength==0)
-                lastVal=chunkLength-1;
-            else
-                lastVal=(ilist.size()%chunkLength)-1;
-        }
-
-        //Reallocation du tableau
-        tab=new T*[tabLength];
-        for(i=0;i<tabLength;i++){
-            tab[i]=new T[chunkLength];
-        }
+        //On redimensionne le deque selon la liste
+        this->resize(ilist.size());
 
         //Remplissage
         i=0;
@@ -386,11 +339,14 @@ public:
      */
     void clear() {
         //On vide
-        for (int i = firstPtr; i <= lastPtr; i++)
-            if (tab[i] != nullptr) delete[] tab[i];
-        if (tab != nullptr)
-            delete[] tab;
-        tab = nullptr;
+        if(firstPtr!=-1 && lastPtr==-1){
+            for (int i = firstPtr; i <= lastPtr; i++)
+                if (tab[i] != nullptr) delete[] tab[i];
+            if (tab != nullptr)
+                delete[] tab;
+            tab = nullptr;
+        }
+
 
         //Mise à 0 des attributs
         tabLength = nbElements = 0;
@@ -402,40 +358,7 @@ public:
      * @param value
      */
     void push_back( const T& value ) {
-        size_t remainingSpace = nbElements % chunkLength;  // Si=0, il n'y a plus de place, sinon ça vaut l'indice où sera placé le nouvel élément
-        T** nvTab;
-        int i;
-
-        if (remainingSpace == 0) {
-            // Si les tableaux pointés sont déjà tous remplis
-            tabLength++;
-
-            //Creation d'un nouveau tableau pour la reaoloccation
-            nvTab = new T*[tabLength];
-            if(firstPtr!=-1) {
-                for (i = firstPtr; i <= lastPtr; i++) {
-                    nvTab[i] = tab[i]; //On reprends les chunk de l'ancien tableau
-                    tab[i] = nullptr;
-                }
-            }
-            else{
-                //Pour un deque vide
-                firstPtr=0;
-                firstVal=0;
-            }
-
-            //Et on libère la mémoire de l'ancien tableau
-            delete[] tab;
-            tab = nvTab;
-
-            // Le nouveau chunk
-            lastPtr++;
-            tab[lastPtr] = new T[chunkLength];
-        }
-        // Ajout du dernier élément
-        nbElements++;
-        lastVal = remainingSpace;
-        tab[lastPtr][lastVal] = value;
+        resize(nbElements+1,value);
     }
 
      /**
@@ -451,21 +374,173 @@ public:
 
     void pop_back() {}
 
-    void push_front( const T& value ) {}
-    void push_front( T&& value ) {}
+    /**
+     * Ajoute un élément au début du conteneur
+     * @param value
+     */
+    void push_front( const T& value ) {
+        T** nvTab;
+        int i;
+
+        if(firstVal==-1 || (firstPtr==0 && firstVal==0)){ //Si le deque est vide ou complet sur le premier chunk
+            //Creation d'un nouveau chunk
+            // Si les tableaux pointés sont déjà tous remplis
+            tabLength++;
+
+            //Creation d'un nouveau tableau pour la reaoloccation
+            nvTab = new T*[tabLength];
+            if(firstPtr!=-1) {
+                for (i = firstPtr; i <= lastPtr; i++) {
+                    nvTab[i+1] = tab[i]; //On reprends les chunk de l'ancien tableau
+                    tab[i] = nullptr;
+                }
+            }
+            else{
+                //Pour un deque vide
+                firstPtr=0;
+                firstVal=0;
+            }
+
+            //Et on libère la mémoire de l'ancien tableau
+            delete[] tab;
+            tab = nvTab;
+
+            // Le nouveau chunk
+            tab[firstPtr] = new T[chunkLength];
+            firstVal=chunkLength-1;
+        }
+        else{
+            if(firstVal==0){ //Si le premier chunk est complet et qu'il n'est pas pointé par tab[0]
+                //Remplir le chunk pointé par firstPtr-1
+                firstPtr--;
+                firstVal=chunkLength-1;
+            }
+            else{
+                //Il y a un trou dans le premier chunk, on le remplit
+                firstVal--;
+            }
+        }
+        nbElements++;
+        tab[firstPtr][firstVal]=value;
+    }
+
+    /**
+     * Ajoute un élément au début du conteneur
+     * @param value
+     */
+    void push_front( T&& value ) {
+        const T valeur=value;
+        push_front(valeur);
+    }
 
     template< class... Args > void emplace_front( Args&&... args ) {}
 
     void pop_front() {}
 
-    void resize( size_type count ) {}
-    void resize( size_type count, const value_type& value ) {}
+    /**
+     * Redimensionne le conteneur
+     * @param count
+     */
+    void resize( size_type count ) {
+        resize(count,dummy);
+    }
+
+    /**
+     * Redimensionne le conteneur
+     * @param count
+     * @param value
+     */
+    void resize( size_type count, const value_type& value ) {
+        T** nvTab;
+        int i;
+        int remainingSpace;
+        int prevLastPtr=lastPtr;
+        int prevFirstPtr=firstPtr;
+
+        if(count!=nbElements){
+            tabLength=count/chunkLength; //*******VOICI LA VRAI METHODE PR CALCULER LE TAB LENGTH commence ici
+            if(tabLength*chunkLength<count)
+                tabLength++;
+            remainingSpace=tabLength*chunkLength-count; //Dans le chunk, il reste remainingSpace cases vides
+
+            //Creation d'un nouveau tableau pour la reaoloccation
+            nvTab = new T*[tabLength];
+
+            if(count<nbElements){//Si on réduit le deque
+                nbElements=0;
+
+                //Si il y en a, on reprend les chunk qui ne changent pas, non coupés
+                for(i=firstPtr ; i<firstPtr+count/chunkLength ; i++){
+                    nvTab[i] = tab[i];
+                    nbElements+=chunkLength;
+                }
+                nvTab[tabLength-1]=new T[chunkLength];
+
+                //Si il y en a, on ajoute les éléments du chunk coupé : le chunk firstPtr+count/chunkLength
+                if(count%chunkLength!=0){
+                    i=0;
+                    while((nbElements<count)==1){
+                        nvTab[tabLength-1][i]=tab[firstPtr+count/chunkLength][i];
+                        i++;
+                        nbElements++;
+                    }
+                }
+
+                lastVal=chunkLength-remainingSpace-1; // Il y a alors chunkLenght-remainingSpace cases prises => soit l'indice de la derniere case
+                lastPtr=tabLength-1;
+            }
+            else{
+                //On reprend tous les chunks
+                for(i=firstPtr ; i<=lastPtr ; i++){
+                    nvTab[i] = tab[i];
+                }
+
+                //Si le deque est vide, on initialise son tableau et on change des attributs
+                if(lastPtr==-1 && firstPtr==-1){
+                    firstPtr=0;//Le reste des attributs changeront tout seuls par la suite
+                    firstVal=0;
+                }
+
+                //Si besoin, on remplit le dernier chunk =>Non valide sur un deque vide
+                if(lastVal<chunkLength-1 && lastVal!=-1){
+                    while(lastVal<chunkLength-1 && nbElements<count){
+                        lastVal++;
+                        nvTab[lastPtr][lastVal]=value;
+                        nbElements++;
+                    }
+                }
+
+                //Si besoin, on remplit les autres chunks
+                if(nbElements<count){
+                    while(nbElements!=count){
+                        lastPtr++;
+                        lastVal=-1;
+                        nvTab[lastPtr]=new T[chunkLength];
+                        while(lastVal<chunkLength-1 && nbElements<count){
+                            lastVal++;
+                            nvTab[lastPtr][lastVal]=value;
+                            nbElements++;
+                        }
+                    }
+                }
+            }
+            //On libère la mémoire de l'ancien tableau
+            if(prevLastPtr!=-1 && prevFirstPtr!=-1){
+                for (i = prevFirstPtr; i <= prevLastPtr; i++) {
+                    tab[i] = nullptr;
+                }
+                delete[] tab;
+            }
+
+            tab = nvTab;
+        }
+    }
 
     void swap( deque& other ) {}
 
     /** OPERATEURS **/
     friend bool operator==( const deque& lhs, const deque& rhs ) {
-        int i, j, egal = 1, res = true;
+        int i, j, res = true;
 
         if (lhs.firstPtr == rhs.firstPtr && lhs.lastPtr == rhs.lastPtr){
             i=lhs.firstPtr;
