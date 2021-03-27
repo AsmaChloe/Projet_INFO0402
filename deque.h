@@ -756,7 +756,7 @@ public:
         //T* PtrVal;
         int i;
         int j;
-        deque<T>& container;
+        deque<T> container;
     public:
         /**
          * Constructeur par défaut
@@ -792,7 +792,12 @@ public:
         iterator operator++(int) { return *this; }
         bool operator==(iterator other) const { return false; }
         bool operator!=(iterator other) const { return false; }
-        T& operator*() const { return dummy; };
+
+        /**
+         * Cette méthode retourne la valeur pointé par l'itérateur
+         * @return
+         */
+        T& operator*() const { return container.tab[i][j]; };
         //// birectionnel
         // iterator& operator--();
         // iterator operator--(int);
@@ -806,7 +811,15 @@ public:
         // int& operator[](int n);
         // const int& operator[](int n) const;
     };
-    iterator begin() { return tab[firstPtr][firstVal]; }
+
+    /**
+     * Cette méthode retourne un itérateur pointant sur le premier élément du conteneur
+     * @return
+     */
+    iterator begin() {
+        iterator nvIterator(*this);
+        return nvIterator;
+    }
     iterator end() { return tab[lastPtr][lastVal]; }
 
     // iterateur constant

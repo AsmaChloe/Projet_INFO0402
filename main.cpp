@@ -186,19 +186,19 @@ int main() {
     //**************************************ITERATEUR**************************************
     //VRAI DEQUE
     std::cout<<"***************VRAI DEQUE***************\n";
-    /*std::deque<A>::iterator ita;
-    std::deque<A>::iterator itb(ita);
-    std::cout
-            <<"ita : "<<*ita<< ", "
-            <<"itb : "<<*itb<< ", "<< std::endl;*/
+    std::cout<<"Voici dequee : "<<std::endl;
+    for(int i=0;i<dequee.size();i++)
+        std::cout<<" dequee["<<i<<"]="<<dequee[i];
+    std::deque<A>::iterator ite=dequee.begin();
+    std::cout<<"Iterator pointant sur le premier élément de dequee : "<<*ite<<std::endl;
 
     //MON DEQUE
     std::cout<<"\n\n***************MON DEQUE***************\n";
-    deque<A>::iterator it1;
-    deque<A>::iterator it2(it1);
-    std::cout
-            <<"ita : "<<*it1<< ", "
-            <<"itb : "<<*it2<< ", "<< std::endl;
+    std::cout<<"Voici deque5 : "<<std::endl;
+    for(int i=0;i<deque5.size();i++)
+        std::cout<<" deque5["<<i<<"]="<<deque5[i];
+    deque<A>::iterator it5=deque5.begin();
+    std::cout<<"\nIterator pointant sur le premier élément de deque5 : "<<*it5<<std::endl;
 
 
      // iterateur
