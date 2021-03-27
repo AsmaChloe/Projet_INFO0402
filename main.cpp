@@ -186,16 +186,16 @@ int main() {
     //**************************************ITERATEUR**************************************
     //VRAI DEQUE
     std::cout<<"***************VRAI DEQUE***************\n";
-    std::deque<A>::iterator ita();
-    std::deque<A>::iterator itb(std::deque<A>::iterator ita());
+    /*std::deque<A>::iterator ita;
+    std::deque<A>::iterator itb(ita);
     std::cout
             <<"ita : "<<*ita<< ", "
-            <<"itb : "<<*itb<< ", "<< std::endl;
+            <<"itb : "<<*itb<< ", "<< std::endl;*/
 
     //MON DEQUE
     std::cout<<"\n\n***************MON DEQUE***************\n";
-    deque<A>::iterator it1();
-    deque<A>::iterator it2(std::deque<A>::iterator it1());
+    deque<A>::iterator it1;
+    deque<A>::iterator it2(it1);
     std::cout
             <<"ita : "<<*it1<< ", "
             <<"itb : "<<*it2<< ", "<< std::endl;

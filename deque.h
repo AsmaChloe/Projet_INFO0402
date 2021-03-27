@@ -753,20 +753,31 @@ public:
     // iterateur classique
     class iterator {
     private :
-        T* PtrVal;
+        //T* PtrVal;
+        int i;
+        int j;
+        deque<T>& conteneur;
     public:
         /**
          * Constructeur par défaut
          */
-        explicit iterator() : PtrVal(1) {}
+        explicit iterator() : i(0),j(0) {}
 
         /**
          * Constructeur par copie
          * @param other
          */
-        iterator(const iterator& other) : PtrVal(other.PtrVal) {}
-        
-        iterator& operator++() { return *this; }
+        iterator(const iterator& other) : i(other.i), j(other.j) {}
+
+        /**
+         * Cette méthode déplace l'itérateur d'un cran vers l'avant
+         * @return
+         */
+        iterator& operator++() {
+            if(j<conteneur.tabLength-1){
+
+            }
+        }
         iterator operator++(int) { return *this; }
         bool operator==(iterator other) const { return false; }
         bool operator!=(iterator other) const { return false; }
