@@ -774,10 +774,15 @@ public:
          * @return
          */
         iterator& operator++() {
-            if(j<conteneur.tabLength-1){
-
+            if(j<chunkLength-1){
+                j++;
+            }
+            else{
+                i++;
+                j=0;
             }
         }
+
         iterator operator++(int) { return *this; }
         bool operator==(iterator other) const { return false; }
         bool operator!=(iterator other) const { return false; }
