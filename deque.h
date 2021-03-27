@@ -756,7 +756,7 @@ public:
         //T* PtrVal;
         int i;
         int j;
-        deque<T>& conteneur;
+        deque<T>& container;
     public:
         /**
          * Constructeur par défaut
@@ -770,10 +770,16 @@ public:
         iterator(const iterator& other) : i(other.i), j(other.j) {}
 
         /**
+         * Contructeur à partir d'un conteneur
+         * @param conteneur
+         */
+         iterator(const deque<T>& conteneur) : container(conteneur),i(conteneur.firstPtr),j(conteneur.firstVal){}
+
+        /**
          * Cette méthode déplace l'itérateur d'un cran vers l'avant
          * @return
          */
-        iterator& operator++() {
+        iterator& operator++() {  //======> A vérifier sur documention si operator++ fait attention sur les nouveaux indices sont valides ou non
             if(j<chunkLength-1){
                 j++;
             }
