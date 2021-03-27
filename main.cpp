@@ -62,6 +62,19 @@ int main() {
     //deque4.push_front(6);
     // avec rvalue: impossible à tester pour T=int
 
+    // pop
+    /*deque4.pop_back();
+    deque4.pop_front();*/
+
+    // tests
+    /*std::cout
+            << (deque4 == deque5) << ", "
+            << (deque4 != deque5) << ", "
+            << (deque4 <  deque5) << ", "
+            << (deque4 <= deque5) << ", "
+            << (deque4 >  deque5) << ", "
+            << (deque4 == deque5) << std::endl;*/
+
     //*****************************************POP BACK*****************************************
 
     /*std::cout<<"***************VRAI DEQUE***************\n";
@@ -88,7 +101,7 @@ int main() {
 
     //*****************************************POP FRONT*****************************************
 
-    std::cout<<"***************VRAI DEQUE***************\n";
+    /*std::cout<<"***************VRAI DEQUE***************\n";
     for(int i=0;i<dequef.size();i++)
         std::cout<<" dequef["<<i<<"]="<<dequef[i];
 
@@ -112,7 +125,7 @@ int main() {
     std::cout<<"\n\n...deque6.pop_front();..."<<std::endl;
 
     for(int i=0;i<deque6.size();i++)
-        std::cout<<" deque6["<<i<<"]="<<deque6[i];
+        std::cout<<" deque6["<<i<<"]="<<deque6[i];*/
 
     //*****************************************SWAP*****************************************
     // swap
@@ -170,38 +183,36 @@ int main() {
     for(int i=0;i<deque5.size();i++)
         std::cout<<" deque5["<<i<<"]="<<deque5[i];*/
 
-
-    //*****************************************OPERATEUR DE TEST*****************************************
-    //MON DEQUE
-    /*std::cout
-            << "Deque 6 == Deque 3 : " << ((deque6 == deque3)?"OUI" : "NON") << std::endl
-            << "Deque 6 != Deque 3 : " << ((deque6 != deque3)?"OUI" : "NON") << std::endl
-            << "Deque 6 < Deque 3 : " << ((deque6 < deque3)?"OUI" : "NON") << std::endl
-            << "Deque 6 <= Deque 3 : " << ((deque6 <= deque3)?"OUI" : "NON") << std::endl
-            << "Deque 6 > Deque 3 : " << ((deque6 > deque3)?"OUI" : "NON") << std::endl
-            << "Deque 6 >= Deque 3 : " << ((deque6 >= deque3)?"OUI" : "NON") << std::endl;
-
+    //**************************************ITERATEUR**************************************
     //VRAI DEQUE
-    std::cout << "VERIFICATIONS :" << std::endl
-            << "ddequef == dequec : " << ((dequef == dequec)?"OUI" : "NON") << std::endl
-            << "dequef != dequec : " << ((dequef != dequec)?"OUI" : "NON") << std::endl
-            << "dequef < dequec : " << ((dequef < dequec)?"OUI" : "NON") << std::endl
-            << "dequef <= dequec : " << ((dequef <= dequec)?"OUI" : "NON") << std::endl
-            << "dequef > dequec : " << ((dequef > dequec)?"OUI" : "NON") << std::endl
-            << "dequef >= dequec : " << ((dequef >= dequec)?"OUI" : "NON") << std::endl;*/
+    std::cout<<"***************VRAI DEQUE***************\n";
+    std::deque<A>::iterator ita();
+    std::deque<A>::iterator itb(std::deque<A>::iterator ita());
+    std::cout
+            <<"ita : "<<*ita<< ", "
+            <<"itb : "<<*itb<< ", "<< std::endl;
 
-    // iterateur
-    /*
-    for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
-    std::cout << std::endl;
-    deque<A>::iterator it1 = deque1.insert( deque1.cbegin(), 7 );
-    // avec rvalue: impossible à tester pour T=int
-    deque<A>::iterator it3 = deque1.insert( it1, 4, 7 );
-    deque<A>::iterator it4 = deque1.insert( it3, deque2.begin(), deque2.end() );
-    deque<A>::iterator it5 = deque1.insert( it4, {5,4,3,2,1,0} );
-    deque<A>::iterator it6 = deque1.erase(it5);
-    deque1.erase(it6, deque1.cend() );
-*/
+    //MON DEQUE
+    std::cout<<"\n\n***************MON DEQUE***************\n";
+    deque<A>::iterator it1();
+    deque<A>::iterator it2(std::deque<A>::iterator it1());
+    std::cout
+            <<"ita : "<<*it1<< ", "
+            <<"itb : "<<*it2<< ", "<< std::endl;
+
+
+     // iterateur
+     /*
+     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
+     std::cout << std::endl;
+     deque<A>::iterator it1 = deque1.insert( deque1.cbegin(), 7 );
+     // avec rvalue: impossible à tester pour T=int
+     deque<A>::iterator it3 = deque1.insert( it1, 4, 7 );
+     deque<A>::iterator it4 = deque1.insert( it3, deque2.begin(), deque2.end() );
+     deque<A>::iterator it5 = deque1.insert( it4, {5,4,3,2,1,0} );
+     deque<A>::iterator it6 = deque1.erase(it5);
+     deque1.erase(it6, deque1.cend() );
+ */
 
 
     return 0;

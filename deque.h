@@ -752,11 +752,20 @@ public:
 
     // iterateur classique
     class iterator {
+    private :
+        T* PtrVal;
     public:
-        explicit iterator() {
+        /**
+         * Constructeur par défaut
+         */
+        explicit iterator() : PtrVal(1) {}
 
-        }
-        iterator(const iterator&) {}
+        /**
+         * Constructeur par copie
+         * @param other
+         */
+        iterator(const iterator& other) : PtrVal(other.PtrVal) {}
+        
         iterator& operator++() { return *this; }
         iterator operator++(int) { return *this; }
         bool operator==(iterator other) const { return false; }
