@@ -187,8 +187,10 @@ int main() {
     //VRAI DEQUE
     std::cout<<"***************VRAI DEQUE***************\n";
     std::cout<<"Voici dequee : "<<std::endl;
-    for(auto it=dequee.begin(); it!=dequee.end(); ++it) std::cout << *it << ",";
-    std::cout << std::endl;
+
+    for (auto it = dequee.begin(); it != dequee.end(); it++) {
+        std::cout << *it << ", ";
+    }
 
     std::deque<A>::iterator iteBegin=dequee.begin();
     std::cout << "\nIterator pointant sur le premier élément de dequee : "
@@ -208,8 +210,9 @@ int main() {
     //MON DEQUE
     std::cout<<"\n\n***************MON DEQUE***************\n";
     std::cout<<"Voici deque5 : "<<std::endl;
-    for(auto it=deque5.begin(); it!=deque5.end(); ++it) std::cout << *it << ",";        //===> erreur car on a pas fait operator!= encore
-    std::cout << std::endl;
+    for (auto it = deque5.begin(); it != deque5.end(); it++) {
+        std::cout << *it << ", ";
+    }
 
     deque<A>::iterator it5Begin=deque5.begin();
     std::cout << "\nIterator pointant sur le premier élément de deque5 : "

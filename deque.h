@@ -803,8 +803,10 @@ public:
             return tmpIt;
         }
 
-        bool operator==(iterator other) const { return false; }
-        bool operator!=(iterator other) const { return false; }
+        bool operator==(iterator other) const {
+            return currentChunk==other.currentChunk && currentIndex==other.currentIndex;
+        }
+        bool operator!=(iterator other) const { return !operator==(other); }
 
         /**
          * Cette méthode retourne la valeur pointé par l'itérateur
@@ -843,7 +845,7 @@ public:
      * Cette fonction retourne un itérateur pointant sur le dernier élément du conteneur
      * @return
      */
-    iterator end() {
+    iterator end() {                                    //Cassé
         iterator tmpIt;
         tmpIt.currentChunk = tab + lastPtr;
         tmpIt.currentIndex = lastVal;
