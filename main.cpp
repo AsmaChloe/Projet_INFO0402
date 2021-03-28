@@ -9,9 +9,9 @@ int main() {
     // constructions
     deque<A>   deque1;                                      // défaut
     deque<A>   deque2(13);                             // count
-    deque<A>   deque3(3, a);                         // count/value
+    deque<A>   deque3(2, a);                         // count/value
     deque<A>   deque6( {1,2,3,4,5,6,7} );               //Liste d'initialisation
-    deque<A>   deque66( {0,1,2,3,4,5,6} );               //Liste d'initialisation bis
+    deque<A>   deque66( {0,1,2,3,4,5} );               //Liste d'initialisation bis
     deque<A>   deque4(deque6);                              //Copie
     deque<A>    deque5(std::move(deque4));                  //Par déplacement
     //A tester encore : first/last
@@ -19,9 +19,9 @@ int main() {
     //Vrai deque
     std::deque<A>   dequea;                                 // défaut
     std::deque<A>   dequeb(13);                           // count
-    std::deque<A>   dequec(3,a);                        // count/value
+    std::deque<A>   dequec(2,a);                        // count/value
     std::deque<A>   dequef( {1,2,3,4,5,6,7} );            //Liste d'initialisation
-    std::deque<A>   dequeff( {0,1,2,3,4,5,6} );               //Liste d'initialisation bis
+    std::deque<A>   dequeff( {0,1,2,3,4,5} );               //Liste d'initialisation bis
     std::deque<A>   dequed(dequef);                         //Copie
     std::deque<A>   dequee( std::move(dequed) );            // Par déplacement
     //td::deque<A>   dequec( dequeb.begin(), dequeb.end() );  // itérateur
@@ -186,48 +186,91 @@ int main() {
     //**************************************ITERATEUR**************************************
     //VRAI DEQUE
     std::cout<<"***************VRAI DEQUE***************\n";
-    std::cout<<"Voici dequee : "<<std::endl;
-
-    for (auto it = dequee.begin(); it != dequee.end(); it++) {
+    int count=0;
+    std::cout<<"Voici dequec : "<<std::endl;
+    for (auto it = dequec.begin(); it != dequec.end(); it++) {
         std::cout << *it << ", ";
+        count++;
     }
+    std::cout<<"\n compte : "<<count;
+    count=0;
 
-    std::deque<A>::iterator iteBegin=dequee.begin();
-    std::cout << "\nIterator pointant sur le premier élément de dequee : "
+    std::cout<<"\n\nVoici dequef : "<<std::endl;
+    for (auto it = dequef.begin(); it != dequef.end(); it++) {
+        std::cout << *it << ", ";
+        count++;
+    }
+    std::cout<<"\n compte : "<<count;
+    count=0;
+
+    std::cout<<"\n\nVoici dequeff : "<<std::endl;
+    for (auto it = dequeff.begin(); it != dequeff.end(); it++) {
+        std::cout << *it << ", ";
+        count++;
+    }
+    std::cout<<"\n compte : "<<count;
+    count=0;
+
+    std::deque<A>::iterator iteBegin=dequeff.begin();
+    std::cout << "\nIterator pointant sur le premier élément de dequeff : "
               << *iteBegin << std::endl;
 
-    std::cout << "Iterator pointant sur le 2 élément de dequee : "
+    std::cout << "Iterator pointant sur le 2 élément de dequeff : "
               << *(++iteBegin) << std::endl;
 
     iteBegin++;
-    std::cout << "Iterator pointant sur le 3 élément de dequee : "
+    std::cout << "Iterator pointant sur le 3 élément de dequeff : "
               << *(iteBegin) << std::endl;
 
-    std::deque<A>::iterator iteEnd = dequee.end();
-    std::cout << "Iterator pointant sur le dernier élément de dequee : "
+    std::deque<A>::iterator iteEnd = dequeff.end();
+    std::cout << "Iterator pointant sur le dernier élément de dequeff : "
               << *iteEnd << std::endl;
 
     //MON DEQUE
     std::cout<<"\n\n***************MON DEQUE***************\n";
-    std::cout<<"Voici deque5 : "<<std::endl;
-    for (auto it = deque5.begin(); it != deque5.end(); it++) {
-        std::cout << *it << ", ";
+    std::cout<<"Voici deque3 : "<<std::endl;
+    for (auto itt = deque3.begin(); itt != deque3.end(); itt++) {
+        std::cout << *itt << ", ";
+        count++;
     }
+    std::cout<<"\n compte : "<<count;
+    count=0;
 
-    deque<A>::iterator it5Begin=deque5.begin();
-    std::cout << "\nIterator pointant sur le premier élément de deque5 : "
+    std::cout<<"\n\nVoici deque6 : "<<std::endl;
+    for (auto itt = deque6.begin(); itt != deque6.end(); itt++) {
+        std::cout << *itt << ", ";
+        count++;
+    }
+    std::cout<<"\n compte : "<<count;
+    count=0;
+
+    std::cout<<"\n\nVoici deque66 : "<<std::endl;
+    for (auto itt = deque66.begin(); itt != deque66.end(); itt++) {
+        std::cout << *itt << ", ";
+        count++;
+    }
+    std::cout<<"\n compte : "<<count;
+
+    //deque<A>::iterator itt=deque66.begin();
+    /*for(int i=0;i<deque66.size();i++){
+        std::cout<<*itt<<" - "<<&itt<<", ";
+        itt++;
+    }*/
+
+    deque<A>::iterator it5Begin=deque66.begin();
+    std::cout << "\nIterator pointant sur le premier élément de deque66 : "
               << *it5Begin << std::endl;
 
-    std::cout << "Iterator pointant sur le 2 élément de deque5 : "
+    std::cout << "Iterator pointant sur le 2 élément de deque66 : "
               << *(++it5Begin) << std::endl;
 
     it5Begin++;
-    std::cout << "Iterator pointant sur le 3 élément de deque5 : "
+    std::cout << "Iterator pointant sur le 3 élément de deque66 : "
               << *(it5Begin) << std::endl;
 
-    deque<A>::iterator it5End = deque5.end();
-    std::cout << "Iterator pointant sur le dernier élément de deque5 : "
-              << *it5End << std::endl;
+    deque<A>::iterator it5End = deque66.end();
+    /*std::cout << "Iterator pointant sur le dernier élément de deque66 : "         MARCHE PAS
+              << *it5End << std::endl;*/
 
 
      // iterateur

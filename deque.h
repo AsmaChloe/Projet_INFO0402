@@ -752,8 +752,6 @@ public:
 
     // iterateur classique
     class iterator {
-    private:
-        T*  currentElement; // pointeur sur élément dans le chunk courant
     public:
         //Attributs
         T** currentChunk; // pointeur sur le chunk courant
@@ -768,7 +766,7 @@ public:
          * Constructeur par copie
          * @param other
          */
-        iterator(const iterator& other){}
+        iterator(const iterator& other) : currentChunk(other.currentChunk), currentIndex(other.currentIndex){}
 
         /**
          * Contructeur à partir d'un tableau 2D et d'un index
@@ -815,6 +813,7 @@ public:
          * @return
          */
         T& operator*() const {
+            //std::cout<<"Currentchunk "<<currentChunk<<" - currentIndex "<<currentIndex<<std::endl;
             return *(*currentChunk + currentIndex);
         }
 
@@ -844,13 +843,18 @@ public:
     }
 
     /**
-     * Cette fonction retourne un itérateur pointant sur le dernier élément du conteneur
+     * Cette fonction retourne un itérateur pointant sur l'élément après le dernier élément du conteneur
      * @return
      */
     iterator end() {                                    //Cassé
-        iterator tmpIt;
-        tmpIt.currentChunk = tab + lastPtr;
-        tmpIt.currentIndex = lastVal;
+        /*        iterator tmpIt;
+tmpIt.currentChunk = tab + lastPtr;
+tmpIt.currentIndex = lastVal;*/
+        iterator tmpIt(this->begin());
+        for(int i=0;i<this->size();i++){ //On se déplace de la longueur du deque a partie du premier élément => on attérit un cran après le dernier élément
+            tmpIt++;
+        }
+
         return tmpIt;
     }
 
