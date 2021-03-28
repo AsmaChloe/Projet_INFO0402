@@ -804,7 +804,9 @@ public:
         }
 
         bool operator==(iterator other) const {
-            return currentChunk==other.currentChunk && currentIndex==other.currentIndex;
+            if(currentChunk!=other.currentChunk || currentIndex!=other.currentIndex)
+                return false;
+            return true;
         }
         bool operator!=(iterator other) const { return !operator==(other); }
 
