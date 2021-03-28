@@ -752,44 +752,57 @@ public:
 
     // iterateur classique
     class iterator {
-    private :
-        //T* PtrVal;
-        int i;
-        int j;
-        deque<T> container;
+    private:
+        T*  currentElement; // pointeur sur élément dans le chunk courant
     public:
+        //Attributs
+        T** currentChunk; // pointeur sur le chunk courant
+        int currentIndex; // l'indice de l'élément courant dans le chunk courant
+
         /**
          * Constructeur par défaut
          */
-        explicit iterator() : i(0),j(0) {}
+        explicit iterator() {}
 
         /**
          * Constructeur par copie
          * @param other
          */
-        iterator(const iterator& other) : i(other.i), j(other.j) {}
+        iterator(const iterator& other){}
 
         /**
-         * Contructeur à partir d'un conteneur
+         * Contructeur à partir d'un tableau 2D et d'un index
          * @param conteneur
          */
-         iterator(const deque<T>& conteneur) : container(conteneur),i(conteneur.firstPtr),j(conteneur.firstVal){}
+        iterator(T** tab, int index){
+            currentChunk = tab;
+            currentIndex = index;
+        }
 
         /**
          * Cette méthode déplace l'itérateur d'un cran vers l'avant
          * @return
          */
         iterator& operator++() {  //======> A vérifier sur documention si operator++ fait attention sur les nouveaux indices sont valides ou non
-            if(j<chunkLength-1){
-                j++;
-            }
-            else{
-                i++;
-                j=0;
-            }
+            //pre increment
+            if (currentIndex == (chunkLength - 1)) currentChunk++;
+            currentIndex = (currentIndex + 1) % chunkLength;
+            return *this;
         }
 
-        iterator operator++(int) { return *this; }
+        /**
+         * Cette méthode déplace l'itérateur de n crans vers l'avant
+         * @param n
+         * @return
+         */
+        iterator operator++(int) { //======> A vérifier sur documention si operator++ fait attention sur les nouveaux indices sont valides ou non
+            //post increment
+            iterator tmpIt = *this;
+            if (currentIndex == (chunkLength - 1)) currentChunk++;
+            currentIndex = (currentIndex + 1) % chunkLength;
+            return tmpIt;
+        }
+
         bool operator==(iterator other) const { return false; }
         bool operator!=(iterator other) const { return false; }
 
@@ -797,7 +810,10 @@ public:
          * Cette méthode retourne la valeur pointé par l'itérateur
          * @return
          */
-        T& operator*() const { return container.tab[i][j]; };
+        T& operator*() const {
+            return *(*currentChunk + currentIndex);
+        }
+
         //// birectionnel
         // iterator& operator--();
         // iterator operator--(int);
@@ -813,14 +829,26 @@ public:
     };
 
     /**
-     * Cette méthode retourne un itérateur pointant sur le premier élément du conteneur
+     * Cette fonction retourne un itérateur pointant sur le premier élément du conteneur
      * @return
      */
     iterator begin() {
-        iterator nvIterator(*this);
-        return nvIterator;
+        iterator tmpIt;
+        tmpIt.currentChunk = tab + firstPtr;
+        tmpIt.currentIndex = firstVal;
+        return tmpIt;
     }
-    iterator end() { return tab[lastPtr][lastVal]; }
+
+    /**
+     * Cette fonction retourne un itérateur pointant sur le dernier élément du conteneur
+     * @return
+     */
+    iterator end() {
+        iterator tmpIt;
+        tmpIt.currentChunk = tab + lastPtr;
+        tmpIt.currentIndex = lastVal;
+        return tmpIt;
+    }
 
     // iterateur constant
     class const_iterator {

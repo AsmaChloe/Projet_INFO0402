@@ -187,18 +187,44 @@ int main() {
     //VRAI DEQUE
     std::cout<<"***************VRAI DEQUE***************\n";
     std::cout<<"Voici dequee : "<<std::endl;
-    for(int i=0;i<dequee.size();i++)
-        std::cout<<" dequee["<<i<<"]="<<dequee[i];
-    std::deque<A>::iterator ite=dequee.begin();
-    std::cout<<"Iterator pointant sur le premier élément de dequee : "<<*ite<<std::endl;
+    for(auto it=dequee.begin(); it!=dequee.end(); ++it) std::cout << *it << ",";
+    std::cout << std::endl;
+
+    std::deque<A>::iterator iteBegin=dequee.begin();
+    std::cout << "\nIterator pointant sur le premier élément de dequee : "
+              << *iteBegin << std::endl;
+
+    std::cout << "Iterator pointant sur le 2 élément de dequee : "
+              << *(++iteBegin) << std::endl;
+
+    iteBegin++;
+    std::cout << "Iterator pointant sur le 3 élément de dequee : "
+              << *(iteBegin) << std::endl;
+
+    std::deque<A>::iterator iteEnd = dequee.end();
+    std::cout << "Iterator pointant sur le dernier élément de dequee : "
+              << *iteEnd << std::endl;
 
     //MON DEQUE
     std::cout<<"\n\n***************MON DEQUE***************\n";
     std::cout<<"Voici deque5 : "<<std::endl;
-    for(int i=0;i<deque5.size();i++)
-        std::cout<<" deque5["<<i<<"]="<<deque5[i];
-    deque<A>::iterator it5=deque5.begin();
-    std::cout<<"\nIterator pointant sur le premier élément de deque5 : "<<*it5<<std::endl;
+    for(auto it=deque5.begin(); it!=deque5.end(); ++it) std::cout << *it << ",";        //===> erreur car on a pas fait operator!= encore
+    std::cout << std::endl;
+
+    deque<A>::iterator it5Begin=deque5.begin();
+    std::cout << "\nIterator pointant sur le premier élément de deque5 : "
+              << *it5Begin << std::endl;
+
+    std::cout << "Iterator pointant sur le 2 élément de deque5 : "
+              << *(++it5Begin) << std::endl;
+
+    it5Begin++;
+    std::cout << "Iterator pointant sur le 3 élément de deque5 : "
+              << *(it5Begin) << std::endl;
+
+    deque<A>::iterator it5End = deque5.end();
+    std::cout << "Iterator pointant sur le dernier élément de deque5 : "
+              << *it5End << std::endl;
 
 
      // iterateur
