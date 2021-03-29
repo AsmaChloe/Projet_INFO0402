@@ -887,8 +887,28 @@ public:
         bool operator>=(const iterator& other) const{
             return !operator<(other);
         }
-        // iterator& operator+=(const int n)
-        // iterator& operator-=(const int n)
+
+        /**
+         * Cette méthode avance l'itérateur de n crans.
+         * @param n
+         * @return
+         */
+        iterator& operator+=(const int n){              //TEST QUOI FAIRE POUR DEPASSEMENT
+            for(int i=0;i<n;i++)
+                this->operator++();
+            return *this;
+        }
+
+        /**
+         * Cette méthode recule l'itérateur de n crans.
+         * @param n
+         * @return
+         */
+        iterator& operator-=(const int n){              //TEST QUOI FAIRE POUR DEPASSEMENT
+            for(int i=0;i<n;i++)
+                this->operator--();
+            return *this;
+        }
         // int& operator[](int n);
         // const int& operator[](int n) const;
     };

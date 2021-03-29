@@ -138,6 +138,15 @@ int main() {
     std::cout<<"iteBegin > iteEnd ? "<<(iteBegin>iteEnd)<<std::endl;
     std::cout<<"iteBegin >= iteEnd ? "<<(iteBegin>=iteEnd)<<std::endl;
 
+    std::cout<<"\n\n+= et -= dans sur iteBegin"<<std::endl;
+    std::cout<<"iteBegin = "<<*iteBegin<<std::endl;
+    iteBegin+=3; //0=>3
+    std::cout<<"...iteBegin+=3;..."<<std::endl;
+    std::cout<<"iteBegin = "<<*iteBegin<<std::endl;
+    iteBegin-=3; //3=>0
+    std::cout<<"...iteBegin-=3;..."<<std::endl;
+    std::cout<<"iteBegin = "<<*iteBegin<<std::endl;
+
     //MON DEQUE
     std::cout<<"\n\n***************MON DEQUE***************\n";
     std::cout<<"Voici deque3 : "<<std::endl;
@@ -200,6 +209,14 @@ int main() {
     std::cout<<"it5Begin > it5End ? "<<(it5Begin>it5End)<<std::endl;
     std::cout<<"it5Begin >= it5End ? "<<(it5Begin>=it5End)<<std::endl;
 
+    std::cout<<"\n\n+= et -= dans sur it5Begin"<<std::endl;
+    std::cout<<"it5Begin = "<<*it5Begin<<std::endl;
+    it5Begin+=3; //3=>4
+    std::cout<<"...it5Begin+=3;..."<<std::endl;
+    std::cout<<"it5Begin = "<<*it5Begin<<std::endl;
+    it5Begin-=3; //3=>0
+    std::cout<<"...it5Begin-=3;..."<<std::endl;
+    std::cout<<"it5Begin = "<<*it5Begin<<std::endl;
 
      // iterateur
      /*
