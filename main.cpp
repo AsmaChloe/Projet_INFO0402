@@ -128,6 +128,16 @@ int main() {
     std::cout << "Iterator pointant sur le dernier élément de dequeff : "
               << *iteEnd << std::endl;
 
+    std::cout<<"\n\nComparaison dans dequeff"<<std::endl;
+    iteBegin=dequeff.begin();
+    iteEnd=dequeff.begin();
+    iteEnd++;
+
+    std::cout<<"iteBegin < iteEnd ? "<<(iteBegin<iteEnd)<<std::endl;
+    std::cout<<"iteBegin <= iteEnd ? "<<(iteBegin<=iteEnd)<<std::endl;
+    std::cout<<"iteBegin > iteEnd ? "<<(iteBegin>iteEnd)<<std::endl;
+    std::cout<<"iteBegin >= iteEnd ? "<<(iteBegin>=iteEnd)<<std::endl;
+
     //MON DEQUE
     std::cout<<"\n\n***************MON DEQUE***************\n";
     std::cout<<"Voici deque3 : "<<std::endl;
@@ -179,6 +189,16 @@ int main() {
     deque<A>::iterator it5End = deque66.end();
     /*std::cout << "Iterator pointant sur le dernier élément de deque66 : "         MARCHE PAS
               << *it5End << std::endl;*/
+
+    std::cout<<"\n\nComparaison dans deque66"<<std::endl;
+    it5Begin=deque66.begin();
+    it5End=deque66.begin();
+    it5End++;
+
+    std::cout<<"it5Begin < it5End ? "<<(it5Begin<it5End)<<std::endl;
+    std::cout<<"it5Begin <= it5End ? "<<(it5Begin<=it5End)<<std::endl;
+    std::cout<<"it5Begin > it5End ? "<<(it5Begin>it5End)<<std::endl;
+    std::cout<<"it5Begin >= it5End ? "<<(it5Begin>=it5End)<<std::endl;
 
 
      // iterateur

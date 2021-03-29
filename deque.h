@@ -842,11 +842,51 @@ public:
             //Post incrémentation
             return operator--();
         }
+
         //// random access
-        // bool operator<(const iterator&)  const;
-        // bool operator<=(const iterator&) const;
-        // bool operator>(const iterator&)  const;
-        // bool operator>=(const iterator&) const;
+        /**
+         * Cette méthode retourne si l'itérateur courant est strictement inférieur à l'itérateur other.
+         * @param other
+         * @return
+         */
+        bool operator<(const iterator& other)  const{
+            if(*currentChunk<*other.currentChunk)
+                return true;
+            else if(*currentChunk>*other.currentChunk)
+                return  false;
+            else
+            if(currentIndex<other.currentIndex)
+                return true;
+            else
+                return false;
+        }
+
+        /**
+         * Cette méthode retourne si l'itérateur courant est inférieur ou égal à l'itérateur other.
+         * @param other
+         * @return
+         */
+        bool operator<=(const iterator& other) const{
+            return operator<(other) || operator==(other);
+        }
+
+        /**
+         * Cette méthode retourne si l'itérateur courant est strictement supérieur à l'itérateur other.
+         * @param other
+         * @return
+         */
+        bool operator>(const iterator& other)  const{
+            return !operator<=(other);
+        }
+
+        /**
+         * Cette méthode retourne si l'itérateur courant est supérieur ou égal à l'itérateur other.
+         * @param other
+         * @return
+         */
+        bool operator>=(const iterator& other) const{
+            return !operator<(other);
+        }
         // iterator& operator+=(const int n)
         // iterator& operator-=(const int n)
         // int& operator[](int n);
