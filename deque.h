@@ -794,11 +794,7 @@ public:
          * @return
          */
         iterator operator++(int) { //======> A vérifier sur documention si operator++ fait attention sur les nouveaux indices sont valides ou non
-            //post increment
-            iterator tmpIt = *this;
-            if (currentIndex == (chunkLength - 1)) currentChunk++;
-            currentIndex = (currentIndex + 1) % chunkLength;
-            return tmpIt;
+            return operator++();
         }
 
         bool operator==(iterator other) const {
@@ -818,8 +814,16 @@ public:
         }
 
         //// birectionnel
-        // iterator& operator--();
-        // iterator operator--(int);
+        iterator& operator--(){
+            //Pre incrémentation
+            if (currentIndex == 0) currentChunk--;
+            currentIndex = (currentIndex - 1) % chunkLength;
+            return *this;
+        }
+        iterator operator--(int){
+            //Post incrémentation
+            return operator--();
+        }
         //// random access
         // bool operator<(const iterator&)  const;
         // bool operator<=(const iterator&) const;

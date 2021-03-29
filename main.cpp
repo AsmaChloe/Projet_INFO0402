@@ -222,6 +222,12 @@ int main() {
     std::cout << "Iterator pointant sur le 3 élément de dequeff : "
               << *(iteBegin) << std::endl;
 
+    std::cout << "Iterator pointant (encore) sur le 2e élément de dequeff : "
+              << *(--iteBegin) << std::endl;
+    iteBegin--;
+    std::cout << "Iterator pointant (encore) sur le 1er élément de dequeff : "
+              << *iteBegin << std::endl;
+
     std::deque<A>::iterator iteEnd = dequeff.end();
     std::cout << "Iterator pointant sur le dernier élément de dequeff : "
               << *iteEnd << std::endl;
@@ -267,6 +273,12 @@ int main() {
     it5Begin++;
     std::cout << "Iterator pointant sur le 3 élément de deque66 : "
               << *(it5Begin) << std::endl;
+
+    std::cout << "Iterator pointant (encore) sur le 2e élément de deque66 : "
+              << *(--it5Begin) << std::endl;
+    it5Begin--;
+    std::cout << "Iterator pointant (encore) sur le 1er élément de deque66 : "
+              << *it5Begin << std::endl;
 
     deque<A>::iterator it5End = deque66.end();
     /*std::cout << "Iterator pointant sur le dernier élément de deque66 : "         MARCHE PAS
