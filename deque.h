@@ -778,7 +778,7 @@ public:
         }
 
         /**
-         * Cette méthode déplace l'itérateur d'un cran vers l'avant
+         * Cette méthode déplace l'itérateur d'un cran vers l'avant. Elle est appelée lors d'une préincrémentation.
          * @return
          */
         iterator& operator++() {  //======> A vérifier sur documention si operator++ fait attention sur les nouveaux indices sont valides ou non
@@ -789,7 +789,7 @@ public:
         }
 
         /**
-         * Cette méthode déplace l'itérateur de n crans vers l'avant
+         * Cette méthode déplace l'itérateur d'un crans vers l'avant. Elle est appelée lors d'une postincrémentation.
          * @param n
          * @return
          */
@@ -797,11 +797,20 @@ public:
             return operator++();
         }
 
+        /**
+         * Cette méthode retourne si deux itérateurs sont égaux, c'est à dire s'ils pointent sur le même élément
+         * @param other
+         * @return
+         */
         bool operator==(iterator other) const {
             if(currentChunk!=other.currentChunk || currentIndex!=other.currentIndex)
                 return false;
             return true;
         }
+
+        /**
+         * Cette méthode retourn si deux itérateurs ne sont pas égaux, c'est à dire s'ils ne pointent pas sur le même élément
+         */
         bool operator!=(iterator other) const { return !operator==(other); }
 
         /**
@@ -814,12 +823,21 @@ public:
         }
 
         //// birectionnel
+
+        /**
+         * Cette méthode recule l'itérateur d'un cran vers l'arrière. Elle est appelée lors d'une préincrémentation.
+         */
         iterator& operator--(){
             //Pre incrémentation
             if (currentIndex == 0) currentChunk--;
             currentIndex = (currentIndex - 1) % chunkLength;
             return *this;
         }
+
+        /**
+         * Cette méthode recule l'itérateur d'un cran vers l'arrière. Elle est appelée lors d'une postincrémentation.
+         * @return
+         */
         iterator operator--(int){
             //Post incrémentation
             return operator--();
