@@ -36,7 +36,6 @@ public:
      * @param count
      */
     explicit deque(size_type count) : nbElements(count) {
-        //tabLength= count / chunkLength + count % chunkLength; //A corriger
         tabLength=count/chunkLength;
         if(tabLength*chunkLength<count)
             tabLength++;
@@ -60,7 +59,6 @@ public:
      * @param value
      */
     deque( size_type count, const T&value ) : nbElements(count) {
-        //tabLength= count / chunkLength + count % chunkLength; //A corriger
         tabLength=count/chunkLength;
         if(tabLength*chunkLength<count)
             tabLength++;
@@ -96,6 +94,7 @@ public:
             nbElements++;
         }
 
+        //Tab length
         tabLength=nbElements/chunkLength;
         if(tabLength*chunkLength<nbElements)
             tabLength++;
@@ -108,14 +107,11 @@ public:
 
         //Initialisation des indices
         firstPtr=0;
-        //lastPtr=(tabLength>0 ? tabLength-1 : 0);
         firstVal=0;
-        lastVal=(nbElements%chunkLength==0? chunkLength-1 : nbElements%chunkLength-1);
-
-        //Ajout des valeurs dans le tableau
         lastPtr=firstPtr;
         lastVal=firstVal;
 
+        //Ajout des valeurs dans le tableaux;
         while(count<nbElements && lastPtr<tabLength){
             tab[lastPtr][lastVal]=*first;
             first++;
