@@ -86,22 +86,48 @@ public:
     }
 
     template< class InputIt > deque( InputIt first, InputIt last) {
-        //FAUX ! deque avec tous les éléments de first à last
+        int count=0;
+        nbElements=0;
+        InputIt it=first;
 
-        /*tabLength = 2;
+        //On compte le nombre d'éléments se trouvant entre first et last
+        while (it!=last){
+            it++;
+            nbElements++;
+        }
 
+        tabLength=nbElements/chunkLength;
+        if(tabLength*chunkLength<nbElements)
+            tabLength++;
+
+        //Initialisation du tableau
         tab=new T*[tabLength];
-
         for(int i=0;i<tabLength;i++){
             tab[i]=new T[chunkLength];
         }
 
-        if (first == NULL || last == NULL){
-            std::cout << "Impossible de contruire le deque car une ou plusieurs valeurs sont nulles !" << std::endl;
-        }else{
-            tab[0][0]=first;
-            tab[0][1]=last;
-        }*/
+        //Initialisation des indices
+        firstPtr=0;
+        //lastPtr=(tabLength>0 ? tabLength-1 : 0);
+        firstVal=0;
+        lastVal=(nbElements%chunkLength==0? chunkLength-1 : nbElements%chunkLength-1);
+
+        //Ajout des valeurs dans le tableau
+        lastPtr=firstPtr;
+        lastVal=firstVal;
+
+        while(count<nbElements && lastPtr<tabLength){
+            tab[lastPtr][lastVal]=*first;
+            first++;
+            count++;
+            if(lastVal==chunkLength-1){
+                lastVal=0;
+                lastPtr++;
+            }
+            else{
+                lastVal++;
+            }
+        }
 
     }
 

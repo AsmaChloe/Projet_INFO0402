@@ -7,24 +7,35 @@ int main() {
     const A a=2;
     const A aBis=4;
     // constructions
-    deque<A>   deque1;                                      // défaut
+    deque<A>   deque1;                                       // défaut
     deque<A>   deque2(13);                             // count
-    deque<A>   deque3(2, a);                         // count/value
+    deque<A>   deque3(2, a);                           // count/value
     deque<A>   deque6( {1,2,3,4,5,6,7} );               //Liste d'initialisation
-    deque<A>   deque66( {0,1,2,3,4,5} );               //Liste d'initialisation bis
+    deque<A>   deque66( {0,1,2,3,4,5} );                //Liste d'initialisation bis
     deque<A>   deque4(deque6);                              //Copie
-    deque<A>    deque5(std::move(deque4));                  //Par déplacement
-    //A tester encore : first/last
+    deque<A>   deque5(std::move(deque4));                   //Par déplacement
+    deque<A>   deque7(deque6.begin(),deque6.end());         //first/last
 
     //Vrai deque
     std::deque<A>   dequea;                                 // défaut
-    std::deque<A>   dequeb(13);                           // count
-    std::deque<A>   dequec(2,a);                        // count/value
-    std::deque<A>   dequef( {1,2,3,4,5,6,7} );            //Liste d'initialisation
-    std::deque<A>   dequeff( {0,1,2,3,4,5} );               //Liste d'initialisation bis
+    std::deque<A>   dequeb(13);                          // count
+    std::deque<A>   dequec(2,a);                         // count/value
+    std::deque<A>   dequef( {1,2,3,4,5,6,7} );           //Liste d'initialisation
+    std::deque<A>   dequeff( {0,1,2,3,4,5} );            //Liste d'initialisation bis
     std::deque<A>   dequed(dequef);                         //Copie
     std::deque<A>   dequee( std::move(dequed) );            // Par déplacement
-    //td::deque<A>   dequec( dequeb.begin(), dequeb.end() );  // itérateur
+    std::deque<A>   dequeg( dequef.begin(), dequef.end() ); // first/last
+
+    /**********TEST CONSTRUCTEUR PAR ITERATEUR*************/
+    std::cout<<"***************VRAI DEQUE***************"<<std::endl;
+    for(auto it=dequeg.begin();it!=dequeg.end();it++)
+        std::cout<<*it<<", ";
+    std::cout<<"\n";
+
+    std::cout<<"***************MON DEQUE***************"<<std::endl;
+    for(auto it=deque7.begin();it!=deque7.end();it++)
+        std::cout<<*it<<", ";
+    std::cout<<"\n";
 
     // assignation
     /*deque1 = deque6;
