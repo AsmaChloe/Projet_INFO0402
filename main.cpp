@@ -26,29 +26,6 @@ int main() {
     std::deque<A>   dequee( std::move(dequed) );            // Par déplacement
     std::deque<A>   dequeg( dequef.begin(), dequef.end() ); // first/last
 
-    /**********TEST CONSTRUCTEUR PAR ITERATEUR*************/
-    std::cout<<"***************VRAI DEQUE***************"<<std::endl;
-    for(auto it=dequeg.begin();it!=dequeg.end();it++)
-        std::cout<<*it<<", ";
-
-    std::cout<<"\ndequeg.assign(dequeff.begin(), dequeff.end())\n";
-    dequeg.assign(dequeff.begin(), dequeff.end());
-
-    for(auto it=dequeg.begin();it!=dequeg.end();it++)
-        std::cout<<*it<<", ";
-    std::cout<<"\n";
-
-    std::cout<<"***************MON DEQUE***************"<<std::endl; //=>CASSE !!!!!!!!!!!
-    for(auto it=deque7.begin();it!=deque7.end();it++)
-        std::cout<<*it<<", ";
-
-    std::cout<<"\ndeque7.assign(deque66.begin(), deque66.end())\n";
-    deque7.assign(deque66.begin(), deque66.end());
-
-    for(auto it=deque7.begin();it!=deque7.end();it++)
-        std::cout<<*it<<", ";
-    std::cout<<"\n";
-
     // assignation
     /*deque1 = deque6;
     deque2 = std::move(deque1);
@@ -117,7 +94,7 @@ int main() {
     std::cout<<"\n\nVoici dequef : "<<std::endl;
     for (auto it = dequef.begin(); it != dequef.end(); it++) {
         std::cout << *it << ", ";
-    }
+    }*/
 
     std::cout<<"\n\nVoici dequeff : "<<std::endl;
     for (auto it = dequea.begin(); it != dequea.end(); it++) {
@@ -127,7 +104,7 @@ int main() {
     std::deque<A>::iterator itffBis=dequea.begin();
     itffBis++;
 
-    std::cout << "\nIterator pointant sur le premier élément de dequeff : "
+    /*std::cout << "\nIterator pointant sur le premier élément de dequeff : "
               << *iteBegin << std::endl;
 
     std::cout << "Iterator pointant sur le 2 élément de dequeff : "
@@ -145,7 +122,7 @@ int main() {
 
     std::deque<A>::iterator iteEnd = dequeff.end();
     std::cout << "Iterator pointant sur le dernier élément de dequeff : "
-              << *iteEnd << std::endl;
+              << *iteEnd << std::endl;*/
 
     std::cout<<"\n\nComparaison dans dequeff"<<std::endl;
 
@@ -154,7 +131,7 @@ int main() {
     std::cout<<"itff("<<*itff<<") > itffBis("<<*itffBis<<") ? "<<(itff>itffBis)<<std::endl;
     std::cout<<"itff("<<*itff<<") >= itffBis("<<*itffBis<<") ? "<<(itff>=itffBis)<<std::endl;
 
-    std::cout<<"\n\n+= et -= dans sur iteBegin"<<std::endl;
+    /*std::cout<<"\n\n+= et -= dans sur iteBegin"<<std::endl;
     std::cout<<"iteBegin = "<<*iteBegin<<std::endl;
     iteBegin+=3; //0=>3
     std::cout<<"...iteBegin+=3;..."<<std::endl;
@@ -176,7 +153,7 @@ int main() {
     std::cout<<"\n\nVoici deque6 : "<<std::endl;
     for (auto itt = deque6.begin(); itt != deque6.end(); itt++) {
         std::cout << *itt << ", ";
-    }
+    }*/
 
     std::cout<<"\n\nVoici deque66 : "<<std::endl;
     for (auto itt = deque1.begin(); itt != deque1.end(); itt++) {
@@ -186,7 +163,7 @@ int main() {
     deque<A>::iterator it66=deque1.begin();
     deque<A>::iterator it66Bis=deque1.begin();
     it66Bis++;
-    for(int i=0;i<deque66.size();i++){
+    /*for(int i=0;i<deque66.size();i++){
         std::cout<<*itt<<" - "<<&itt<<", ";
         itt++;
     }
@@ -208,18 +185,18 @@ int main() {
     std::cout << "Iterator pointant (encore) sur le 1er élément de deque66 : "
               << *it5Begin << std::endl;
 
-    deque<A>::iterator it5End = deque66.end();*/
-    /*std::cout << "Iterator pointant sur le dernier élément de deque66 : "         MARCHE PAS
-              << *it5End << std::endl;
+    deque<A>::iterator it5End = deque66.end();
+    std::cout << "Iterator pointant sur le dernier élément de deque66 : "
+              << *it5End << std::endl;*/
 
     std::cout<<"\n\nComparaison dans deque66"<<std::endl;
 
-    std::cout<<"it66("<<*it66<<") < it66Bis("<<*it66Bis<<") ?"<<(it66<it66Bis)<<std::endl;
-    std::cout<<"it66("<<*it66<<") <= it66Bis("<<*it66Bis<<") ? "<<(it66<=it66Bis)<<std::endl;
-    std::cout<<"it66("<<*it66<<") > it66Bis("<<*it66Bis<<") ? "<<(it66>it66Bis)<<std::endl;
-    std::cout<<"it66("<<*it66<<") >= it66Bis("<<*it66Bis<<") ? "<<(it66>=it66Bis)<<std::endl;
+    std::cout<<"it66 < it66Bis ?  ?"<<(it66<it66Bis)<<std::endl;
+    std::cout<<"it66<= it66Bis ? "<<(it66<=it66Bis)<<std::endl;
+    std::cout<<"it66 > it66Bis ? "<<(it66>it66Bis)<<std::endl;
+    std::cout<<"it66 >= it66Bis ? "<<(it66>=it66Bis)<<std::endl;
 
-    std::cout<<"\n\n+= et -= dans sur it5Begin"<<std::endl;
+    /*std::cout<<"\n\n+= et -= dans sur it5Begin"<<std::endl;
     std::cout<<"it5Begin = "<<*it66Begin<<std::endl;
     it5Begin+=3; //3=>4
     std::cout<<"...it5Begin+=3;..."<<std::endl;
