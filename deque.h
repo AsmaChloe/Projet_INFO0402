@@ -319,7 +319,7 @@ public:
      * @param first
      * @param last
      */
-    template< class InputIt > void assign( InputIt first, InputIt last ) {              //CASSE!!!!!!!!!!
+    template< class InputIt > void assign( InputIt first, InputIt last ) { 
         //On vide l'objet courant
         clear();
 
@@ -848,7 +848,8 @@ public:
          * Cette méthode retourne la valeur pointé par l'itérateur
          * @return
          */
-        T& operator*() const {                  //!!!!!!!!!!!!!!!!!! CASSER PR DEQUE VIDE!!!!!!!!!!!!!!!!!
+        T& operator*() const {
+            if (currentIndex==-1) return dummy;
             return *(*currentChunk + currentIndex);
         }
 
@@ -961,10 +962,9 @@ public:
      * Cette fonction retourne un itérateur pointant sur l'élément après le dernier élément du conteneur
      * @return
      */
-    iterator end() {                                    //Cassé
-        /*        iterator tmpIt;
-tmpIt.currentChunk = tab + lastPtr;
-tmpIt.currentIndex = lastVal;*/
+    iterator end() {
+        if(firstVal==-1) return this->begin(); //Si le deque est vide, selon la document, begin()=end()
+
         iterator tmpIt(this->begin());
         for(int i=0;i<this->size();i++){ //On se déplace de la longueur du deque a partie du premier élément => on attérit un cran après le dernier élément
             tmpIt++;
