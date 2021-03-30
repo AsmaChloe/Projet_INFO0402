@@ -877,8 +877,7 @@ public:
          * Cette méthode retourne la valeur pointé par l'itérateur
          * @return
          */
-        T& operator*() const {
-            //std::cout<<"Currentchunk "<<currentChunk<<" - currentIndex "<<currentIndex<<std::endl;
+        T& operator*() const {                  //!!!!!!!!!!!!!!!!!! CASSER PR DEQUE VIDE!!!!!!!!!!!!!!!!!
             return *(*currentChunk + currentIndex);
         }
 
@@ -899,7 +898,7 @@ public:
          * @return
          */
         iterator operator--(int){
-            //Postincrémentation 
+            //Postincrémentation
             iterator tmpIt = *this;
             if (currentIndex == 0) currentChunk--;
             currentIndex = (currentIndex - 1) % chunkLength;
@@ -912,7 +911,7 @@ public:
          * @param other
          * @return
          */
-        bool operator<(const iterator& other)  const{
+        bool operator<(const iterator& other)  const{ //======> pb avec deque vide
             if(*currentChunk<*other.currentChunk)
                 return true;
             else if(*currentChunk>*other.currentChunk)
