@@ -330,28 +330,9 @@ public:
 
         //Creation d'un nouvel objet selon les paramètres
         deque<T> nvDeque(first,last);
-        std::cout<<"nvDeque.begin() :"<<*nvDeque.begin()<<std::endl;
-        //Nouveaux indices
-        tabLength=nvDeque.tabLength;
-        firstPtr=nvDeque.firstPtr;
-        lastPtr=nvDeque.lastPtr;
-        firstVal=nvDeque.firstVal;
-        lastVal=nvDeque.lastVal;
 
-        int j=firstVal;
-        int i=firstPtr;
-        nbElements=0;
-        while(nbElements<nvDeque.nbElements && i<tabLength) {
-            tab[i][j]=nvDeque.tab[i][j];
-            std::cout<<"tab["<<i<<"]["<<j<<"]:"<<tab[i][j]<<std::endl;
-            if (j == chunkLength - 1) {
-                j = 0;
-                i++;
-            }
-            j++;
-            nbElements++;
-        }
-
+        //Notre objet courant devient le nouvel objet
+        *this=nvDeque;
     }
 
     /**
