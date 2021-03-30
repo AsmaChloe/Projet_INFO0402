@@ -309,13 +309,8 @@ public:
         //Creation d'un nouvel objet selon les paramètres
         deque<T> nvDeque(count,value);
 
-        //Nouveaux indices
-        tabLength=nvDeque.tabLength;
-        nbElements=nvDeque.nbElements;
-        firstPtr=nvDeque.firstPtr;
-        lastPtr=nvDeque.lastPtr;
-        firstVal=nvDeque.firstVal;
-        lastVal=nvDeque.lastVal;
+        //Notre objet courant devient le nouvel objet
+        *this=nvDeque;
     }
 
     /**
@@ -346,13 +341,8 @@ public:
         //Creation d'un nouvel objet selon les paramètres
         deque<T> nvDeque(ilist);
 
-        //Nouveaux indices
-        tabLength=nvDeque.tabLength;
-        nbElements=nvDeque.nbElements;
-        firstPtr=nvDeque.firstPtr;
-        lastPtr=nvDeque.lastPtr;
-        firstVal=nvDeque.firstVal;
-        lastVal=nvDeque.lastVal;
+        //Notre objet courant devient le nouvel objet
+        *this=nvDeque;
     }
 
     /**
