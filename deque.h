@@ -853,8 +853,8 @@ public:
             return *(*currentChunk + currentIndex);
         }
 
-        //// birectionnel
 
+        //***********************BIDIRECTIONNEL***********************
         /**
          * Cette méthode recule l'itérateur d'un cran vers l'arrière. Elle est appelée lors d'une préincrémentation.
          */
@@ -877,13 +877,13 @@ public:
             return tmpIt;
         }
 
-        //// random access
+        //***********************RANDOM ACCESS***********************
         /**
          * Cette méthode retourne si l'itérateur courant est strictement inférieur à l'itérateur other.
          * @param other
          * @return
          */
-        bool operator<(const iterator& other)  const{ //======> pb avec deque vide
+        bool operator<(const iterator& other)  const{
             if(*currentChunk<*other.currentChunk)
                 return true;
             else if(*currentChunk>*other.currentChunk)
@@ -927,7 +927,7 @@ public:
          * @param n
          * @return
          */
-        iterator& operator+=(const int n){              //TEST QUOI FAIRE POUR DEPASSEMENT
+        iterator& operator+=(const int n){
             for(int i=0;i<n;i++)
                 this->operator++();
             return *this;
@@ -938,13 +938,20 @@ public:
          * @param n
          * @return
          */
-        iterator& operator-=(const int n){              //TEST QUOI FAIRE POUR DEPASSEMENT
+        iterator& operator-=(const int n){
             for(int i=0;i<n;i++)
                 this->operator--();
             return *this;
         }
-        // int& operator[](int n);
-        // const int& operator[](int n) const;
+
+        /**
+         * Cette méthode retourne le nieme élément du conteneur
+         * @param n
+         * @return
+         */
+        int& operator[](int n) {
+            return *(*this + n);
+        }
     };
 
     /**
@@ -965,10 +972,10 @@ public:
     iterator end() {
         if(firstVal==-1) return this->begin(); //Si le deque est vide, selon la document, begin()=end()
 
-        iterator tmpIt(this->begin());
-        for(int i=0;i<this->size();i++){ //On se déplace de la longueur du deque a partie du premier élément => on attérit un cran après le dernier élément
-            tmpIt++;
-        }
+        iterator tmpIt;
+        tmpIt.currentChunk = tab + lastPtr;
+        tmpIt.currentIndex = lastVal;
+        tmpIt++;
 
         return tmpIt;
     }
