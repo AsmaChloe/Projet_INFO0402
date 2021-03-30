@@ -318,7 +318,41 @@ public:
         lastVal=nvDeque.lastVal;
     }
 
-    template< class InputIt > void assign( InputIt first, InputIt last ) {}
+    /**
+     * Cette méthode remplit l'objet courant avec les valeurs de l'itérateur first jusqu'à l'itérateur last(exclu)
+     * @tparam InputIt
+     * @param first
+     * @param last
+     */
+    template< class InputIt > void assign( InputIt first, InputIt last ) {              //CASSE!!!!!!!!!!
+        //On vide l'objet courant
+        clear();
+
+        //Creation d'un nouvel objet selon les paramètres
+        deque<T> nvDeque(first,last);
+        std::cout<<"nvDeque.begin() :"<<*nvDeque.begin()<<std::endl;
+        //Nouveaux indices
+        tabLength=nvDeque.tabLength;
+        firstPtr=nvDeque.firstPtr;
+        lastPtr=nvDeque.lastPtr;
+        firstVal=nvDeque.firstVal;
+        lastVal=nvDeque.lastVal;
+
+        int j=firstVal;
+        int i=firstPtr;
+        nbElements=0;
+        while(nbElements<nvDeque.nbElements && i<tabLength) {
+            tab[i][j]=nvDeque.tab[i][j];
+            std::cout<<"tab["<<i<<"]["<<j<<"]:"<<tab[i][j]<<std::endl;
+            if (j == chunkLength - 1) {
+                j = 0;
+                i++;
+            }
+            j++;
+            nbElements++;
+        }
+
+    }
 
     /**
      * Cette méthode remplit l'objet courant avec les valeurs de la liste d'initialisation
@@ -478,7 +512,7 @@ public:
         push_back(valeur);
     }
 
-    template< class... Args > void emplace_back( Args&&... args ) {}
+    template< class... Args > void emplace_back( Args&&... args ) {}                /***************A FAIRE**************/
 
     /**
      * Cette méthode retire un élément à la fin du deque
@@ -547,7 +581,7 @@ public:
         push_front(valeur);
     }
 
-    template< class... Args > void emplace_front( Args&&... args ) {}
+    template< class... Args > void emplace_front( Args&&... args ) {}                        /***************A FAIRE**************/
 
     /**
      * Cette méthode retire le premier élément du conteneur

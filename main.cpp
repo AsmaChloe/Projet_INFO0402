@@ -30,11 +30,26 @@ int main() {
     std::cout<<"***************VRAI DEQUE***************"<<std::endl;
     for(auto it=dequeg.begin();it!=dequeg.end();it++)
         std::cout<<*it<<", ";
+
+    std::cout<<"\ndequeg.assign(dequeff.begin(), dequeff.end())\n";
+    dequeg.assign(dequeff.begin(), dequeff.end());
+
+    for(auto it=dequeg.begin();it!=dequeg.end();it++)
+        std::cout<<*it<<", ";
     std::cout<<"\n";
 
-    std::cout<<"***************MON DEQUE***************"<<std::endl;
+    std::cout<<"***************MON DEQUE***************"<<std::endl; //=>CASSE !!!!!!!!!!!
     for(auto it=deque7.begin();it!=deque7.end();it++)
         std::cout<<*it<<", ";
+
+    std::cout<<"\ndeque7.assign(deque66.begin(), dequeff.end())\n";
+    deque7.assign(dequeff.begin(), dequeff.end());
+
+    for(auto it=deque7.begin();it!=deque7.end();it++)
+        std::cout<<*it<<", ";
+    std::cout<<"\n";
+    for(int it=0;it<deque7.size();it++)
+        std::cout<<deque7[it]<<", ";
     std::cout<<"\n";
 
     // assignation
