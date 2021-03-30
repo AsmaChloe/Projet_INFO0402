@@ -838,7 +838,7 @@ public:
          * @return
          */
         iterator& operator++() {  //======> A vérifier sur documention si operator++ fait attention sur les nouveaux indices sont valides ou non
-            //pre increment
+            //Préincrémentation
             if (currentIndex == (chunkLength - 1)) currentChunk++;
             currentIndex = (currentIndex + 1) % chunkLength;
             return *this;
@@ -850,7 +850,11 @@ public:
          * @return
          */
         iterator operator++(int) { //======> A vérifier sur documention si operator++ fait attention sur les nouveaux indices sont valides ou non
-            return operator++();
+            //Postincrémentation => on retourne le pointeur actuel et ensuite on l'incrémente
+            iterator tmpIt = *this;
+            if (currentIndex == (chunkLength - 1)) currentChunk++;
+            currentIndex = (currentIndex + 1) % chunkLength;
+            return tmpIt;
         }
 
         /**
@@ -884,7 +888,7 @@ public:
          * Cette méthode recule l'itérateur d'un cran vers l'arrière. Elle est appelée lors d'une préincrémentation.
          */
         iterator& operator--(){
-            //Pre incrémentation
+            //Préincrémentation
             if (currentIndex == 0) currentChunk--;
             currentIndex = (currentIndex - 1) % chunkLength;
             return *this;
@@ -895,8 +899,11 @@ public:
          * @return
          */
         iterator operator--(int){
-            //Post incrémentation
-            return operator--();
+            //Postincrémentation 
+            iterator tmpIt = *this;
+            if (currentIndex == 0) currentChunk--;
+            currentIndex = (currentIndex - 1) % chunkLength;
+            return tmpIt;
         }
 
         //// random access
