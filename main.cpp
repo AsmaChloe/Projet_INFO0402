@@ -83,21 +83,22 @@ int main() {
     //VRAI DEQUE
     std::cout<<"***************VRAI DEQUE***************\n";
 
-    std::cout<<"Voici dequeff : "<<std::endl;
+    /*std::cout<<"Voici dequeff : "<<std::endl;
     for (auto it = dequeff.begin(); it != dequeff.end(); it++) {
         std::cout << *it << ", ";
-    }
-
-    std::cout<<"\n dequeff[3]="<<dequeff[3]<<std::endl;
+    }*/
+    std::deque<A>::iterator ita;
+    std::cout<<&ita<<std::endl;
 
     //MON DEQUE
     std::cout<<"\n\n***************MON DEQUE***************\n";
 
-    std::cout<<"\n\nVoici deque66 : "<<std::endl;
+    /*std::cout<<"\n\nVoici deque66 : "<<std::endl;
     for (auto it66 = deque66.begin(); it66 != deque66.end(); it66++) {
         std::cout << *it66 << ", ";
-    }
-    std::cout<<"\n deque66[3]="<<deque66[3]<<std::endl;
+    }*/
+    deque<A>::iterator it1;
+    std::cout<<&it1<<std::endl;
 
      // iterateur
      /*

@@ -319,7 +319,7 @@ public:
      * @param first
      * @param last
      */
-    template< class InputIt > void assign( InputIt first, InputIt last ) { 
+    template< class InputIt > void assign( InputIt first, InputIt last ) {
         //On vide l'objet courant
         clear();
 
@@ -777,7 +777,7 @@ public:
         return !operator<(lhs,rhs);
     }
 
-    // iterateur classique
+    //**********************************IERATEUR CLASSIQUES**********************************
     class iterator {
     public:
         //Attributs
@@ -787,7 +787,7 @@ public:
         /**
          * Constructeur par défaut
          */
-        explicit iterator() {}
+        explicit iterator() : currentChunk(nullptr), currentIndex(0) {}
 
         /**
          * Constructeur par copie
@@ -980,7 +980,7 @@ public:
         return tmpIt;
     }
 
-    // iterateur constant
+    //**********************************IERATEUR CONSTANTS**********************************
     class const_iterator {
     public:
         explicit const_iterator() {}
