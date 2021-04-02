@@ -81,24 +81,88 @@ int main() {
 
     //**************************************ITERATEUR**************************************
     //VRAI DEQUE
-    std::cout<<"***************VRAI DEQUE***************\n";
+    std::cout<<"***************VRAI DEQUE - version const ***************\n";
+    const std::deque<A> constdequeff=dequeff;
 
-    /*std::cout<<"Voici dequeff : "<<std::endl;
-    for (auto it = dequeff.begin(); it != dequeff.end(); it++) {
+    std::deque<A>::const_iterator itff=constdequeff.begin();
+    std::deque<A>::const_iterator itffBis(itff);
+
+    std::cout<<"Voici constdequeff : "<<std::endl;
+    for (auto it = constdequeff.begin(); it != constdequeff.end(); it++) {
         std::cout << *it << ", ";
-    }*/
-    std::deque<A>::iterator ita;
-    std::cout<<&ita<<std::endl;
+    }
 
+    //Operateur ++ --
+    std::cout<<"\n\nPremier élément : "<<*(itffBis++)<<std::endl;
+    std::cout<<"Deuxieme élément : "<<*itffBis<<std::endl;
+    std::cout<<"Troisieme élément : "<<*(++itffBis)<<std::endl;
+    std::cout<<"Troisieme élément : "<<*(itffBis--)<<std::endl;
+    std::cout<<"Deuxieme élément : "<<*(itffBis)<<std::endl;
+    std::cout<<"Premier élément : "<<*(--itffBis)<<std::endl;
+
+
+    //Comparaison
+    std::cout<<"\nitff : "<<*itff<<" - itffBis : "<<*itffBis<<std::endl;
+    std::cout<<"itff == itffBis ? "<<(itff == itffBis)<<std::endl;
+    std::cout<<"itff != itffBis ? "<<(itff != itffBis)<<std::endl;
+
+    //Random access
+    std::cout<<"itff < itffBis ? "<<(itff < itffBis)<<std::endl;
+    std::cout<<"itff <= itffBis ? "<<(itff <= itffBis)<<std::endl;
+    std::cout<<"itff > itffBis ? "<<(itff > itffBis)<<std::endl;
+    std::cout<<"itff >= itffBis ? "<<(itff >= itffBis)<<std::endl;
+
+    //+= -=
+    std::cout<<"\nitff : "<<*itff<<"\n ...itff+=3..."<<std::endl;
+    itff+=3;
+    std::cout<<"itff : "<<*itff<<"\n...itff-=3..."<<std::endl;
+    itff-=3;
+    std::cout<<"itf : "<<*itff<<std::endl;
+
+    //Operateur []
+    std::cout<<"itff[3]="<<itff[3]<<std::endl;
+
+    std::cout<<"\n\n"<<std::endl;
     //MON DEQUE
-    std::cout<<"\n\n***************MON DEQUE***************\n";
+    std::cout<<"***************MON DEQUE - version const***************\n";
+    const deque<A> constdeque66=deque66;
 
-    /*std::cout<<"\n\nVoici deque66 : "<<std::endl;
-    for (auto it66 = deque66.begin(); it66 != deque66.end(); it66++) {
+    deque<A>::const_iterator it66=constdeque66.begin();
+    deque<A>::const_iterator it66Bis(it66);
+
+    std::cout<<"Voici constdeque66 : "<<std::endl;
+    for (auto it66 = constdeque66.begin(); it66 != constdeque66.end(); it66++) {
         std::cout << *it66 << ", ";
-    }*/
-    deque<A>::iterator it1;
-    std::cout<<&it1<<std::endl;
+    }
+
+    //Operateur ++ --
+    std::cout<<"\n\nPremier élément : "<<*(it66Bis++)<<std::endl;
+    std::cout<<"Deuxieme élément : "<<*it66Bis<<std::endl;
+    std::cout<<"Troisieme élément : "<<*(++it66Bis)<<std::endl;
+    std::cout<<"Troisieme élément : "<<*(it66Bis--)<<std::endl;
+    std::cout<<"Deuxieme élément : "<<*(it66Bis)<<std::endl;
+    std::cout<<"Premier élément : "<<*(--it66Bis)<<std::endl;
+
+    //Comparaison
+    std::cout<<"\nit66 : "<<*it66<<" - it66Bis : "<<*it66Bis<<std::endl;
+    std::cout<<"it66 == it66Bis ? "<<(it66 == it66Bis)<<std::endl;
+    std::cout<<"it66 != it66Bis ? "<<(it66 != it66Bis)<<std::endl;
+
+    //Random access
+    std::cout<<"it66 < it66Bis ? "<<(it66 < it66Bis)<<std::endl;
+    std::cout<<"it66 <= it66Bis ? "<<(it66 <= it66Bis)<<std::endl;
+    std::cout<<"it66 > it66Bis ? "<<(it66 > it66Bis)<<std::endl;
+    std::cout<<"it66 >= it66Bis ? "<<(it66 >= it66Bis)<<std::endl;
+
+    //+= -=
+    std::cout<<"\nit66 : "<<*it66<<"\n ...it66+=3..."<<std::endl;
+    it66+=3;
+    std::cout<<"it66 : "<<*it66<<"\n...it66-=3..."<<std::endl;
+    it66-=3;
+    std::cout<<"it66 : "<<*it66<<std::endl;
+
+    //Operateur []                  ERREUR
+    //std::cout<<"it66[3]="<<it66[3]<<std::endl;
 
      // iterateur
      /*

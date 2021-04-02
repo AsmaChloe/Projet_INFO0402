@@ -808,7 +808,7 @@ public:
          * Cette méthode déplace l'itérateur d'un cran vers l'avant. Elle est appelée lors d'une préincrémentation.
          * @return
          */
-        iterator& operator++() {  //======> A vérifier sur documention si operator++ fait attention sur les nouveaux indices sont valides ou non
+        iterator& operator++() {
             //Préincrémentation
             if (currentIndex == (chunkLength - 1)) currentChunk++;
             currentIndex = (currentIndex + 1) % chunkLength;
@@ -841,6 +841,8 @@ public:
 
         /**
          * Cette méthode retourn si deux itérateurs ne sont pas égaux, c'est à dire s'ils ne pointent pas sur le même élément
+         * @param other
+         * @return
          */
         bool operator!=(iterator other) const { return !operator==(other); }
 
@@ -950,7 +952,8 @@ public:
          * @return
          */
         int& operator[](int n) {
-            return *(*this + n);
+            *this+=n-1;
+            return *this;
         }
     };
 
@@ -983,31 +986,208 @@ public:
     //**********************************IERATEUR CONSTANTS**********************************
     class const_iterator {
     public:
-        explicit const_iterator() {}
-        const_iterator(const const_iterator&) {}
-        const_iterator(const iterator&) {}
-        const_iterator& operator++() { return *this; }
-        const_iterator operator++(int) { return *this; }
-        bool operator==(const_iterator other) const { return false; }
-        bool operator!=(const_iterator other) const { return false; }
-        const T& operator*() const { return dummy; };
-        //// birectionnel
-        // iterator& operator--();
-        // iterator operator--(int);
-        //// random access
-        // bool operator<(const iterator&)  const;
-        // bool operator<=(const iterator&) const;
-        // bool operator>(const iterator&)  const;
-        // bool operator>=(const iterator&) const;
-        // iterator& operator+=(const int n)
-        // iterator& operator-=(const int n)
-        // int& operator[](int n);
-        // const int& operator[](int n) const;
+        //Attributs
+        T** currentChunk; // pointeur sur le chunk courant
+        int currentIndex; // l'indice de l'élément courant dans le chunk courant
+
+        /**
+        * Constructeur par défaut
+         */
+        explicit const_iterator() : currentChunk(nullptr), currentIndex(0) {}
+
+        /**
+         * Constructeur par copie d'un const_iterator
+         * @param other
+         */
+        const_iterator(const const_iterator& other) : currentChunk(other.currentChunk), currentIndex(other.currentIndex){}
+
+        /**
+         * Constructeur par copie d'un iterator
+         * @param other
+         */
+        const_iterator(const iterator& other) : currentChunk(other.currentChunk), currentIndex(other.currentIndex){}
+
+       /**
+        * Cette méthode déplace l'itérateur d'un cran vers l'avant. Elle est appelée lors d'une préincrémentation.
+        * @return
+        */
+        const_iterator& operator++() {
+            //Préincrémentation
+            if (currentIndex == (chunkLength - 1)) currentChunk++;
+            currentIndex = (currentIndex + 1) % chunkLength;
+            return *this;
+        }
+
+        /**
+         * Cette méthode déplace l'itérateur d'un crans vers l'avant. Elle est appelée lors d'une postincrémentation.
+         * @return
+         */
+        const_iterator operator++(int)  {
+            //Postincrémentation => on retourne le pointeur actuel et ensuite on l'incrémente
+            const_iterator tmpIt = *this;
+            if (currentIndex == (chunkLength - 1)) currentChunk++;
+            currentIndex = (currentIndex + 1) % chunkLength;
+            return tmpIt;
+        }
+
+        /**
+         * Cette méthode retourne si deux itérateurs sont égaux, c'est à dire s'ils pointent sur le même élément
+         * @param other
+         * @return
+         */
+        bool operator==(const_iterator other) const {
+            if(currentChunk!=other.currentChunk || currentIndex!=other.currentIndex)
+                return false;
+            return true;
+        }
+
+        /**
+         * Cette méthode retourn si deux itérateurs ne sont pas égaux, c'est à dire s'ils ne pointent pas sur le même élément
+         * @param other
+         * @return
+         */
+        bool operator!=(const_iterator other) const { return !operator==(other); }
+
+        /**
+         * Cette méthode retourne la valeur pointé par l'itérateur
+         * @return
+         */
+        const T& operator*() const {
+            if (currentIndex==-1) return dummy;
+            return *(*currentChunk + currentIndex);
+        };
+
+        //***********************BIDIRECTIONNEL***********************
+        /**
+        * Cette méthode recule l'itérateur d'un cran vers l'arrière. Elle est appelée lors d'une préincrémentation.
+        */
+        const_iterator& operator--(){
+            //Préincrémentation
+            if (currentIndex == 0) currentChunk--;
+            currentIndex = (currentIndex - 1) % chunkLength;
+            return *this;
+        }
+        /**
+        * Cette méthode recule l'itérateur d'un cran vers l'arrière. Elle est appelée lors d'une postincrémentation.
+        * @return
+        */
+        const_iterator operator--(int){
+            //Postincrémentation
+            const_iterator tmpIt = *this;
+            if (currentIndex == 0) currentChunk--;
+            currentIndex = (currentIndex - 1) % chunkLength;
+            return tmpIt;
+        }
+
+        //***********************RANDOM ACCESS***********************
+
+        bool operator<(const const_iterator& other)  const{
+            if(*currentChunk<*other.currentChunk)
+                return true;
+            else if(*currentChunk>*other.currentChunk)
+                return  false;
+            else
+            if(currentIndex<other.currentIndex)
+                return true;
+            else
+                return false;
+        }
+
+        /**
+         * Cette méthode retourne si l'itérateur courant est inférieur ou égal à l'itérateur other.
+         * @param other
+         * @return
+         */
+        bool operator<=(const const_iterator& other) const{
+            return operator<(other) || operator==(other);
+        }
+
+        /**
+         * Cette méthode retourne si l'itérateur courant est inférieur ou égal à l'itérateur other.
+         * @param other
+         * @return
+         */
+        bool operator>(const const_iterator& other)  const{
+            return operator<(other) || operator==(other);
+        }
+
+        /**
+         * Cette méthode retourne si l'itérateur courant est supérieur ou égal à l'itérateur other.
+         * @param other
+         * @return
+         */
+        bool operator>=(const const_iterator& other) const{
+            return !operator<(other);
+        }
+
+        /**
+         * Cette méthode avance l'itérateur de n crans.
+         * @param n
+         * @return
+         */
+        const_iterator& operator+=(const int n){
+            for(int i=0;i<n;i++)
+                this->operator++();
+            return *this;
+        }
+
+        /**
+         * Cette méthode recule l'itérateur de n crans.
+         * @param n
+         * @return
+         */
+        const_iterator& operator-=(const int n){
+            for(int i=0;i<n;i++)
+                this->operator--();
+            return *this;
+        }
+
+        /**
+         * Cette méthode retourne le nieme élément du conteneur
+         * @param n
+         * @return
+         */
+        int& operator[](int n) {
+            *this+=n;
+            return *(*this);
+        }
+
+        /**
+         * Cette méthode retourne le nieme élément du conteneur. Element de type const.
+         * @param n
+         * @return
+         */
+        const int& operator[](int n) const{
+            const int res=operator[](n);
+            return res;
+        }
     };
     const_iterator cbegin() { return const_iterator(); }
     const_iterator cend() { return const_iterator(); }
-    const_iterator begin() const { return const_iterator(); }
-    const_iterator end() const { return const_iterator(); }
+
+    /**
+     * Cette fonction retourne un itérateur pointant sur le premier élément du conteneur
+     */
+    const_iterator begin() const {
+        const_iterator tmpIt;
+        tmpIt.currentChunk = tab + firstPtr;
+        tmpIt.currentIndex = firstVal;
+        return tmpIt;
+    }
+    /**
+     * Cette fonction retourne un itérateur pointant sur l'élément après le dernier élément du conteneur
+     * @return
+     */
+    const_iterator end() const {
+        if(firstVal==-1) return this->begin(); //Si le deque est vide, selon la document, begin()=end()
+
+        iterator tmpIt;
+        tmpIt.currentChunk = tab + lastPtr;
+        tmpIt.currentIndex = lastVal;
+        tmpIt++;
+
+        return tmpIt;
+    }
 
     // methode necessitant des itérateurs
     iterator insert( const_iterator pos, const T& value ) { return iterator(); }
