@@ -528,6 +528,7 @@ public:
             // Le nouveau chunk
             tab[firstPtr] = new T[chunkLength];
             firstVal=chunkLength-1;
+            lastPtr++;
         }
         else{
             if(firstVal==0){ //Si le premier chunk est complet et qu'il n'est pas pointé par tab[0]
@@ -606,7 +607,7 @@ public:
                 //Si il y en a, on reprend les chunk qui ne changent pas, non coupés
                 for(i=firstPtr ; i<firstPtr+count/chunkLength ; i++){
                     nvTab[i] = tab[i];
-                    nbElements+=chunkLength;
+                    nbElements+=chunkLength;                //====> here pb
                 }
 
                 //Si il y en a, on ajoute les éléments du chunk coupé : le chunk firstPtr+count/chunkLength

@@ -48,9 +48,14 @@ int main() {
     deque4.push_front(6);
     // avec rvalue: impossible à tester pour T=int
 
+
     // pop
     deque4.pop_back();
+    for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
+    std::cout << std::endl;
     deque4.pop_front();
+    for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
+    std::cout << std::endl;
 
     // tests
     std::cout
@@ -61,7 +66,7 @@ int main() {
             << (deque4 >  deque5) << ", "
             << (deque4 == deque5) << std::endl;
 
-    // iterateur
+    // iterateurs
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
     std::cout << std::endl;
 
