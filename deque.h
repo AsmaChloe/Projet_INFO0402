@@ -216,8 +216,9 @@ public:
      */
     ~deque() {
         if(tab!=nullptr) {
-            for (int i = 0; i < tabLength; i++) {
-                if (tab[i] != nullptr) delete[] tab[i];
+            for (int i = firstPtr; i <= lastPtr; i++) {
+                if (tab[i] != nullptr)
+                    delete[] tab[i];
             }
         }
         delete[] tab;
@@ -625,6 +626,7 @@ public:
             }
             else{
                 //On reprend tous les chunks
+                if(firstPtr!=-1 && lastPtr!=-1)
                 for(i=firstPtr ; i<=lastPtr ; i++){
                     nvTab[i] = tab[i];
                 }
