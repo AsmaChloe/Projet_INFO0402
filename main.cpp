@@ -82,7 +82,7 @@ int main() {
     //**************************************ITERATEUR**************************************
     //VRAI DEQUE
     std::cout<<"***************VRAI DEQUE - version const ***************\n";
-    std::deque<A> constdequeff=dequeff;
+    const std::deque<A> constdequeff=dequeff;
 
     std::deque<A>::const_iterator itff=constdequeff.begin();
     std::deque<A>::const_iterator itffBis(itff);
@@ -125,7 +125,7 @@ int main() {
     std::cout<<"\n\n"<<std::endl;
     //MON DEQUE
     std::cout<<"***************MON DEQUE - version const***************\n";
-    deque<A> constdeque66=deque66;
+    const deque<A> constdeque66=deque66;
 
     deque<A>::const_iterator it66=constdeque66.begin();
     deque<A>::const_iterator it66Bis(it66);

@@ -1167,7 +1167,7 @@ public:
      * Cette fonction retourne un itérateur constant pointant sur le premier élément du conteneur
      * @return
      */
-    const_iterator cbegin() {
+    const_iterator cbegin() const{
         const_iterator tmpIt;
         tmpIt.currentChunk = tab + firstPtr;
         tmpIt.currentIndex = firstVal;
@@ -1178,7 +1178,7 @@ public:
      * Cette fonction retourne un itérateur constant pointant sur l'élément après le dernier élément du conteneur
      * @return
      */
-    const_iterator cend() {
+    const_iterator cend() const{
         if(firstVal==-1) return this->cbegin(); //Si le deque est vide, selon la document, cbegin()=cend()
 
         iterator tmpIt;
