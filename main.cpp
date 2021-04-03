@@ -4,8 +4,8 @@
 #include <deque>
 
 int main() {
-    const A a=2;
-    const A aBis=4;
+    A a=2;
+     A aBis=4;
     // constructions
     deque<A>   deque1;                                       // défaut
     deque<A>   deque2(13);                             // count
@@ -82,13 +82,13 @@ int main() {
     //**************************************ITERATEUR**************************************
     //VRAI DEQUE
     std::cout<<"***************VRAI DEQUE - version const ***************\n";
-    const std::deque<A> constdequeff=dequeff;
+    std::deque<A> constdequeff=dequeff;
 
     std::deque<A>::const_iterator itff=constdequeff.begin();
     std::deque<A>::const_iterator itffBis(itff);
 
     std::cout<<"Voici constdequeff : "<<std::endl;
-    for (auto it = constdequeff.begin(); it != constdequeff.end(); it++) {
+    for (auto it = constdequeff.cbegin(); it != constdequeff.cend(); it++) {
         std::cout << *it << ", ";
     }
 
@@ -125,13 +125,13 @@ int main() {
     std::cout<<"\n\n"<<std::endl;
     //MON DEQUE
     std::cout<<"***************MON DEQUE - version const***************\n";
-    const deque<A> constdeque66=deque66;
+    deque<A> constdeque66=deque66;
 
     deque<A>::const_iterator it66=constdeque66.begin();
     deque<A>::const_iterator it66Bis(it66);
 
     std::cout<<"Voici constdeque66 : "<<std::endl;
-    for (auto it66 = constdeque66.begin(); it66 != constdeque66.end(); it66++) {
+    for (auto it66 = constdeque66.cbegin(); it66 != constdeque66.cend(); it66++) {
         std::cout << *it66 << ", ";
     }
 

@@ -1162,32 +1162,42 @@ public:
             return res;
         }
     };
-    const_iterator cbegin() { return const_iterator(); }
-    const_iterator cend() { return const_iterator(); }
 
     /**
-     * Cette fonction retourne un itérateur pointant sur le premier élément du conteneur
+     * Cette fonction retourne un itérateur constant pointant sur le premier élément du conteneur
+     * @return
      */
-    const_iterator begin() const {
+    const_iterator cbegin() {
         const_iterator tmpIt;
         tmpIt.currentChunk = tab + firstPtr;
         tmpIt.currentIndex = firstVal;
         return tmpIt;
     }
+
     /**
-     * Cette fonction retourne un itérateur pointant sur l'élément après le dernier élément du conteneur
+     * Cette fonction retourne un itérateur constant pointant sur l'élément après le dernier élément du conteneur
      * @return
      */
-    const_iterator end() const {
-        if(firstVal==-1) return this->begin(); //Si le deque est vide, selon la document, begin()=end()
+    const_iterator cend() {
+        if(firstVal==-1) return this->cbegin(); //Si le deque est vide, selon la document, cbegin()=cend()
 
         iterator tmpIt;
         tmpIt.currentChunk = tab + lastPtr;
         tmpIt.currentIndex = lastVal;
         tmpIt++;
 
-        return tmpIt;
-    }
+        return tmpIt; }
+
+    /**
+     * Cette fonction retourne un itérateur constant pointant sur le premier élément du conteneur
+     */
+    const_iterator begin() const { return this->cbegin();}
+
+    /**
+     * Cette fonction retourne un itérateur constant pointant sur l'élément après le dernier élément du conteneur
+     * @return
+     */
+    const_iterator end() const { return cend();}
 
     // methode necessitant des itérateurs
     iterator insert( const_iterator pos, const T& value ) { return iterator(); }
