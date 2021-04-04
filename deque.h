@@ -199,13 +199,15 @@ public:
      * Destructeur
      */
     ~deque() {
-        if(tab!=nullptr && firstPtr!=-1 && lastPtr!=-1) {
+        if(firstPtr!=-1 || lastPtr!=-1) {
             for (int i = firstPtr; i <= lastPtr; i++) {
                 if (tab[i] != nullptr)
                     delete[] tab[i];
+                tab[i]= nullptr;
             }
         }
-        delete[] tab;
+        if(tab!=nullptr) delete[] tab;
+        tab= nullptr;
     }
 
     /**
@@ -442,7 +444,9 @@ public:
         push_back(valeur);
     }
 
-    template< class... Args > void emplace_back( Args&&... args ) {}                /***************A FAIRE**************/
+    template< class... Args > void emplace_back( Args&&... args ) {
+        push_back(args...);
+    }                /***************A FAIRE**************/
 
     /**
      * Cette méthode retire un élément à la fin du deque
@@ -512,7 +516,9 @@ public:
         push_front(valeur);
     }
 
-    template< class... Args > void emplace_front( Args&&... args ) {}                        /***************A FAIRE**************/
+    template< class... Args > void emplace_front( Args&&... args ) {
+        push_front(args...);
+    }                        /***************A FAIRE**************/
 
     /**
      * Cette méthode retire le premier élément du conteneur

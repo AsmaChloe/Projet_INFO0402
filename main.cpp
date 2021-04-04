@@ -1,4 +1,5 @@
 #include <iostream>
+#include <deque>
 #include "classA.h"
 #include "deque.h"
 
@@ -14,7 +15,7 @@ int main() {
     deque<A>   deque6( {1,2,3,4,5,6} );
 
     // assignation
-    deque1 = deque6;
+    /*deque1 = deque6;
     deque2 = std::move(deque1);
     deque3 = { 4, 5, 6, 7};
 
@@ -37,7 +38,7 @@ int main() {
             << deque6.empty() << ", "
             << deque6.size()  << std::endl;
 
-    // clear
+    // clear*/
     deque5.clear();
     deque5.resize(10);
     deque4.resize(6,4);
@@ -53,7 +54,7 @@ int main() {
     deque4.pop_front();
 
     // tests
-    std::cout
+    /*std::cout
             << (deque4 == deque5) << ", "
             << (deque4 != deque5) << ", "
             << (deque4 <  deque5) << ", "
@@ -72,21 +73,40 @@ int main() {
     deque<A>::iterator it5 = deque1.insert( it4, {5,4,3,2,1,0} );
 
     deque<A>::iterator it6 = deque1.erase(it5);
-    deque1.erase(it6, deque1.cend() );
+    deque1.erase(it6, deque1.cend() );*/
 
 
     // swap
-    std::cout<<"\ndeque4 avant swap"<<std::endl;
+    std::cout<<"\ndeque4 avant les swap"<<std::endl;
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
     std::cout << std::endl;
 
-    deque4={1,2,3,4};
+     std::cout<<"\ndeque5 avant les swap"<<std::endl;
+    for(auto it=deque5.begin(); it!=deque5.end(); ++it) std::cout << *it << ",";
+    std::cout << std::endl;
 
-    std::cout<<"\ndeque4 apres swap"<<std::endl;
+    deque4.swap(deque5);
+
+
+    std::cout<<"\ndeque4 entre les swap"<<std::endl;
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
     std::cout << std::endl;
 
-    swap(deque1,deque2);
+    std::cout<<"\ndeque5 entre les swap"<<std::endl;
+    for(int i=0; i<deque5.size(); ++i) std::cout << deque5[i] << ",";
+    std::cout << std::endl;
+
+    /*swap(deque4,deque5);
+
+    std::cout<<"\ndeque4 apres les swap"<<std::endl;
+    for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
+    std::cout << std::endl;
+
+    std::cout<<"\ndeque5 apres les swap"<<std::endl;
+    for(auto it=deque5.begin(); it!=deque5.end(); ++it) std::cout << *it << ",";
+    std::cout << std::endl;
+
+    swap(deque1,deque2);*/
 
 
     return 0;
