@@ -25,7 +25,7 @@ int main() {
 
     // front/back
     const deque<A>&deque6const = deque6;
-    /*std::cout
+    std::cout
             << deque6.at(0) << ","
             << deque6const.at(0) << ","
             << deque6[1] << ","
@@ -35,7 +35,7 @@ int main() {
             << deque6.back()  << ", "
             << deque6const.back()  << ", "
             << deque6.empty() << ", "
-            << deque6.size()  << std::endl;*/
+            << deque6.size()  << std::endl;
 
     // clear
     deque5.clear();
@@ -49,11 +49,11 @@ int main() {
     // avec rvalue: impossible à tester pour T=int
 
     // pop
-    //deque4.pop_back();
-    //deque4.pop_front();
+    deque4.pop_back();
+    deque4.pop_front();
 
     // tests
-    /*std::cout
+    std::cout
             << (deque4 == deque5) << ", "
             << (deque4 != deque5) << ", "
             << (deque4 <  deque5) << ", "
@@ -63,7 +63,7 @@ int main() {
 
     // iterateurs
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
-    std::cout << std::endl;*/
+    std::cout << std::endl;
 
     deque<A>::iterator it1 = deque1.insert( deque1.cbegin(), 7 );
     // avec rvalue: impossible à tester pour T=int
@@ -80,19 +80,12 @@ int main() {
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
     std::cout << std::endl;
 
-    std::cout<<"deque5 avant swap"<<std::endl;
-    for(auto it=deque5.begin(); it!=deque5.end(); ++it) std::cout << *it << ",";
-    std::cout << std::endl;
-
     deque4={1,2,3,4};
 
     std::cout<<"\ndeque4 apres swap"<<std::endl;
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
     std::cout << std::endl;
 
-    std::cout<<"deque5 apres swap"<<std::endl;
-    for(auto it=deque5.begin(); it!=deque5.end(); ++it) std::cout << *it << ",";
-    std::cout << std::endl;
     swap(deque1,deque2);
 
 

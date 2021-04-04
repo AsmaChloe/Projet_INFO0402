@@ -27,30 +27,14 @@ public:
     /**
      * Constructeur par défaut. Construit un conteneur vide.
      */
-    deque() :tabLength(0), nbElements(0),firstPtr(-1),lastPtr(-1),firstVal(-1),lastVal(-1) {
-        tab=new T*[tabLength];
-    }
+    deque() :tabLength(0), nbElements(0),firstPtr(-1),lastPtr(-1),firstVal(-1),lastVal(-1), tab(nullptr) {}
 
     /**
      * Constructeur qui crée le conteneur avec count instances
      * @param count
      */
-    explicit deque(size_type count) : nbElements(count) {
-        tabLength=count/chunkLength;
-        if(tabLength*chunkLength<count)
-            tabLength++;
-
-        //Initialisation du tableau
-        tab=new T*[tabLength];
-        for(int i=0;i<tabLength;i++){
-            tab[i]=new T[chunkLength];
-        }
-
-        //Initialisation des indices
-        firstPtr=0;
-        lastPtr=(tabLength>0 ? tabLength-1 : 0);
-        firstVal=-1;
-        lastVal=-1;
+    explicit deque(size_type count) {
+        deque(count,dummy);
     }
 
     /**
@@ -253,21 +237,9 @@ public:
      * @return
      */
     deque& operator=( deque&& other ) {
-        int i, j, k=0;
-
-        //On ajuste la taille de l'objet
-        this->resize(other.nbElements);
-
-
-        //On copie les valeurs de other
-        if(firstPtr!=-1) {
-            for (i = firstPtr; i <= lastPtr; i++) {
-                for (j = 0; j < chunkLength; j++) {
-                    tab[i][j] = other[k];
-                    k++;
-                }
-            }
-        }
+        clear();
+        deque<T> tmp_deque(other);
+        *this = tmp_deque;
         return *this;
     }
 
@@ -277,28 +249,11 @@ public:
      * @return
      */
     deque& operator=( std::initializer_list<T> ilist ) {
-        int i, j, count=0;
-
-        std::cout<<"Avant resize : "<<tabLength<<" "<<nbElements<<" "<<firstPtr<<" "<<lastPtr<<" "<<firstVal<<" "<<lastVal<<std::endl;
-        //On redimensionne le deque selon la liste
-        this->resize(ilist.size());
-
-        std::cout<<"Apres resize : "<<tabLength<<" "<<nbElements<<" "<<firstPtr<<" "<<lastPtr<<" "<<firstVal<<" "<<lastVal<<std::endl;
-
-        //Remplissage
-        i=0;
-        j=0;
-        for(auto &element : ilist){
-            if(count % chunkLength == 0 && count != 0) {
-                i++;
-                j = 0;
-            }
-            tab[i][j]=element;
-            count++;
-            j++;
-        }
-
+        clear();
+        deque<T> tmp_deque(ilist);
+        *this = tmp_deque;
         return *this;
+
     }
 
     /**
@@ -456,7 +411,7 @@ public:
      */
     void clear() {
         //On vide
-        if(firstPtr!=-1 && lastPtr==-1){
+        if(firstPtr!=-1 && lastPtr!=-1){
             for (int i = firstPtr; i <= lastPtr; i++)
                 if (tab[i] != nullptr) delete[] tab[i];
             if (tab != nullptr)
