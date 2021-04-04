@@ -230,18 +230,17 @@ public:
      * @return
      */
     deque& operator=( const deque& other ) {
-        int i, j;
+        int i, j,k=0;
 
         //On réalloue l'objet
         this->resize(other.nbElements);
 
         //On copie les valeurs de other
-        tab=new T*[tabLength];
         if(firstPtr!=-1) {
             for (i = firstPtr; i <= lastPtr; i++) {
-                tab[i] = new T[chunkLength];
                 for (j = 0; j < chunkLength; j++) {
-                    tab[i][j] = other.tab[i][j];
+                    tab[i][j] = other[k];
+                    k++;
                 }
             }
         }
@@ -256,8 +255,9 @@ public:
     deque& operator=( deque&& other ) {
         int i, j;
 
-        //On réalloue l'objet
+        //On ajuste la taille de l'objet
         this->resize(other.nbElements);
+
 
         //On copie les valeurs de other
         tab=new T*[tabLength];

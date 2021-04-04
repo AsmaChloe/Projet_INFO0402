@@ -48,16 +48,9 @@ int main() {
     deque4.push_front(6);
     // avec rvalue: impossible à tester pour T=int
 
-
     // pop
-    deque4.push_back(2);
-    // avec rvalue: impossible à tester pour T=int
-    deque4.push_front(6);
-    // avec rvalue: impossible à tester pour T=int
-
-    // pop
-    deque4.pop_back();
-    deque4.pop_front();
+    //deque4.pop_back();
+    //deque4.pop_front();
 
     // tests
     /*std::cout
@@ -66,11 +59,11 @@ int main() {
             << (deque4 <  deque5) << ", "
             << (deque4 <= deque5) << ", "
             << (deque4 >  deque5) << ", "
-            << (deque4 == deque5) << std::endl;*/
+            << (deque4 == deque5) << std::endl;
 
     // iterateurs
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
-    std::cout << std::endl;
+    std::cout << std::endl;*/
 
     deque<A>::iterator it1 = deque1.insert( deque1.cbegin(), 7 );
     // avec rvalue: impossible à tester pour T=int
@@ -91,7 +84,7 @@ int main() {
     for(auto it=deque5.begin(); it!=deque5.end(); ++it) std::cout << *it << ",";
     std::cout << std::endl;
 
-    deque4.swap(deque5);                    //erreur voir, le output de deque5
+    deque4.swap(deque5);
 
     std::cout<<"\ndeque4 apres swap"<<std::endl;
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
