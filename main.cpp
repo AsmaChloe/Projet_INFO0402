@@ -84,7 +84,7 @@ int main() {
     for(auto it=deque5.begin(); it!=deque5.end(); ++it) std::cout << *it << ",";
     std::cout << std::endl;
 
-    deque4.swap(deque5);
+    deque4={1,2,3,4};
 
     std::cout<<"\ndeque4 apres swap"<<std::endl;
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";

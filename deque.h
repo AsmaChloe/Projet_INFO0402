@@ -253,19 +253,18 @@ public:
      * @return
      */
     deque& operator=( deque&& other ) {
-        int i, j;
+        int i, j, k=0;
 
         //On ajuste la taille de l'objet
         this->resize(other.nbElements);
 
 
         //On copie les valeurs de other
-        tab=new T*[tabLength];
         if(firstPtr!=-1) {
             for (i = firstPtr; i <= lastPtr; i++) {
-                tab[i] = new T[chunkLength];
                 for (j = 0; j < chunkLength; j++) {
-                    tab[i][j] = other.tab[i][j];
+                    tab[i][j] = other[k];
+                    k++;
                 }
             }
         }
@@ -279,8 +278,12 @@ public:
      */
     deque& operator=( std::initializer_list<T> ilist ) {
         int i, j, count=0;
+
+        std::cout<<"Avant resize : "<<tabLength<<" "<<nbElements<<" "<<firstPtr<<" "<<lastPtr<<" "<<firstVal<<" "<<lastVal<<std::endl;
         //On redimensionne le deque selon la liste
         this->resize(ilist.size());
+
+        std::cout<<"Apres resize : "<<tabLength<<" "<<nbElements<<" "<<firstPtr<<" "<<lastPtr<<" "<<firstVal<<" "<<lastVal<<std::endl;
 
         //Remplissage
         i=0;
@@ -604,6 +607,7 @@ public:
             nvTab = new T*[tabLength];
             if(count<nbElements){//Si on réduit le deque
                 nbElements=0;
+
                 //Si il y en a, on reprend les chunk qui ne changent pas, non coupés
                 for(i=firstPtr ; i<firstPtr+count/chunkLength ; i++){
                     nvTab[i] = tab[i];
@@ -624,10 +628,12 @@ public:
 
                     i=0;
                     while(nbElements<count){
+
                         nvTab[tabLength-1][i]=tab[firstPtr+count/chunkLength][i];
                         lastVal=i;
                         i++;
                         nbElements++;
+
                     }
 
                 }
