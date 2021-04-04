@@ -607,7 +607,13 @@ public:
                 //Si il y en a, on reprend les chunk qui ne changent pas, non coupés
                 for(i=firstPtr ; i<firstPtr+count/chunkLength ; i++){
                     nvTab[i] = tab[i];
-                    nbElements+=chunkLength;                //====> here pb
+
+                    if(i==firstPtr){ //Il se peut que le premier chunk ne soit pas complet
+                        nbElements+=chunkLength-firstVal;
+                    }
+                    else{
+                        nbElements+=chunkLength;
+                    }
                 }
 
                 //Si il y en a, on ajoute les éléments du chunk coupé : le chunk firstPtr+count/chunkLength
@@ -615,7 +621,7 @@ public:
                     nvTab[tabLength-1]=new T[chunkLength]; //Creation d'un chunk vierge
 
                     i=0;
-                    while((nbElements<count)==1){
+                    while(nbElements<count){
                         nvTab[tabLength-1][i]=tab[firstPtr+count/chunkLength][i];
                         i++;
                         nbElements++;

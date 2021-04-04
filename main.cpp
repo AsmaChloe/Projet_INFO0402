@@ -50,9 +50,21 @@ int main() {
 
 
     // pop
-    deque4.pop_back();
+    std::cout<<" Avant pop_back : ";
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
+    std::cout<<std::endl;
+
+    deque4.pop_back();
+
+    std::cout<<"Apres pop-back - parcours avec iterateur : ";
+    for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";            //PB
+
+    std::cout<<"\nApres pop-back - parcours de 0 a size()-1 avec operateur[] : ";
+    for(int i=0;i<deque4.size();i++)
+        std::cout<<deque4[i]<<",";
     std::cout << std::endl;
+
+
     deque4.pop_front();
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
     std::cout << std::endl;
