@@ -25,7 +25,7 @@ int main() {
 
     // front/back
     const deque<A>&deque6const = deque6;
-    std::cout
+    /*std::cout
             << deque6.at(0) << ","
             << deque6const.at(0) << ","
             << deque6[1] << ","
@@ -35,7 +35,7 @@ int main() {
             << deque6.back()  << ", "
             << deque6const.back()  << ", "
             << deque6.empty() << ", "
-            << deque6.size()  << std::endl;
+            << deque6.size()  << std::endl;*/
 
     // clear
     deque5.clear();
@@ -50,33 +50,23 @@ int main() {
 
 
     // pop
-    std::cout<<" Avant pop_back : ";
-    for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
-    std::cout<<std::endl;
+    deque4.push_back(2);
+    // avec rvalue: impossible à tester pour T=int
+    deque4.push_front(6);
+    // avec rvalue: impossible à tester pour T=int
 
+    // pop
     deque4.pop_back();
-
-    std::cout<<"Apres pop-back - parcours avec iterateur : ";
-    for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";            //PB
-
-    std::cout<<"\nApres pop-back - parcours de 0 a size()-1 avec operateur[] : ";
-    for(int i=0;i<deque4.size();i++)
-        std::cout<<deque4[i]<<",";
-    std::cout << std::endl;
-
-
     deque4.pop_front();
-    for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
-    std::cout << std::endl;
 
     // tests
-    std::cout
+    /*std::cout
             << (deque4 == deque5) << ", "
             << (deque4 != deque5) << ", "
             << (deque4 <  deque5) << ", "
             << (deque4 <= deque5) << ", "
             << (deque4 >  deque5) << ", "
-            << (deque4 == deque5) << std::endl;
+            << (deque4 == deque5) << std::endl;*/
 
     // iterateurs
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
@@ -93,7 +83,23 @@ int main() {
 
 
     // swap
-    deque4.swap(deque5);
+    std::cout<<"\ndeque4 avant swap"<<std::endl;
+    for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
+    std::cout << std::endl;
+
+    std::cout<<"deque5 avant swap"<<std::endl;
+    for(auto it=deque5.begin(); it!=deque5.end(); ++it) std::cout << *it << ",";
+    std::cout << std::endl;
+
+    deque4.swap(deque5);                    //erreur voir, le output de deque5
+
+    std::cout<<"\ndeque4 apres swap"<<std::endl;
+    for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
+    std::cout << std::endl;
+
+    std::cout<<"deque5 apres swap"<<std::endl;
+    for(auto it=deque5.begin(); it!=deque5.end(); ++it) std::cout << *it << ",";
+    std::cout << std::endl;
     swap(deque1,deque2);
 
 

@@ -215,7 +215,7 @@ public:
      * Destructeur
      */
     ~deque() {
-        if(tab!=nullptr) {
+        if(tab!=nullptr && firstPtr!=-1 && lastPtr!=-1) {
             for (int i = firstPtr; i <= lastPtr; i++) {
                 if (tab[i] != nullptr)
                     delete[] tab[i];
@@ -610,9 +610,11 @@ public:
 
                     if(i==firstPtr){ //Il se peut que le premier chunk ne soit pas complet
                         nbElements+=chunkLength-firstVal;
+                        lastVal=chunkLength-1;
                     }
                     else{
                         nbElements+=chunkLength;
+                        lastVal=(lastVal+chunkLength)%chunkLength;
                     }
                 }
 
@@ -623,12 +625,13 @@ public:
                     i=0;
                     while(nbElements<count){
                         nvTab[tabLength-1][i]=tab[firstPtr+count/chunkLength][i];
+                        lastVal=i;
                         i++;
                         nbElements++;
                     }
+
                 }
 
-                lastVal=chunkLength-remainingSpace-1; // Il y a alors chunkLenght-remainingSpace cases prises => soit l'indice de la derniere case
                 lastPtr=tabLength-1;
             }
             else{
@@ -983,6 +986,10 @@ public:
      */
     iterator end() {
         if(firstVal==-1) return this->begin(); //Si le deque est vide, selon la document, begin()=end()
+
+        /*iterator tmpIt=begin();
+
+        tmpIt+=this->size();*/
 
         iterator tmpIt;
         tmpIt.currentChunk = tab + lastPtr;
