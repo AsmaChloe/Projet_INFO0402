@@ -243,7 +243,7 @@ public:
      */
     deque& operator=( deque&& other ) {
         clear();
-        deque<T> tmp_deque(other);
+        deque<T> tmp_deque(std::move(other));
         *this = tmp_deque;
         return *this;
     }
