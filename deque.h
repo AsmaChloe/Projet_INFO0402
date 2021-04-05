@@ -222,7 +222,16 @@ public:
         int i, j,k=0;
 
         //On réalloue l'objet
-        this->resize(other.nbElements);
+        this->resize(other.tabLength*chunkLength);
+
+        //On copie les indices
+        firstPtr=other.firstPtr;
+        lastPtr=other.lastPtr;
+        firstVal=other.firstVal;
+        lastVal=other.lastVal;
+
+        tabLength=other.tabLength;
+        nbElements=other.nbElements;
 
         //On copie les valeurs de other
         if(firstPtr!=-1) {

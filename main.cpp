@@ -54,16 +54,16 @@ int main() {
     deque4.pop_front();
 
     // tests
-    /*std::cout
+    std::cout
             << (deque4 == deque5) << ", "
             << (deque4 != deque5) << ", "
             << (deque4 <  deque5) << ", "
             << (deque4 <= deque5) << ", "
             << (deque4 >  deque5) << ", "
-            << (deque4 == deque5) << std::endl;
+            << (deque4 >= deque5) << std::endl;
 
     // iterateurs
-    for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
+    /*for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
     std::cout << std::endl;
 
     deque<A>::iterator it1 = deque1.insert( deque1.cbegin(), 7 );
