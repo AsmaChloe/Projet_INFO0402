@@ -656,8 +656,8 @@ public:
      * @param other
      */
     void swap( deque& other ){
-        deque<T>tmp=(*this);
-        *this=other;
+        deque<T>tmp(std::move(*this));
+        *this=std::move(other);
         other=tmp;
     }
 
