@@ -199,15 +199,18 @@ public:
      * Destructeur
      */
     ~deque() {
-        if(firstPtr!=-1 || lastPtr!=-1) {
+        if(tab!=nullptr && firstPtr!=-1 && lastPtr!=-1) {
             for (int i = firstPtr; i <= lastPtr; i++) {
-                if (tab[i] != nullptr)
+                if (tab[i] != nullptr) {
                     delete[] tab[i];
-                tab[i]= nullptr;
+                    tab[i] = nullptr;
+                }
             }
         }
-        if(tab!=nullptr) delete[] tab;
-        tab= nullptr;
+        if(tab!=nullptr) {
+            delete[] tab;
+            tab = nullptr;
+        }
     }
 
     /**
@@ -426,7 +429,7 @@ public:
         tabLength = nbElements = 0;
         firstVal = lastVal = firstPtr = lastPtr = -1;
     }
-  
+
   /**
      * Cette méthode permet d'ajouter un élément à la fin du conteneur
      * @param value
@@ -476,11 +479,12 @@ public:
                     nvTab[i+1] = tab[i]; //On reprends les chunk de l'ancien tableau
                     tab[i] = nullptr;
                 }
+                firstVal=chunkLength-1;
+                lastPtr++;
             }
             else{
                 //Pour un deque vide
-                firstPtr=0;
-                firstVal=0;
+                firstPtr=lastPtr=firstVal=lastVal=0;
             }
 
             //Et on libère la mémoire de l'ancien tableau
@@ -489,8 +493,6 @@ public:
 
             // Le nouveau chunk
             tab[firstPtr] = new T[chunkLength];
-            firstVal=chunkLength-1;
-            lastPtr++;
         }
         else{
             if(firstVal==0){ //Si le premier chunk est complet et qu'il n'est pas pointé par tab[0]
@@ -518,7 +520,7 @@ public:
 
     template< class... Args > void emplace_front( Args&&... args ) {
         push_front(args...);
-    }                        /***************A FAIRE**************/
+    }
 
     /**
      * Cette méthode retire le premier élément du conteneur
@@ -530,7 +532,7 @@ public:
         if(firstVal==chunkLength-1) {
             firstVal = 0;
             firstPtr++;
-            tabLength--;
+            //tabLength--;
         }
         else
             firstVal++;

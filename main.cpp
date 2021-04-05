@@ -96,7 +96,7 @@ int main() {
     for(int i=0; i<deque5.size(); ++i) std::cout << deque5[i] << ",";
     std::cout << std::endl;
 
-    /*swap(deque4,deque5);
+    swap(deque4,deque5);
 
     std::cout<<"\ndeque4 apres les swap"<<std::endl;
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
@@ -106,7 +106,7 @@ int main() {
     for(auto it=deque5.begin(); it!=deque5.end(); ++it) std::cout << *it << ",";
     std::cout << std::endl;
 
-    swap(deque1,deque2);*/
+    //swap(deque1,deque2);
 
 
     return 0;
