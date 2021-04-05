@@ -1211,9 +1211,10 @@ public:
 };
 
 template<class T> void swap( deque<T> &lhs, deque<T> &rhs ) {
-    deque<T>tmp=(lhs);
+    lhs.swap(rhs);
+    /*deque<T>tmp=(lhs);
     lhs=rhs;
-    rhs=tmp;
+    rhs=tmp;*/
 }
 
 template <class T> T deque<T>::dummy = 0;
