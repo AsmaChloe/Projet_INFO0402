@@ -119,7 +119,7 @@ public:
     deque( const deque& other ) : tabLength(other.tabLength), nbElements(other.nbElements), firstPtr(other.firstPtr), lastPtr(other.lastPtr), firstVal(other.firstVal), lastVal(other.lastVal) {
         //Initialisation du tableau
         tab=new T*[tabLength];
-        for(int i=0;i<tabLength;i++){
+        for(int i=firstPtr;i<=lastPtr;i++){
             tab[i]=new T[chunkLength];
             for(int j=0; j < chunkLength; j++) {
                 tab[i][j] = other.tab[i][j];
@@ -135,7 +135,7 @@ public:
 
         //Initialisation du tableau
         tab=new T*[tabLength];
-        for(int i=0;i<tabLength;i++){
+        for(int i=firstPtr;i<=lastPtr;i++){
             tab[i]=other.tab[i];
             other.tab[i]=nullptr;
         }
@@ -466,7 +466,13 @@ public:
      */
     void pop_back() {
         //On ne vérifie pas si le deque est vide => selon la documentation on a un undefined behaviour si le conteneur est vide.
-        resize(nbElements-1);
+        if(nbElements<1) return;
+        lastVal--;
+        if(lastVal==-1){
+            lastPtr--;
+            lastVal=chunkLength-1;
+        }
+        nbElements--;
     }
 
     /**
@@ -542,7 +548,6 @@ public:
         if(firstVal==chunkLength-1) {
             firstVal = 0;
             firstPtr++;
-            //tabLength--;
         }
         else
             firstVal++;
@@ -785,15 +790,6 @@ public:
          * @param other
          */
         iterator(const iterator& other) : currentChunk(other.currentChunk), currentIndex(other.currentIndex){}
-
-        /**
-         * Contructeur à partir d'un tableau 2D et d'un index
-         * @param conteneur
-         */
-        iterator(T** tab, int index){
-            currentChunk = tab;
-            currentIndex = index;
-        }
 
         /**
          * Cette méthode déplace l'itérateur d'un cran vers l'avant. Elle est appelée lors d'une préincrémentation.

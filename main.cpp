@@ -120,7 +120,7 @@ int main() {
 
     std::cout<<"...deque4.push_back(a);...\n...deque4.push_back(std::move(a));...\n...deque4.push_front(b);...\ndeque4.push_front(std::move(b));...\n"<<std::endl;
     deque4.push_back(a);
-    deque4.push_back(std::move(a));         //rvalue possible car T=A
+    deque4.push_back(std::move(a));          //ravlue possible car T=A
     deque4.push_front(b);
     deque4.push_front(std::move(b));        //ravlue possible car T=A
 
@@ -132,70 +132,93 @@ int main() {
     //**********POP**********
     std::cout<<"\n\n**********POP**********"<<std::endl;
 
-    std::cout<<"...deque4.pop_back();...\n...deque4.pop_front();...\n"<<std::endl;
+    std::cout<<"...deque4.pop_back();...\n...deque4.pop_back();...\n...deque4.pop_front();...\n"<<std::endl;
     deque4.pop_back();
-    //deque4.pop_front();
+    deque4.pop_back();
+    deque4.pop_front();
 
     std::cout<<"deque4 : ";
     for(auto it=deque4.begin();it!=deque4.end();it++)
         std::cout<<*it<<",";
     std::cout<<std::endl;
 
-    // tests
-    /*std::cout
-            << (deque4 == deque5) << ", "
-            << (deque4 != deque5) << ", "
-            << (deque4 <  deque5) << ", "
-            << (deque4 <= deque5) << ", "
-            << (deque4 >  deque5) << ", "
-            << (deque4 >= deque5) << std::endl;
-
-    // iterateurs
-    for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
-    std::cout << std::endl;
-
-    deque<A>::iterator it1 = deque1.insert( deque1.cbegin(), 7 );
-    // avec rvalue: impossible à tester pour T=int
-    deque<A>::iterator it3 = deque1.insert( it1, 4, 7 );
-    deque<A>::iterator it4 = deque1.insert( it3, deque2.begin(), deque2.end() );
-    deque<A>::iterator it5 = deque1.insert( it4, {5,4,3,2,1,0} );
-
-    deque<A>::iterator it6 = deque1.erase(it5);
-    deque1.erase(it6, deque1.cend() );
+    //**********TESTS DE COMPARAISON**********
+    std::cout<<"\n\n**********TESTS DE COMPARAISON**********"<<std::endl;
+    std::cout
+            <<"(deque4 == deque5) ? "<< (deque4 == deque5) << "\n"
+            <<"(deque4 != deque5) ? "<< (deque4 != deque5) << "\n"
+            <<"(deque4 <  deque5) ?"<< (deque4 <  deque5) << "\n"
+            <<"(deque4 <= deque5) ? "<< (deque4 <= deque5) << "\n"
+            <<"(deque4 >  deque5) ? "<< (deque4 >  deque5) << "\n"
+            <<"(deque4 >= deque5) ?"<< (deque4 >= deque5) << std::endl;
 
 
-    // swap
-    std::cout<<"\ndeque4 avant les swap"<<std::endl;
-    for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
-    std::cout << std::endl;
+    //**********ITERATEUR**********
+    std::cout<<"\n\n**********ITERATEUR**********"<<std::endl;
 
-     std::cout<<"\ndeque5 avant les swap"<<std::endl;
-    for(auto it=deque5.begin(); it!=deque5.end(); ++it) std::cout << *it << ",";
-    std::cout << std::endl;
+    deque<A>::iterator it6=deque6.begin();
+    deque<A>::iterator it6Bis=deque6.begin();
+    it6Bis++;
+
+    //Operateur ++ --
+    std::cout<<"\n\nPremier élément de deque6: "<<*(it6++)<<std::endl;
+    std::cout<<"Deuxieme élément deque6: "<<*it6<<std::endl;
+    std::cout<<"Troisieme élément deque6: "<<*(++it6)<<std::endl;
+    std::cout<<"Troisieme élément deque6: "<<*(it6--)<<std::endl;
+    std::cout<<"Deuxieme élément deque6: "<<*(it6)<<std::endl;
+    std::cout<<"Premier élément deque6: "<<*(--it6)<<std::endl;
+
+    //Comparaison
+    std::cout<<"\nit6 : "<<*it6<<" - it6Bis : "<<*it6Bis<<std::endl;
+    std::cout<<"it6 == it6Bis ? "<<(it6 == it6Bis)<<std::endl;
+    std::cout<<"it6 != it6Bis ? "<<(it6 != it6Bis)<<std::endl;
+
+    //Random access
+    std::cout<<"it6 < it6Bis ? "<<(it6 < it6Bis)<<std::endl;
+    std::cout<<"it6 <= it6Bis ? "<<(it6 <= it6Bis)<<std::endl;
+    std::cout<<"it6 > it6Bis ? "<<(it6 > it6Bis)<<std::endl;
+    std::cout<<"it6 >= it6Bis ? "<<(it6 >= it6Bis)<<std::endl;
+
+    //+= -=
+    std::cout<<"\nit6 : "<<*it6<<"\n ...it6+=3..."<<std::endl;
+    it6+=3;
+    std::cout<<"it6 : "<<*it6<<"\n...it6-=3..."<<std::endl;
+    it6-=3;
+    std::cout<<"it6 : "<<*it6<<std::endl;
+
+    //cbegin et cend de cons_iterator
+    std::cout<<"\ndeque6 mais c'est avec des const_iterator :"<<std::endl;
+    for(auto it=deque6.cbegin();it!=deque6.cend();it++)
+        std::cout<<*it<<",";
+    std::cout<<std::endl;
+
+
+
+    //**********SWAP**********
+    std::cout<<"\n\n**********SWAP**********"<<std::endl;
+
+    std::cout<<"...deque4.swap(deque5);...\n"<<std::endl;
 
     deque4.swap(deque5);
 
-
-    std::cout<<"\ndeque4 entre les swap"<<std::endl;
+    std::cout<<"deque4 : ";
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
     std::cout << std::endl;
 
-    std::cout<<"\ndeque5 entre les swap"<<std::endl;
+    std::cout<<"deque5 : ";
     for(int i=0; i<deque5.size(); ++i) std::cout << deque5[i] << ",";
     std::cout << std::endl;
 
+    std::cout<<"\n...swap(deque4,deque5);...\n"<<std::endl;
     swap(deque4,deque5);
 
-    std::cout<<"\ndeque4 apres les swap"<<std::endl;
+    std::cout<<"deque4 : ";
     for(auto it=deque4.begin(); it!=deque4.end(); ++it) std::cout << *it << ",";
     std::cout << std::endl;
 
-    std::cout<<"\ndeque5 apres les swap"<<std::endl;
+    std::cout<<"deque5 : ";
     for(auto it=deque5.begin(); it!=deque5.end(); ++it) std::cout << *it << ",";
-    std::cout << std::endl;*/
-
-    //swap(deque1,deque2);
-
+    std::cout << std::endl;
 
     return 0;
 }
