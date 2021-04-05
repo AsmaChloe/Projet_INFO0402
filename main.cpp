@@ -1,5 +1,4 @@
 #include <iostream>
-#include <deque>
 #include "classA.h"
 #include "deque.h"
 
