@@ -78,7 +78,7 @@ public:
             nbElements++;
         }
 
-        //Tab length
+        //Definition du tabLength
         tabLength=nbElements/chunkLength;
         if(tabLength*chunkLength<nbElements)
             tabLength++;
@@ -93,22 +93,23 @@ public:
         firstPtr=0;
         firstVal=0;
         lastPtr=firstPtr;
-        lastVal=firstVal;
+        lastVal=firstVal-1; //On va un cran plus loin => nous evite de faire un tour en trop
 
         //Ajout des valeurs dans le tableaux;
-        while(count<nbElements && lastPtr<tabLength){
-            tab[lastPtr][lastVal]=*first;
-            first++;
-            count++;
-            if(lastVal==chunkLength-1){
+        while(count!=nbElements && lastPtr<tabLength){
+
+            if(lastVal==chunkLength-1){ //Si on est au bout du chunk
                 lastVal=0;
                 lastPtr++;
             }
             else{
                 lastVal++;
             }
-        }
 
+            tab[lastPtr][lastVal]=*first;
+            first++; //On déplace l'itérateur
+            count++;
+        }
     }
 
     /**
@@ -965,15 +966,14 @@ public:
     iterator end() {
         if(firstVal==-1) return this->begin(); //Si le deque est vide, selon la document, begin()=end()
 
-        /*iterator tmpIt=begin();
+        iterator tmpIt=begin();
 
-        tmpIt+=this->size();*/
+        tmpIt+=this->size();
 
-        iterator tmpIt;
+        /*iterator tmpIt;
         tmpIt.currentChunk = tab + lastPtr;
         tmpIt.currentIndex = lastVal;
-        tmpIt++;
-
+*/
         return tmpIt;
     }
 
